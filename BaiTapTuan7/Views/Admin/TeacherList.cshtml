@@ -1,0 +1,46 @@
+﻿@model BaiTapTuan7.Models.tb_Teacher
+@{
+    ViewBag.Title = "Teacher";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="table table-hover">
+    <h2>TeacherList</h2>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(m => m.TeacherFirstName)</th>
+                            <th>@Html.DisplayNameFor(m => m.TeacherLastName)</th>
+                            <th>@Html.DisplayNameFor(m => m.Gmail)</th>
+                            <th>@Html.DisplayNameFor(m => m.PhoneNumber)</th>
+                            <th>@Html.DisplayNameFor(m => m.DateOfBirth)</th>
+                            <th>@Html.DisplayNameFor(m => m.PlaceOfBirth)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.TeacherList)
+                        {
+                            <tr>
+                                <td>@item.TeacherFirstName</td>
+                                <td>@item.TeacherLastName</td>
+                                <td>@item.Gmail</td>
+                                <td>@item.PhoneNumber</td>
+                                <td>@item.DateOfBirth</td>
+                                <td>@item.PlaceOfBirth</td>
+                                <td>
+                                    <a href="@Url.Action("EditUser","Admin",new { Id = item.UserId })"> Edit</a>|
+                                    @Html.ActionLink("Remove", "RemoveUser", new { Id = item.UserId }, new { onclick = "return confirm('Are you sure to delete this user?');" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

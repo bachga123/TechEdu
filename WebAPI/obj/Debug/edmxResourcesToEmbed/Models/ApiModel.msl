@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TechEduModelStoreContainer" CdmEntityContainer="TechEduEntities">
+    <EntitySetMapping Name="tb_Class">
+      <EntityTypeMapping TypeName="TechEduModel.tb_Class">
+        <MappingFragment StoreEntitySet="tb_Class">
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="YearOfClass" ColumnName="YearOfClass" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

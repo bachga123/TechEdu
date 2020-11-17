@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TechEduModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tb_Class">
+    <Key>
+      <PropertyRef Name="ClassId" />
+    </Key>
+    <Property Name="ClassId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
+    <Property Name="YearOfClass" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_CTS">
+    <Key>
+      <PropertyRef Name="Details" />
+    </Key>
+    <Property Name="ClassId" Type="int" />
+    <Property Name="StudentId" Type="int" />
+    <Property Name="TeacherId" Type="int" />
+    <Property Name="Details" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_Student">
+    <Key>
+      <PropertyRef Name="StudentId" />
+    </Key>
+    <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Images" Type="bit" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="Gmail" Type="varchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="int" />
+    <Property Name="DateOfBirth" Type="datetime" />
+    <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tb_Teacher">
+    <Key>
+      <PropertyRef Name="TeacherId" />
+    </Key>
+    <Property Name="TeacherId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="TeacherFirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="TeacherLastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Gmail" Type="varchar" MaxLength="100" />
+    <Property Name="PhoneNumber" Type="int" />
+    <Property Name="DateOfBirth" Type="datetime" />
+    <Property Name="PlaceOfBirth" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="tb_Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Usertype" Type="varchar" MaxLength="50" />
+    <Property Name="Block" Type="bit" />
+    <Property Name="RegisterDate" Type="datetime" />
+    <Property Name="Roles" Type="varchar" MaxLength="50" />
+    <Property Name="ResetPasswordCode" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tb_UserType">
+    <Key>
+      <PropertyRef Name="UserTypeId" />
+    </Key>
+    <Property Name="UserTypeId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserTypeName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tb_UserType_Roles">
+    <Key>
+      <PropertyRef Name="UserTypeId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserTypeId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RoleId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Details" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityContainer Name="TechEduModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Class" EntityType="Self.tb_Class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_CTS" EntityType="Self.tb_CTS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Roles" EntityType="Self.tb_Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Student" EntityType="Self.tb_Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Teacher" EntityType="Self.tb_Teacher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Users" EntityType="Self.tb_Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_UserType" EntityType="Self.tb_UserType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_UserType_Roles" EntityType="Self.tb_UserType_Roles" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tb_UserType_Roles].[UserTypeId] AS [UserTypeId], 
+    [tb_UserType_Roles].[RoleId] AS [RoleId], 
+    [tb_UserType_Roles].[Details] AS [Details]
+    FROM [dbo].[tb_UserType_Roles] AS [tb_UserType_Roles]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
