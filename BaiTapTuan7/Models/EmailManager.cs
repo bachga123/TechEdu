@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Net.Mail;
 using System.Configuration;
+using System.Linq;
 using System.Net;
+using System.Net.Mail;
+using System.Web;
 
 namespace BaiTapTuan7.Models
 {
@@ -31,6 +31,5 @@ namespace BaiTapTuan7.Models
             smtp.EnableSsl = true;
             smtp.Send(mail);
         }
-
     }
 }
