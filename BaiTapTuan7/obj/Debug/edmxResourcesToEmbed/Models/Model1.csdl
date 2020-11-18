@@ -61,20 +61,6 @@
     <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
     <Property Name="PlaceOfBirth" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
   </EntityType>
-  <EntityType Name="tb_Users">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Usertype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Block" Type="Boolean" />
-    <Property Name="RegisterDate" Type="DateTime" Precision="3" />
-    <Property Name="Roles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="ResetPasswordCode" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="tb_UserType">
     <Key>
       <PropertyRef Name="UserTypeId" />
@@ -98,8 +84,21 @@
     <EntitySet Name="tb_Roles" EntityType="Self.tb_Roles" />
     <EntitySet Name="tb_Student" EntityType="Self.tb_Student" />
     <EntitySet Name="tb_Teacher" EntityType="Self.tb_Teacher" />
-    <EntitySet Name="tb_Users" EntityType="Self.tb_Users" />
     <EntitySet Name="tb_UserType" EntityType="Self.tb_UserType" />
     <EntitySet Name="tb_UserType_Roles" EntityType="Self.tb_UserType_Roles" />
+    <EntitySet Name="tb_Users" EntityType="TechEduModel.tb_Users" />
   </EntityContainer>
+  <EntityType Name="tb_Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Usertype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Block" Type="Boolean" />
+    <Property Name="RegisterDate" Type="DateTime" Precision="3" />
+    <Property Name="ResetPasswordCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
 </Schema>

@@ -72,8 +72,7 @@
     <Property Name="Usertype" Type="varchar" MaxLength="50" />
     <Property Name="Block" Type="bit" />
     <Property Name="RegisterDate" Type="datetime" />
-    <Property Name="Roles" Type="varchar" MaxLength="50" />
-    <Property Name="ResetPasswordCode" Type="varchar" MaxLength="500" />
+    <Property Name="ResetPasswordCode" Type="nchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="tb_UserType">
     <Key>

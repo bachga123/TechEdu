@@ -1,4 +1,4 @@
-﻿@model BaiTapTuan7.Models.tb_Class
+﻿@model BaiTapTuan7.Models.Class
 
 @{
     ViewBag.Title = "Index";
@@ -13,6 +13,9 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
+                <div class="btn btn-primary">
+                    Create Class
+                </div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
@@ -31,7 +34,7 @@
                                 <td>
                                     @Html.ActionLink("Edit", "Edit", new { id = item.ClassId }) |
                                     @Html.ActionLink("Details", "Details", new { id = item.ClassId }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ClassId })
+                                    <a onclick="return confirm('Do you want to Delete?')" href="@Url.Action("Delete","Class",new {id= item.ClassId})">Delete</a>
                                 </td>
                             </tr>
                         }

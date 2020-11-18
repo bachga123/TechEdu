@@ -1,5 +1,4 @@
-﻿@model BaiTapTuan7.Models.tb_Class
-
+﻿@model BaiTapTuan7.Models.ViewModel.ClassViewModel
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -7,7 +6,7 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit","Class",FormMethod.Post ))
 {
     @Html.AntiForgeryToken()
 
@@ -15,21 +14,21 @@
         <h4>tb_Class</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ClassId)
+        @Html.HiddenFor(model => model.clas.ClassId)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ClassName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.clas.ClassName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ClassName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ClassName, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.clas.ClassName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.clas.ClassName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.YearOfClass, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.clas.YearOfClass, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.YearOfClass, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.YearOfClass, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.clas.YearOfClass, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.clas.YearOfClass, "", new { @class = "text-danger" })
             </div>
         </div>
 

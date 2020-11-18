@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TechEduModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TechEduModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -77,8 +77,7 @@
           <Property Name="Usertype" Type="varchar" MaxLength="50" />
           <Property Name="Block" Type="bit" />
           <Property Name="RegisterDate" Type="datetime" />
-          <Property Name="Roles" Type="varchar" MaxLength="50" />
-          <Property Name="ResetPasswordCode" Type="varchar" MaxLength="500" />
+          <Property Name="ResetPasswordCode" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="tb_UserType">
           <Key>
@@ -115,8 +114,7 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
     FROM [dbo].[tb_UserType_Roles] AS [tb_UserType_Roles]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TechEduModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -181,20 +179,6 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
           <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
           <Property Name="PlaceOfBirth" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
-        <EntityType Name="tb_Users">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Usertype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Block" Type="Boolean" />
-          <Property Name="RegisterDate" Type="DateTime" Precision="3" />
-          <Property Name="Roles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ResetPasswordCode" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="tb_UserType">
           <Key>
             <PropertyRef Name="UserTypeId" />
@@ -218,10 +202,23 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
           <EntitySet Name="tb_Roles" EntityType="Self.tb_Roles" />
           <EntitySet Name="tb_Student" EntityType="Self.tb_Student" />
           <EntitySet Name="tb_Teacher" EntityType="Self.tb_Teacher" />
-          <EntitySet Name="tb_Users" EntityType="Self.tb_Users" />
           <EntitySet Name="tb_UserType" EntityType="Self.tb_UserType" />
           <EntitySet Name="tb_UserType_Roles" EntityType="Self.tb_UserType_Roles" />
+          <EntitySet Name="tb_Users" EntityType="TechEduModel.tb_Users" />
         </EntityContainer>
+        <EntityType Name="tb_Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Usertype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Block" Type="Boolean" />
+          <Property Name="RegisterDate" Type="DateTime" Precision="3" />
+          <Property Name="ResetPasswordCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -295,21 +292,6 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_Users">
-            <EntityTypeMapping TypeName="TechEduModel.tb_Users">
-              <MappingFragment StoreEntitySet="tb_Users">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Usertype" ColumnName="Usertype" />
-                <ScalarProperty Name="Block" ColumnName="Block" />
-                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
-                <ScalarProperty Name="Roles" ColumnName="Roles" />
-                <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tb_UserType">
             <EntityTypeMapping TypeName="TechEduModel.tb_UserType">
               <MappingFragment StoreEntitySet="tb_UserType">
@@ -324,6 +306,20 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
                 <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Users">
+            <EntityTypeMapping TypeName="TechEduModel.tb_Users">
+              <MappingFragment StoreEntitySet="tb_Users">
+                <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="Block" ColumnName="Block" />
+                <ScalarProperty Name="Usertype" ColumnName="Usertype" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

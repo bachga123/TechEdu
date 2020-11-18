@@ -12,35 +12,39 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>@Html.DisplayNameFor(m => m.FirstName)</th>
-                            <th>@Html.DisplayNameFor(m => m.LastName)</th>
-                            <th>@Html.DisplayNameFor(m => m.Gmail)</th>
-                            <th>@Html.DisplayNameFor(m => m.PhoneNumber)</th>
-                            <th>@Html.DisplayNameFor(m => m.DateOfBirth)</th>
-                            <th>@Html.DisplayNameFor(m => m.PlaceOfBirth)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in ViewBag.StudentList)
-                        {
-                            <tr>
-                                <td>@item.FirstName</td>
-                                <td>@item.LastName</td>
-                                <td>@item.Gmail</td>
-                                <td>@item.PhoneNumber</td>
-                                <td>@item.DateOfBirth</td>
-                                <td>@item.PlaceOfBirth</td>
-                                <td>
-                                    <a href="@Url.Action("EditUser","Admin",new { Id = item.UserId })"> Edit</a>|
-                                    @Html.ActionLink("Remove", "RemoveUser", new { Id = item.UserId }, new { onclick = "return confirm('Are you sure to delete this user?');" })
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(m => m.FirstName)</th>
+                                    <th>@Html.DisplayNameFor(m => m.LastName)</th>
+                                    <th>@Html.DisplayNameFor(m => m.Gmail)</th>
+                                    <th>@Html.DisplayNameFor(m => m.PhoneNumber)</th>
+                                    <th>@Html.DisplayNameFor(m => m.DateOfBirth)</th>
+                                    <th>@Html.DisplayNameFor(m => m.PlaceOfBirth)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.StudentList)
+                                {
+                                    <tr>
+                                        <td>@item.FirstName</td>
+                                        <td>@item.LastName</td>
+                                        <td>@item.Gmail</td>
+                                        <td>@item.PhoneNumber</td>
+                                        <td>@item.DateOfBirth</td>
+                                        <td>@item.PlaceOfBirth</td>
+                                        <td>
+                                            <a href="@Url.Action("EditUser","Admin",new { Id = item.UserId })"> Edit</a>|
+                                            @Html.ActionLink("Remove", "RemoveUser", new { Id = item.UserId }, new { onclick = "return confirm('Are you sure to delete this user?');" })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

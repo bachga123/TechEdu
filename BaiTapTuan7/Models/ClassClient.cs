@@ -83,7 +83,7 @@ namespace BaiTapTuan7.Models
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(Base_URL);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage response = client.DeleteAsync("Class/" + id).Result;
+                HttpResponseMessage response = client.DeleteAsync("Classes/" + id).Result;
                 return response.IsSuccessStatusCode;
             }
             catch

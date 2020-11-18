@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace BaiTapTuan7.Controllers
 {
+    [AuthorizeController]
     public class ClassController : Controller
     {
         // GET: Class
@@ -41,7 +42,7 @@ namespace BaiTapTuan7.Controllers
             ClassClient cc = new ClassClient();
             ClassViewModel cvm = new ClassViewModel();
             cvm.clas = cc.find(id);
-            return View("Edit", cvm.clas);
+            return View("Edit", cvm);
         }
         [HttpPost]
         public ActionResult Edit(ClassViewModel cvm)

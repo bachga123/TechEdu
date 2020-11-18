@@ -21,7 +21,6 @@ namespace BaiTapTuan7.Models
         public string Usertype { get; set; }
         public Nullable<bool> Block { get; set; }
         public Nullable<System.DateTime> RegisterDate { get; set; }
-        public string Roles { get; set; }
         public string ResetPasswordCode { get; set; }
 
         public string AddUserError;
