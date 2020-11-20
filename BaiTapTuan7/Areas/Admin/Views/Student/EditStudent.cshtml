@@ -2,12 +2,12 @@
 
 @{
     ViewBag.Title = "EditStudent";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>EditStudent</h2>
 
-@using (Html.BeginForm("EditStudent","Admin",FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("EditStudent","Student",FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     

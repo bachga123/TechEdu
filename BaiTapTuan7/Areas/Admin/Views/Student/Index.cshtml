@@ -1,7 +1,7 @@
 ﻿@model BaiTapTuan7.Models.tb_Student
 @{
     ViewBag.Title = "StudentList";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="table table-hover">
@@ -36,8 +36,8 @@
                                         <td>@item.DateOfBirth</td>
                                         <td>@item.PlaceOfBirth</td>
                                         <td>
-                                            <a href="@Url.Action("EditUser","Admin",new { Id = item.UserId })"> Edit</a>|
-                                            @Html.ActionLink("Remove", "RemoveUser", new { Id = item.UserId }, new { onclick = "return confirm('Are you sure to delete this user?');" })
+                                            <a href="@Url.Action("EditStudent",new { Id = item.UserId })"> Edit</a>|
+                                            @Html.ActionLink("Remove", "RemoveUser","User", new { Id = item.UserId }, new { onclick = "return confirm('Are you sure to delete this user?');" })
                                         </td>
                                     </tr>
                                 }

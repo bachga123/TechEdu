@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BaiTapTuan7.Controllers
+namespace BaiTapTuan7.Areas.Admin.Controllers
 {
     [AuthorizeController]
     public class ClassController : Controller
