@@ -360,3 +360,5 @@ E:\Web\Project\TechEdu\WebAPI\obj\Debug\WebAPI.csproj.CoreCompileInputs.cache
 E:\Web\Project\TechEdu\WebAPI\obj\Debug\WebAPI.csproj.CopyComplete
 E:\Web\Project\TechEdu\WebAPI\obj\Debug\WebAPI.dll
 E:\Web\Project\TechEdu\WebAPI\obj\Debug\WebAPI.pdb
+E:\Web\Project\TechEdu\WebAPI\bin\PagedList.dll
+E:\Web\Project\TechEdu\WebAPI\bin\PagedList.xml

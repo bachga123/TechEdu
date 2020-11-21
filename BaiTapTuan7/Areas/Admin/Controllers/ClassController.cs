@@ -12,7 +12,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
     public class ClassController : Controller
     {
         // GET: Class
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 10)
         {
             ClassClient cc = new ClassClient();
             ViewBag.listClass = cc.findAll();

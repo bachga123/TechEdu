@@ -1,4 +1,5 @@
-﻿@model BaiTapTuan7.Models.tb_Teacher
+﻿@model PagedList.IPagedList<BaiTapTuan7.Models.tb_Teacher>
+@using PagedList.Mvc
 @{
     ViewBag.Title = "Teacher";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -11,36 +12,46 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>@Html.DisplayNameFor(m => m.TeacherFirstName)</th>
-                            <th>@Html.DisplayNameFor(m => m.TeacherLastName)</th>
-                            <th>@Html.DisplayNameFor(m => m.Gmail)</th>
-                            <th>@Html.DisplayNameFor(m => m.PhoneNumber)</th>
-                            <th>@Html.DisplayNameFor(m => m.DateOfBirth)</th>
-                            <th>@Html.DisplayNameFor(m => m.PlaceOfBirth)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in ViewBag.TeacherList)
-                        {
-                            <tr>
-                                <td>@item.TeacherFirstName</td>
-                                <td>@item.TeacherLastName</td>
-                                <td>@item.Gmail</td>
-                                <td>@item.PhoneNumber</td>
-                                <td>@item.DateOfBirth</td>
-                                <td>@item.PlaceOfBirth</td>
-                                <td>
-                                    <a href="@Url.Action("EditUser","User",new { Id = item.UserId })"> Edit</a>|
-                                    @Html.ActionLink("Remove", "RemoveUser","User", new { onclick = "return confirm('Are you sure to delete this user?');" })
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Gmail</th>
+                                    <th>Phone Number</th>
+                                    <th>Date Of Birth</th>
+                                    <th>Place Of Birth</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.TeacherFirstName</td>
+                                        <td>@item.TeacherLastName</td>
+                                        <td>@item.Gmail</td>
+                                        <td>@item.PhoneNumber</td>
+                                        <td>@item.DateOfBirth</td>
+                                        <td>@item.PlaceOfBirth</td>
+                                        <td>
+                                            <a href="@Url.Action("EditUser","User",new { Id = item.UserId })"> Edit</a>|
+                                            @Html.ActionLink("Remove", "RemoveUser", "User", new { onclick = "return confirm('Are you sure to delete this user?');" })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_paginate">
+                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
     </div>
 </div>

@@ -1,4 +1,5 @@
-﻿@model BaiTapTuan7.Models.tb_Student
+﻿@model PagedList.IPagedList<BaiTapTuan7.Models.tb_Student>
+@using PagedList.Mvc
 @{
     ViewBag.Title = "StudentList";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -17,16 +18,16 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>@Html.DisplayNameFor(m => m.FirstName)</th>
-                                    <th>@Html.DisplayNameFor(m => m.LastName)</th>
-                                    <th>@Html.DisplayNameFor(m => m.Gmail)</th>
-                                    <th>@Html.DisplayNameFor(m => m.PhoneNumber)</th>
-                                    <th>@Html.DisplayNameFor(m => m.DateOfBirth)</th>
-                                    <th>@Html.DisplayNameFor(m => m.PlaceOfBirth)</th>
+                                    <th>FirstNam</th>
+                                    <th>LastName</th>
+                                    <th>Gmail</th>
+                                    <th>PhoneNumber</th>
+                                    <th>DateOfBirth</th>
+                                    <th>PlaceOfBirth</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in ViewBag.StudentList)
+                                @foreach (var item in Model)
                                 {
                                     <tr>
                                         <td>@item.FirstName</td>
@@ -37,7 +38,7 @@
                                         <td>@item.PlaceOfBirth</td>
                                         <td>
                                             <a href="@Url.Action("EditStudent",new { Id = item.UserId })"> Edit</a>|
-                                            @Html.ActionLink("Remove", "RemoveUser","User", new { Id = item.UserId }, new { onclick = "return confirm('Are you sure to delete this user?');" })
+                                            @Html.ActionLink("Remove", "RemoveUser", "User", new { Id = item.UserId }, new { onclick = "return confirm('Are you sure to delete this user?');" })
                                         </td>
                                     </tr>
                                 }
@@ -45,6 +46,13 @@
                         </table>
                     </div>
                 </div>
+                <div class="row">
+                <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_paginate">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     </div>

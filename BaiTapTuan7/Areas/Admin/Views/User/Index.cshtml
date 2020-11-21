@@ -1,4 +1,5 @@
-﻿@model BaiTapTuan7.Models.tb_Users
+﻿@model PagedList.IPagedList<BaiTapTuan7.Models.tb_Users>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "UserList";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -11,42 +12,53 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>@Html.DisplayNameFor(m => m.Username)</th>
-                            <th>@Html.DisplayNameFor(m => m.Email)</th>
-                            <th>@Html.DisplayNameFor(m => m.RegisterDate)</th>
-                            <th>@Html.DisplayNameFor(m => m.Usertype)</th>
-                            <th>@Html.DisplayNameFor(m => m.Block)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in ViewBag.UserLists)
-                        {
-                            <tr>
-                                <td>@item.Username</td>
-                                <td>@item.Email</td>
-                                <td>@item.RegisterDate</td>
-                                <td>@item.Usertype</td>
-                                <td>@item.Block</td>
-                                <td>
-                                    @if (item.Block == true)
-                                    {
-                                        @Html.ActionLink("Active", "ActiveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to active this user?');" })
-                                    }
-                                    else if (item.Block == false)
-                                    {
-                                        @Html.ActionLink("Unactive", "UnactiveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to unactive this user?');" })
-                                    }
-                                    |
-                                    <a href="@Url.Action("EditUser","User",new { Id = item.Id })"> Edit User</a>|
-                                    @Html.ActionLink("Remove", "RemoveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to delete this user?');" })
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered" id="dataTable_w" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Register Date</th>
+                                    <th>Usertype</th>
+                                    <th>Block</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Username</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.RegisterDate</td>
+                                        <td>@item.Usertype</td>
+                                        <td>@item.Block</td>
+                                        <td>
+                                            @if (item.Block == true)
+                                            {
+                                                @Html.ActionLink("Active", "ActiveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to active this user?');" })
+                                            }
+                                            else if (item.Block == false)
+                                            {
+                                                @Html.ActionLink("Unactive", "UnactiveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to unactive this user?');" })
+                                            }
+                                            |
+                                            <a href="@Url.Action("EditUser","User",new { Id = item.Id })"> Edit User</a>|
+                                            @Html.ActionLink("Remove", "RemoveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to delete this user?');" })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_paginate">
+                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

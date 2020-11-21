@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-
+using PagedList;
 namespace BaiTapTuan7.Areas.Admin.Controllers
 {
     [AuthorizeController]
@@ -14,14 +14,10 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
     {
         TechEduEntities db = new TechEduEntities();
         // GET: Teacher
-        public ActionResult Index()
+        public ActionResult Index(int page = 1,int pageSize = 10)
         {
-            using (TechEduEntities db = new TechEduEntities())
-            {
-                List<tb_Teacher> listTeacher = db.tb_Teacher.ToList();
-                ViewBag.TeacherList = listTeacher;
-            }
-            return View();
+            var listTeacher = db.tb_Teacher.OrderByDescending(m =>m.TeacherFirstName).ToPagedList(page,pageSize);
+            return View(listTeacher);
         }
         public ActionResult EditTeacher(int id)
         {

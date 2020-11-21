@@ -6,6 +6,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using PagedList;
+
 
 namespace BaiTapTuan7.Areas.Admin.Controllers
 {
@@ -14,12 +16,10 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
     {
         TechEduEntities db = new TechEduEntities();
         // GET: User
-        public ActionResult Index()
+        public ActionResult Index(int page = 1,int pageSize = 10)
         {
-
-            List<tb_Users> lst = db.tb_Users.ToList();
-            ViewBag.UserLists = lst;
-            return View();
+            var lst = db.tb_Users.OrderByDescending(x => x.RegisterDate).ToPagedList(page, pageSize);
+            return View(lst);
         }
         public ActionResult AddUser()
         {

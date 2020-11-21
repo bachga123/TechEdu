@@ -261,3 +261,7 @@ E:\Web\Project\TechEdu\BaiTapTuan7\bin\System.Security.Principal.Windows.xml
 E:\Web\Project\TechEdu\BaiTapTuan7\bin\System.Text.Encodings.Web.xml
 E:\Web\Project\TechEdu\BaiTapTuan7\bin\System.Threading.Tasks.Extensions.xml
 E:\Web\Project\TechEdu\BaiTapTuan7\bin\System.ValueTuple.xml
+E:\Web\Project\TechEdu\BaiTapTuan7\bin\PagedList.dll
+E:\Web\Project\TechEdu\BaiTapTuan7\bin\PagedList.Mvc.dll
+E:\Web\Project\TechEdu\BaiTapTuan7\bin\PagedList.xml
+E:\Web\Project\TechEdu\BaiTapTuan7\bin\PagedList.Mvc.xml
