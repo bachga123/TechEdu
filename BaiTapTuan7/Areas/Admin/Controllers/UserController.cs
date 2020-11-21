@@ -77,6 +77,44 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
+        public ActionResult EditUser(int? id)
+        {
+            if(id == null)
+            {
+                ModelState.AddModelError("", "User id not found");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                var us = db.tb_Users.Find(id);
+                return View("EditUser", us);
+
+            }
+        }
+        [HttpPost]
+        public ActionResult EditUser(tb_Users tb)
+        {
+            if(ModelState.IsValid)
+            {
+                var result = db.tb_Users.Find(tb.Id);
+                if (result != null)
+                {
+                    result.Password = tb.Password;
+                    db.Entry(result).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Can't edit user");
+                    return View("EditUser", tb);
+                }
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
         public ActionResult ActiveUser(int? Id)
         {
 

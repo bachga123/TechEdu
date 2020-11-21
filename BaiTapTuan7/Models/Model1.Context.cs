@@ -34,5 +34,6 @@ namespace BaiTapTuan7.Models
         public virtual DbSet<tb_UserType> tb_UserType { get; set; }
         public virtual DbSet<tb_UserType_Roles> tb_UserType_Roles { get; set; }
         public virtual DbSet<tb_Users> tb_Users { get; set; }
+
     }
 }
