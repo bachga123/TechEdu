@@ -18,7 +18,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         // GET: User
         public ActionResult Index(int page = 1,int pageSize = 10)
         {
-            var lst = db.tb_Users.OrderByDescending(x => x.RegisterDate).ToPagedList(page, pageSize);
+            var lst = db.tb_Users.OrderBy(x => x.Usertype).ToPagedList(page, pageSize);
             return View(lst);
         }
         public ActionResult AddUser()
@@ -68,7 +68,8 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 }
                 else
                 {
-                    us1.AddUserError = "Username has exists";
+                    ViewBag.ListOfType = TypeList.GetTypeList();
+                    ModelState.AddModelError("", "Username has exists");
                     return View("AddUser", us1);
                 }
             }
@@ -81,14 +82,12 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         {
             if(id == null)
             {
-                ModelState.AddModelError("", "User id not found");
                 return RedirectToAction("Index");
             }
             else
             {
                 var us = db.tb_Users.Find(id);
                 return View("EditUser", us);
-
             }
         }
         [HttpPost]
@@ -125,11 +124,11 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 {
                     us.Block = false;
                     db.SaveChanges();
-                    return RedirectToAction("UserList", us);
+                    return RedirectToAction("Index", us);
                 }
                 else
                 {
-                    return RedirectToAction("UserList", us);
+                    return RedirectToAction("Index", us);
                 }
             }
             else
@@ -148,11 +147,11 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 {
                     us.Block = true;
                     db.SaveChanges();
-                    return RedirectToAction("UserList");
+                    return RedirectToAction("Index");
                 }
                 else
                 {
-                    return RedirectToAction("UserList");
+                    return RedirectToAction("Index");
                 }
             }
             else
@@ -199,7 +198,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 db.Entry(tc).State = EntityState.Deleted;
                 db.Entry(us).State = EntityState.Deleted;
                 db.SaveChanges();
-                return RedirectToAction("UserList", "User");
+                return RedirectToAction("Index", "User");
             }
             else
             {
@@ -217,7 +216,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 db.Entry(tc).State = EntityState.Deleted;
                 db.Entry(us).State = EntityState.Deleted;
                 db.SaveChanges();
-                return RedirectToAction("UserList", "User");
+                return RedirectToAction("Index", "User");
             }
             else
             {

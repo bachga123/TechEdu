@@ -44,7 +44,8 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                     }
                     else
                     {
-                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                        ModelState.AddModelError("", "Edit Student failed");
+                        return View("EditStudent", stu);
                     }
                 }
                 else

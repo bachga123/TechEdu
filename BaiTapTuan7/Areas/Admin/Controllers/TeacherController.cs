@@ -38,11 +38,12 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                         db.Entry(oldteach).State = EntityState.Deleted;
                         db.Entry(tc).State = EntityState.Added;
                         db.SaveChanges();
-                        return RedirectToAction("UserList", "Admin");
+                        return RedirectToAction("Index", "Teacher");
                     }
                     else
                     {
-                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                        ModelState.AddModelError("","Edit Teacher failed");
+                        return View("EditTeacher",tc);
                     }
                 }
                 else
