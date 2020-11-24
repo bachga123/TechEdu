@@ -24,6 +24,7 @@
                                     <th>PhoneNumber</th>
                                     <th>DateOfBirth</th>
                                     <th>PlaceOfBirth</th>
+                                    <th>Pictures</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,6 +37,14 @@
                                         <td>@item.PhoneNumber</td>
                                         <td>@item.DateOfBirth</td>
                                         <td>@item.PlaceOfBirth</td>
+                                        <td>@if(item.Images != null)
+                                            {
+                                                var base64 = Convert.ToBase64String(item.Images);
+                                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                            
+                                            <img src='@imgSrc' style="max-width:100px; max-height:100px;" />
+                                            }
+                                        </td>
                                         <td>
                                             <a href="@Url.Action("EditStudent",new { Id = item.UserId })"> Edit</a>|
                                             @Html.ActionLink("Remove", "RemoveUser", "User", new { Id = item.UserId }, new { onclick = "return confirm('Are you sure to delete this user?');" })

@@ -18,6 +18,15 @@
     <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
     <Property Name="YearOfClass" Type="int" />
   </EntityType>
+  <EntityType Name="tb_Course">
+    <Key>
+      <PropertyRef Name="Course_Id" />
+    </Key>
+    <Property Name="Course_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Course_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Images" Type="varbinary(max)" />
+    <Property Name="Details" Type="nvarchar" MaxLength="150" />
+  </EntityType>
   <EntityType Name="tb_CTS">
     <Key>
       <PropertyRef Name="Details" />
@@ -41,12 +50,12 @@
     <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
     <Property Name="LastName" Type="nvarchar" MaxLength="50" />
-    <Property Name="Images" Type="bit" />
     <Property Name="UserId" Type="int" />
     <Property Name="Gmail" Type="varchar" MaxLength="50" />
     <Property Name="PhoneNumber" Type="int" />
     <Property Name="DateOfBirth" Type="datetime" />
     <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="150" />
+    <Property Name="Images" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="tb_Teacher">
     <Key>
@@ -60,6 +69,7 @@
     <Property Name="PhoneNumber" Type="int" />
     <Property Name="DateOfBirth" Type="datetime" />
     <Property Name="PlaceOfBirth" Type="nchar" MaxLength="10" />
+    <Property Name="Images" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="tb_Users">
     <Key>
@@ -95,6 +105,7 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
   <EntityContainer Name="TechEduModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Class" EntityType="Self.tb_Class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Course" EntityType="Self.tb_Course" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_CTS" EntityType="Self.tb_CTS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Roles" EntityType="Self.tb_Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Student" EntityType="Self.tb_Student" Schema="dbo" store:Type="Tables" />

@@ -11,17 +11,20 @@ namespace BaiTapTuan7.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class tb_Student
     {
         public int StudentId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Nullable<bool> Images { get; set; }
         public Nullable<int> UserId { get; set; }
         public string Gmail { get; set; }
         public Nullable<int> PhoneNumber { get; set; }
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public string PlaceOfBirth { get; set; }
+        public byte[] Images { get; set; }
+
+        public HttpPostedFileBase ImageUpload { get; set; }
     }
 }

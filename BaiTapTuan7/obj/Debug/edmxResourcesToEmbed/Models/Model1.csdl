@@ -18,6 +18,15 @@
     <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="YearOfClass" Type="Int32" />
   </EntityType>
+  <EntityType Name="tb_Course">
+    <Key>
+      <PropertyRef Name="Course_Id" />
+    </Key>
+    <Property Name="Course_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Course_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Images" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="tb_CTS">
     <Key>
       <PropertyRef Name="Details" />
@@ -41,12 +50,12 @@
     <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Images" Type="Boolean" />
     <Property Name="UserId" Type="Int32" />
     <Property Name="Gmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="PhoneNumber" Type="Int32" />
     <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
     <Property Name="PlaceOfBirth" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Images" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="tb_Teacher">
     <Key>
@@ -60,6 +69,20 @@
     <Property Name="PhoneNumber" Type="Int32" />
     <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
     <Property Name="PlaceOfBirth" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Images" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tb_Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Usertype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Block" Type="Boolean" />
+    <Property Name="RegisterDate" Type="DateTime" Precision="3" />
+    <Property Name="ResetPasswordCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="tb_UserType">
     <Key>
@@ -80,25 +103,13 @@
   <EntityContainer Name="TechEduEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="tb_Class" EntityType="Self.tb_Class" />
+    <EntitySet Name="tb_Course" EntityType="Self.tb_Course" />
     <EntitySet Name="tb_CTS" EntityType="Self.tb_CTS" />
     <EntitySet Name="tb_Roles" EntityType="Self.tb_Roles" />
     <EntitySet Name="tb_Student" EntityType="Self.tb_Student" />
     <EntitySet Name="tb_Teacher" EntityType="Self.tb_Teacher" />
+    <EntitySet Name="tb_Users" EntityType="Self.tb_Users" />
     <EntitySet Name="tb_UserType" EntityType="Self.tb_UserType" />
     <EntitySet Name="tb_UserType_Roles" EntityType="Self.tb_UserType_Roles" />
-    <EntitySet Name="tb_Users" EntityType="TechEduModel.tb_Users" />
   </EntityContainer>
-  <EntityType Name="tb_Users">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Usertype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Block" Type="Boolean" />
-    <Property Name="RegisterDate" Type="DateTime" Precision="3" />
-    <Property Name="ResetPasswordCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-  </EntityType>
 </Schema>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -38,7 +39,17 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                     {
                         tb_Student oldstu = db.tb_Student.FirstOrDefault(m => m.StudentId == check.StudentId);
                         db.Entry(oldstu).State = EntityState.Deleted;
-                        db.Entry(stu).State = EntityState.Added;
+                        var new_stu = new tb_Student();
+                        new_stu.FirstName = stu.FirstName;
+                        new_stu.LastName = stu.LastName;
+                        new_stu.Gmail = stu.Gmail;
+                        new_stu.PhoneNumber = stu.PhoneNumber;
+                        new_stu.DateOfBirth = stu.DateOfBirth;
+                        new_stu.PlaceOfBirth = stu.PlaceOfBirth;
+                        HttpPostedFileBase upload = Request.Files["image"]; 
+                        using (var binaryReader = new BinaryReader(upload.InputStream))
+                            new_stu.Images = binaryReader.ReadBytes(upload.ContentLength);
+                        db.Entry(new_stu).State = EntityState.Added;
                         db.SaveChanges();
                         return RedirectToAction("Index", "Student");
                     }
