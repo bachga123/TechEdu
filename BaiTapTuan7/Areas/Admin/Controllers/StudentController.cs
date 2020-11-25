@@ -22,9 +22,17 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             var listStudent = db.tb_Student.OrderByDescending(m => m.FirstName).ToPagedList(page,pageSize);
             return View(listStudent);
         }
+        public ActionResult Details(int id)
+        {
+            var stu = db.tb_Student.Find(id);
+            if (stu == null)
+                return new HttpNotFoundResult();
+            return View(stu);
+
+        }
         public ActionResult EditStudent(int id)
         {
-            tb_Student stu = db.tb_Student.FirstOrDefault(m => m.UserId == id);
+            tb_Student stu = db.tb_Student.FirstOrDefault(m => m.StudentId == id);
             return View("EditStudent", stu);
         }
         [HttpPost]

@@ -5,6 +5,8 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
+<h2>Index</h2>
+
 <div class="table table-hover">
     <h2>StudentList</h2>
     <div class="card shadow mb-4">
@@ -21,34 +23,21 @@
                                     <th>FirstNam</th>
                                     <th>LastName</th>
                                     <th>Gmail</th>
-                                    <th>PhoneNumber</th>
-                                    <th>DateOfBirth</th>
-                                    <th>PlaceOfBirth</th>
-                                    <th>Pictures</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
+                                    <tr onclick="location.href='@Url.Action("Details",new { Id = item.StudentId})'">
                                         <td>@item.FirstName</td>
                                         <td>@item.LastName</td>
                                         <td>@item.Gmail</td>
-                                        <td>@item.PhoneNumber</td>
-                                        <td>@item.DateOfBirth</td>
-                                        <td>@item.PlaceOfBirth</td>
-                                        <td>@if(item.Images != null)
-                                            {
-                                                var base64 = Convert.ToBase64String(item.Images);
-                                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                                            
-                                            <img src='@imgSrc' style="max-width:100px; max-height:100px;" />
-                                            }
-                                        </td>
-                                        <td>
-                                            <a href="@Url.Action("EditStudent",new { Id = item.UserId })"> Edit</a>|
+                                        
+                                        @*<td>
+                                            <a href="@Url.Action("Details",new { Id = item.StudentId})">Details</a>
+                                            <a href="@Url.Action("EditStudent",new { Id = item.StudentId })"> Edit</a>|
                                             @Html.ActionLink("Remove", "RemoveUser", "User", new { Id = item.UserId }, new { onclick = "return confirm('Are you sure to delete this user?');" })
-                                        </td>
+                                        </td>*@
                                     </tr>
                                 }
                             </tbody>

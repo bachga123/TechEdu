@@ -1,0 +1,44 @@
+﻿@model BaiTapTuan7.Models.tb_Course
+
+@{
+    ViewBag.Title = "DetailsCourse";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>DetailsCourse</h2>
+
+@using (Html.BeginForm("Details", "Course", FormMethod.Get, new { enctype = "mutilpart/form-data" }))
+{<div>
+    <h4>tb_Course</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Decription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Decription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+
+    </dl>
+</div>
+}
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

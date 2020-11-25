@@ -34,16 +34,6 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Images, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.Images)
-                @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
         @Html.LabelFor(model => model.Gmail, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Gmail, new { htmlAttributes = new { @class = "form-control" } })
@@ -77,7 +67,18 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Images, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <input type="file" id="Image" name="image">
+            @if (Model.Images != null)
+            {
+                var base64 = Convert.ToBase64String(Model.Images);
+                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                <input type="file" id="fileUpload" name="image" multiple="multiple" />
+                <img src='@imgSrc' style="max-width:100px; max-height:100px;" id="image-display"/>
+                <div id='image-holder'/>
+            }
+            else
+            {
+                <input type="file" id="image" name="image" />
+            }
             @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
         </div>
     </div>

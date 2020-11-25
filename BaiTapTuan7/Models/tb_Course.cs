@@ -15,8 +15,9 @@ namespace BaiTapTuan7.Models
     public partial class tb_Course
     {
         public int Course_Id { get; set; }
-        public string Course_Name { get; set; }
+        public string Title { get; set; }
         public byte[] Images { get; set; }
+        public string Decription { get; set; }
         public string Details { get; set; }
     }
 }

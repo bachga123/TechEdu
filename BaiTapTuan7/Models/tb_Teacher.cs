@@ -11,8 +11,7 @@ namespace BaiTapTuan7.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web;
-
+    
     public partial class tb_Teacher
     {
         public int TeacherId { get; set; }
@@ -24,8 +23,5 @@ namespace BaiTapTuan7.Models
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public string PlaceOfBirth { get; set; }
         public byte[] Images { get; set; }
-
-        public HttpPostedFileBase ImageUpload { get; set; }
-
     }
 }

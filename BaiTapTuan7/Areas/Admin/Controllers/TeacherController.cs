@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using System.IO;
+
 namespace BaiTapTuan7.Areas.Admin.Controllers
 {
     [AuthorizeController]
@@ -14,14 +16,22 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
     {
         TechEduEntities db = new TechEduEntities();
         // GET: Teacher
-        public ActionResult Index(int page = 1,int pageSize = 10)
+        public ActionResult Index(int page = 1, int pageSize = 10)
         {
-            var listTeacher = db.tb_Teacher.OrderByDescending(m =>m.TeacherFirstName).ToPagedList(page,pageSize);
+            var listTeacher = db.tb_Teacher.OrderByDescending(m => m.TeacherFirstName).ToPagedList(page, pageSize);
             return View(listTeacher);
+        }
+        public ActionResult Details(int id)
+        {
+            var stu = db.tb_Teacher.Find(id);
+            if (stu == null)
+                return new HttpNotFoundResult();
+            return View(stu);
+
         }
         public ActionResult EditTeacher(int id)
         {
-            tb_Teacher tc = db.tb_Teacher.FirstOrDefault(m => m.UserId == id);
+            tb_Teacher tc = db.tb_Teacher.Find(id);
             return View("EditTeacher",tc);
         }
         [HttpPost]
@@ -31,12 +41,13 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var check = db.tb_Teacher.FirstOrDefault(m => m.UserId == tc.UserId);
-                    if (check != null)
+                    tb_Teacher Result = db.tb_Teacher.FirstOrDefault(m => m.TeacherId == tc.TeacherId);
+                    if (Result != null)
                     {
-                        tb_Teacher oldteach = db.tb_Teacher.FirstOrDefault(m => m.TeacherId == check.TeacherId);
-                        db.Entry(oldteach).State = EntityState.Deleted;
-                        db.Entry(tc).State = EntityState.Added;
+                        HttpPostedFileBase upload = Request.Files["image"];
+                        using (var binaryReader = new BinaryReader(upload.InputStream))
+                            Result.Images = binaryReader.ReadBytes(upload.ContentLength);
+                        db.Entry(Result).State = EntityState.Modified;
                         db.SaveChanges();
                         return RedirectToAction("Index", "Teacher");
                     }

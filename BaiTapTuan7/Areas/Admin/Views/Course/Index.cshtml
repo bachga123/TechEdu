@@ -1,14 +1,18 @@
-﻿@model PagedList.IPagedList<BaiTapTuan7.Models.tb_Teacher>
-@using PagedList.Mvc
+﻿@model PagedList.IPagedList<BaiTapTuan7.Models.tb_Course>
+@using PagedList.Mvc;
+
 @{
-    ViewBag.Title = "Teacher";
+    ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
+
+<h2>Index</h2>
+
 <div class="table table-hover">
-    <h2>Teacher List</h2>
+    <h2>Course</h2>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            <h6 class="m-0 font-weight-bold text-primary">List Of Course</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -17,23 +21,14 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Gmail</th>
+                                    <th>Title</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr onclick="location.href = '@Url.Action("Details","Teacher",new { id = item.TeacherId})'">
-                                        <td>@item.TeacherFirstName</td>
-                                        <td>@item.TeacherLastName</td>
-                                        <td>@item.Gmail</td>
-
-                                        @*<td>
-                                            <a href="@Url.Action("EditTeacher",new { Id = item.TeacherId })"> Edit</a>|
-                                            @Html.ActionLink("Remove", "RemoveUser", "User", new { Id = item.UserId }, new { onclick = "return confirm('Are you sure to delete this user?');" })
-                                        </td>*@
+                                    <tr onclick="location.href='@(Url.Action("Details","Course",new {Id = item.Course_Id }))'">
+                                        <td>@item.Title</td>
                                     </tr>
                                 }
                             </tbody>
@@ -51,3 +46,6 @@
         </div>
     </div>
 </div>
+<script>
+
+</script>

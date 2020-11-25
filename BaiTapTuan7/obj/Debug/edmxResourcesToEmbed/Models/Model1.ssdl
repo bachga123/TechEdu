@@ -10,21 +10,14 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
-  <EntityType Name="tb_Class">
-    <Key>
-      <PropertyRef Name="ClassId" />
-    </Key>
-    <Property Name="ClassId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
-    <Property Name="YearOfClass" Type="int" />
-  </EntityType>
   <EntityType Name="tb_Course">
     <Key>
       <PropertyRef Name="Course_Id" />
     </Key>
     <Property Name="Course_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Course_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
     <Property Name="Images" Type="varbinary(max)" />
+    <Property Name="Decription" Type="nvarchar" MaxLength="150" />
     <Property Name="Details" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="tb_CTS">
@@ -104,7 +97,6 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
   </EntityType>
   <EntityContainer Name="TechEduModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tb_Class" EntityType="Self.tb_Class" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Course" EntityType="Self.tb_Course" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_CTS" EntityType="Self.tb_CTS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Roles" EntityType="Self.tb_Roles" Schema="dbo" store:Type="Tables" />
