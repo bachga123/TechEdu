@@ -15,10 +15,10 @@
       <PropertyRef Name="Course_Id" />
     </Key>
     <Property Name="Course_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Title" Type="nvarchar" MaxLength="50" />
-    <Property Name="Images" Type="varbinary(max)" />
+    <Property Name="Course_Name" Type="nvarchar" MaxLength="50" />
     <Property Name="Decription" Type="nvarchar" MaxLength="150" />
     <Property Name="Details" Type="nvarchar" MaxLength="150" />
+    <Property Name="TeacherId" Type="int" />
   </EntityType>
   <EntityType Name="tb_CTS">
     <Key>

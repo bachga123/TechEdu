@@ -99,9 +99,9 @@
       <PropertyRef Name="Course_Id" />
     </Key>
     <Property Name="Course_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Images" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Course_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="TeacherId" Type="Int32" />
   </EntityType>
 </Schema>

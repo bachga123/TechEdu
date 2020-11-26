@@ -94,10 +94,10 @@
     <EntitySetMapping Name="tb_Course">
       <EntityTypeMapping TypeName="TechEduModel.tb_Course">
         <MappingFragment StoreEntitySet="tb_Course">
+          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
           <ScalarProperty Name="Details" ColumnName="Details" />
           <ScalarProperty Name="Decription" ColumnName="Decription" />
-          <ScalarProperty Name="Images" ColumnName="Images" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Course_Name" ColumnName="Course_Name" />
           <ScalarProperty Name="Course_Id" ColumnName="Course_Id" />
         </MappingFragment>
       </EntityTypeMapping>

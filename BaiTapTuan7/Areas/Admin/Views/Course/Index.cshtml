@@ -21,15 +21,25 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
+                                    <th>Course name</th>
+                                    <th>Teacher</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr onclick="location.href='@(Url.Action("Details","Course",new {Id = item.Course_Id }))'">
-                                        <td>@item.Title</td>
-                                    </tr>
+                                <tr onclick="location.href='@(Url.Action("Details","Course",new {Id = item.Course_Id }))'">
+                                    <td>@item.Course_Name</td>
+                                    <td>
+                                        @foreach (var i in ViewBag.teacherList)
+                                        {
+                                            if (item.TeacherId == i.TeacherId)
+                                            {
+                                                @(i.TeacherFirstName +' '+ i.TeacherLastName);
+                                            }
+                                        }
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

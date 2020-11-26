@@ -20,10 +20,10 @@
             <PropertyRef Name="Course_Id" />
           </Key>
           <Property Name="Course_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" />
-          <Property Name="Images" Type="varbinary(max)" />
+          <Property Name="Course_Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Decription" Type="nvarchar" MaxLength="150" />
           <Property Name="Details" Type="nvarchar" MaxLength="150" />
+          <Property Name="TeacherId" Type="int" />
         </EntityType>
         <EntityType Name="tb_CTS">
           <Key>
@@ -220,10 +220,10 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
             <PropertyRef Name="Course_Id" />
           </Key>
           <Property Name="Course_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Images" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Course_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="TeacherId" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -324,10 +324,10 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
           <EntitySetMapping Name="tb_Course">
             <EntityTypeMapping TypeName="TechEduModel.tb_Course">
               <MappingFragment StoreEntitySet="tb_Course">
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="Decription" ColumnName="Decription" />
-                <ScalarProperty Name="Images" ColumnName="Images" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Course_Name" ColumnName="Course_Name" />
                 <ScalarProperty Name="Course_Id" ColumnName="Course_Id" />
               </MappingFragment>
             </EntityTypeMapping>
