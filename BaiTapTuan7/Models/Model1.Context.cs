@@ -26,7 +26,6 @@ namespace BaiTapTuan7.Models
         }
     
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<tb_CTS> tb_CTS { get; set; }
         public virtual DbSet<tb_Roles> tb_Roles { get; set; }
         public virtual DbSet<tb_Student> tb_Student { get; set; }
         public virtual DbSet<tb_Teacher> tb_Teacher { get; set; }
@@ -34,5 +33,6 @@ namespace BaiTapTuan7.Models
         public virtual DbSet<tb_UserType> tb_UserType { get; set; }
         public virtual DbSet<tb_UserType_Roles> tb_UserType_Roles { get; set; }
         public virtual DbSet<tb_Course> tb_Course { get; set; }
+        public virtual DbSet<tb_CTS> tb_CTS { get; set; }
     }
 }

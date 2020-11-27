@@ -44,9 +44,18 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                     tb_Teacher Result = db.tb_Teacher.FirstOrDefault(m => m.TeacherId == tc.TeacherId);
                     if (Result != null)
                     {
+                        Result.TeacherFirstName = tc.TeacherFirstName;
+                        Result.TeacherLastName = tc.TeacherLastName;
+                        Result.Gmail = tc.Gmail;
+                        Result.DateOfBirth = tc.DateOfBirth;
+                        Result.PlaceOfBirth = tc.PlaceOfBirth;
+                        Result.PhoneNumber = tc.PhoneNumber;
                         HttpPostedFileBase upload = Request.Files["image"];
-                        using (var binaryReader = new BinaryReader(upload.InputStream))
-                            Result.Images = binaryReader.ReadBytes(upload.ContentLength);
+                        if (upload.FileName != "")
+                        {
+                            using (var binaryReader = new BinaryReader(upload.InputStream))
+                                Result.Images = binaryReader.ReadBytes(upload.ContentLength);
+                        }
                         db.Entry(Result).State = EntityState.Modified;
                         db.SaveChanges();
                         return RedirectToAction("Index", "Teacher");

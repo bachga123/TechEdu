@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace BaiTapTuan7.Areas.Admin.Controllers
 {
+    [AuthorizeController]
     public class CourseController : Controller
     {
         TechEduEntities db = new TechEduEntities();
@@ -88,12 +89,50 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             var result = db.tb_Course.Find(id);
             if (result == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            ViewBag.teacher = db.tb_Teacher.FirstOrDefault(m => m.TeacherId == result.TeacherId);
+            var data = db.tb_CTS.Where(m => m.CourseId == id).ToList();
+            List<tb_Student> studentInCourseList = new List<tb_Student>();
+            foreach(var item in data)
+            {
+                var stu = db.tb_Student.FirstOrDefault(m => m.StudentId == item.StudentId);
+                studentInCourseList.Add(stu);
+            }
+            ViewBag.studentInCourseList = studentInCourseList;
+            var studentNotInCourseList = db.tb_Student.ToList();
+            foreach (var item in studentInCourseList)
+            {
+                var itemRemove = studentNotInCourseList.Find(m => m.StudentId == item.StudentId);
+                studentNotInCourseList.Remove(itemRemove);
+            }
+            ViewBag.studentList = studentNotInCourseList;
             return View(result);
+        }
+        public ActionResult EnrollStudentToCourse(int? couid,int? stuid)
+        {
+            if(couid == null || stuid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if(ModelState.IsValid)
+            {
+                var cou = db.tb_Course.FirstOrDefault(m => m.Course_Id == couid);
+                tb_CTS cts = new tb_CTS();
+                cts.StudentId = stuid;
+                cts.CourseId = cou.Course_Id;
+                cts.TeacherId = cou.TeacherId;
+                db.Entry(cts).State = EntityState.Added;
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = couid });
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
     }
 }

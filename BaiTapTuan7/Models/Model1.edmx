@@ -27,12 +27,12 @@
         </EntityType>
         <EntityType Name="tb_CTS">
           <Key>
-            <PropertyRef Name="Details" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ClassId" Type="int" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseId" Type="int" />
           <Property Name="StudentId" Type="int" />
           <Property Name="TeacherId" Type="int" />
-          <Property Name="Details" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_Roles">
           <Key>
@@ -131,15 +131,6 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="tb_CTS">
-          <Key>
-            <PropertyRef Name="Details" />
-          </Key>
-          <Property Name="ClassId" Type="Int32" />
-          <Property Name="StudentId" Type="Int32" />
-          <Property Name="TeacherId" Type="Int32" />
-          <Property Name="Details" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="tb_Roles">
           <Key>
             <PropertyRef Name="RoleId" />
@@ -206,7 +197,6 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
         </EntityType>
         <EntityContainer Name="TechEduEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="tb_CTS" EntityType="Self.tb_CTS" />
           <EntitySet Name="tb_Roles" EntityType="Self.tb_Roles" />
           <EntitySet Name="tb_Student" EntityType="Self.tb_Student" />
           <EntitySet Name="tb_Teacher" EntityType="Self.tb_Teacher" />
@@ -214,6 +204,7 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
           <EntitySet Name="tb_UserType" EntityType="Self.tb_UserType" />
           <EntitySet Name="tb_UserType_Roles" EntityType="Self.tb_UserType_Roles" />
           <EntitySet Name="tb_Course" EntityType="TechEduModel.tb_Course" />
+          <EntitySet Name="tb_CTS" EntityType="TechEduModel.tb_CTS" />
         </EntityContainer>
         <EntityType Name="tb_Course">
           <Key>
@@ -223,6 +214,15 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
           <Property Name="Course_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="TeacherId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tb_CTS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseId" Type="Int32" />
+          <Property Name="StudentId" Type="Int32" />
           <Property Name="TeacherId" Type="Int32" />
         </EntityType>
       </Schema>
@@ -239,16 +239,6 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_CTS">
-            <EntityTypeMapping TypeName="TechEduModel.tb_CTS">
-              <MappingFragment StoreEntitySet="tb_CTS">
-                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
-                <ScalarProperty Name="Details" ColumnName="Details" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -329,6 +319,16 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
                 <ScalarProperty Name="Decription" ColumnName="Decription" />
                 <ScalarProperty Name="Course_Name" ColumnName="Course_Name" />
                 <ScalarProperty Name="Course_Id" ColumnName="Course_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_CTS">
+            <EntityTypeMapping TypeName="TechEduModel.tb_CTS">
+              <MappingFragment StoreEntitySet="tb_CTS">
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

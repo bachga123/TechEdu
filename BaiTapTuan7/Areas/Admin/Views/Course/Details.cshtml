@@ -5,40 +5,127 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>DetailsCourse</h2>
 
 @using (Html.BeginForm("Details", "Course", FormMethod.Get, new { enctype = "mutilpart/form-data" }))
-{<div>
-    <h4>tb_Course</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Course_Name)
-        </dt>
+{<div class="container-fluid">
+        <div class="card-header">
+            <div class="d-sm-flex align-items-center justify-content-between mb-5 card-header-tabs">
+                <h1>@Html.DisplayFor(model => model.Course_Name)</h1>
+            </div>
+            <div class="d-sm-flex">
+                @Html.DisplayFor(m => m.Decription)
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Course_Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Decription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Decription)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Details)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Details)
-        </dd>
-
-    </dl>
-</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="d-sm-flex align-items-center justify-content-between">
+                            <h4>Teacher</h4>
+                        </div>
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Teacher Name</th>
+                                    <th>Contact</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @(ViewBag.teacher.TeacherFirstName + " " + ViewBag.teacher.TeacherLastName)
+                                    </td>
+                                    <td>@ViewBag.teacher.PhoneNumber</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="table-responsive">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="d-sm-flex align-items-center justify-content-between">
+                            <h4>Student</h4>
+                            <button type="button" name="btnLink" id="btnLink" class="button-group">Enroll Student</button>
+                        </div>
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Student Id</th>
+                                    <th>Student Name</th>
+                                    <th>Gmail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.studentInCourseList)
+                                {
+                                    <tr>
+                                        <th>@item.StudentId</th>
+                                        <th>@(item.FirstName + " " + item.LastName)</th>
+                                        <th>@item.Gmail</th>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p>
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+ <div class="modal fade" id="ModalPopUp" role="dialog">
+     <div class="modal-dialog err-pop" style="">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <button id="DivClose" type="button" class="close" data-dismiss="modal">&times;</button>
+             </div>
+             <div class="modal-body" style="text-align:center;">
+                 @if (ViewBag.studentList.Count == 0)
+                 {
+                     <h4> No data </h4>
+                 }
+                 else
+                 {
+                 <div class="row">
+                     <div class="col-sm-12">
+                         <div class="d-sm-flex align-items-center justify-content-between">
+                             <h4>Students</h4>
+                         </div>
+                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                             <thead>
+                                 <tr>
+                                     <th>FirstName</th>
+                                     <th>LastName</th>
+                                     <th>Gmail</th>
+                                 </tr>
+                             </thead>
+                             <tbody>
+                                 @foreach (var item in ViewBag.studentList)
+                                 {
+                                     <tr onclick="location.href='@(Url.Action("EnrollStudentToCourse", "Course", new { couid = Model.Course_Id, stuid = item.StudentId }))'">
+                                         <td>@item.FirstName</td>
+                                         <td>@item.LastName</td>
+                                         <td>@item.Gmail</td>
+                                     </tr>
+                                 }
+                             </tbody>
+                         </table>
+                     </div>
+                 </div>
+                 }
+             </div>
+         </div>
+     </div>
+ </div>
 }
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<script src="https://code.jquery.com/jquery-1.10.0.min.js" integrity="sha256-2+LznWeWgL7AJ1ciaIG5rFP7GKemzzl+K75tRyTByOE=" crossorigin="anonymous"></script>
+<script>
+    $("#btnLink").click(function () {
+        $('#ModalPopUp').modal('show');
+    })
+</script>

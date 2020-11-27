@@ -70,5 +70,4 @@ namespace BaiTapTuan7.Models
             }
         }
     }
-    
 }

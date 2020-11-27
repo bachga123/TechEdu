@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="34a4e5937d3c43759c02befeb0e08f09" Name="Diagram1">
         <EntityTypeShape EntityType="TechEduModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechEduModel.tb_CTS" Width="1.5" PointX="2.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TechEduModel.tb_Roles" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TechEduModel.tb_Student" Width="1.5" PointX="2.75" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TechEduModel.tb_Teacher" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
@@ -14,6 +13,7 @@
         <EntityTypeShape EntityType="TechEduModel.tb_UserType" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TechEduModel.tb_UserType_Roles" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TechEduModel.tb_Course" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="TechEduModel.tb_CTS" Width="1.5" PointX="7.375" PointY="7" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

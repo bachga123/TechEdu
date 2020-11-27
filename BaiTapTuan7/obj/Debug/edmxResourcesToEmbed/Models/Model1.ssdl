@@ -22,12 +22,12 @@
   </EntityType>
   <EntityType Name="tb_CTS">
     <Key>
-      <PropertyRef Name="Details" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="ClassId" Type="int" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CourseId" Type="int" />
     <Property Name="StudentId" Type="int" />
     <Property Name="TeacherId" Type="int" />
-    <Property Name="Details" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="tb_Roles">
     <Key>

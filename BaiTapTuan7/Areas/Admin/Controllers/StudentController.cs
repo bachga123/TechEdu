@@ -28,7 +28,6 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             if (stu == null)
                 return new HttpNotFoundResult();
             return View(stu);
-
         }
         public ActionResult EditStudent(int id)
         {
@@ -42,22 +41,22 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var check = db.tb_Student.FirstOrDefault(m => m.UserId == stu.UserId);
-                    if (check != null)
+                    tb_Student oldstu = db.tb_Student.FirstOrDefault(m => m.StudentId == stu.StudentId);
+                    if (oldstu != null)
                     {
-                        tb_Student oldstu = db.tb_Student.FirstOrDefault(m => m.StudentId == check.StudentId);
-                        db.Entry(oldstu).State = EntityState.Deleted;
-                        var new_stu = new tb_Student();
-                        new_stu.FirstName = stu.FirstName;
-                        new_stu.LastName = stu.LastName;
-                        new_stu.Gmail = stu.Gmail;
-                        new_stu.PhoneNumber = stu.PhoneNumber;
-                        new_stu.DateOfBirth = stu.DateOfBirth;
-                        new_stu.PlaceOfBirth = stu.PlaceOfBirth;
-                        HttpPostedFileBase upload = Request.Files["image"]; 
-                        using (var binaryReader = new BinaryReader(upload.InputStream))
-                            new_stu.Images = binaryReader.ReadBytes(upload.ContentLength);
-                        db.Entry(new_stu).State = EntityState.Added;
+                        oldstu.FirstName = stu.FirstName;
+                        oldstu.LastName = stu.LastName;
+                        oldstu.Gmail = stu.Gmail;
+                        oldstu.PhoneNumber = stu.PhoneNumber;
+                        oldstu.DateOfBirth = stu.DateOfBirth;
+                        oldstu.PlaceOfBirth = stu.PlaceOfBirth;
+                        HttpPostedFileBase upload = Request.Files["image"];
+                        if(upload.FileName != "")
+                        {
+                            using (var binaryReader = new BinaryReader(upload.InputStream))
+                                oldstu.Images = binaryReader.ReadBytes(upload.ContentLength);
+                        }
+                        db.Entry(oldstu).State = EntityState.Modified;
                         db.SaveChanges();
                         return RedirectToAction("Index", "Student");
                     }
