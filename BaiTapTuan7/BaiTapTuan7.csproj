@@ -2063,7 +2063,6 @@
     <Content Include="Assets\js\jquery.flexslider.js" />
     <Content Include="Assets\js\jquery.min.js" />
     <Content Include="Assets\js\move-top.js" />
-    <Content Include="Assets\js\popup.js" />
     <Content Include="Assets\js\sb-admin-2.js" />
     <Content Include="Assets\js\sb-admin-2.min.js" />
     <Content Include="Assets\js\simpleLightbox.js" />

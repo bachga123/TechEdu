@@ -16,60 +16,76 @@
                 @Html.DisplayFor(m => m.Decription)
             </div>
         </div>
-
-        <div class="card-body">
-            <div class="table-responsive">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="d-sm-flex align-items-center justify-content-between">
-                            <h4>Teacher</h4>
+        <hr />
+        <div class="table table-hover">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Teacher</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Teacher Name</th>
+                                            <th>Contact</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                @(ViewBag.teacher.TeacherFirstName + " " + ViewBag.teacher.TeacherLastName)
+                                            </td>
+                                            <td>@ViewBag.teacher.PhoneNumber</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <table class="table table-bordered" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Teacher Name</th>
-                                    <th>Contact</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        @(ViewBag.teacher.TeacherFirstName + " " + ViewBag.teacher.TeacherLastName)
-                                    </td>
-                                    <td>@ViewBag.teacher.PhoneNumber</td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
             <hr />
-            <div class="table-responsive">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="d-sm-flex align-items-center justify-content-between">
-                            <h4>Student</h4>
-                            <button type="button" name="btnLink" id="btnLink" class="button-group">Enroll Student</button>
+            <div class="table table-hover">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <div class="row no-gutters">
+                            <div class="col-12 col-sm-6 col-md-8">
+                                <h4 class="m-0 font-weight-bold text-primary">Student</h4>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <button type="button" name="btnLink" id="btnLink" class="btn btn-primary">Enroll Student</button>
+                            </div>
                         </div>
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Student Id</th>
-                                    <th>Student Name</th>
-                                    <th>Gmail</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in ViewBag.studentInCourseList)
-                                {
-                                    <tr>
-                                        <th>@item.StudentId</th>
-                                        <th>@(item.FirstName + " " + item.LastName)</th>
-                                        <th>@item.Gmail</th>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Student Id</th>
+                                                <th>Student Name</th>
+                                                <th>Gmail</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.studentInCourseList)
+                                            {
+                                                <tr>
+                                                    <td>@item.StudentId</td>
+                                                    <td>@(item.FirstName + " " + item.LastName)</td>
+                                                    <td>@item.Gmail</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -78,54 +94,66 @@
             @Html.ActionLink("Back to List", "Index")
         </p>
     </div>
- <div class="modal fade" id="ModalPopUp" role="dialog">
-     <div class="modal-dialog err-pop" style="">
-         <div class="modal-content">
-             <div class="modal-header">
-                 <button id="DivClose" type="button" class="close" data-dismiss="modal">&times;</button>
-             </div>
-             <div class="modal-body" style="text-align:center;">
-                 @if (ViewBag.studentList.Count == 0)
-                 {
-                     <h4> No data </h4>
-                 }
-                 else
-                 {
-                 <div class="row">
-                     <div class="col-sm-12">
-                         <div class="d-sm-flex align-items-center justify-content-between">
-                             <h4>Students</h4>
-                         </div>
-                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                             <thead>
-                                 <tr>
-                                     <th>FirstName</th>
-                                     <th>LastName</th>
-                                     <th>Gmail</th>
-                                 </tr>
-                             </thead>
-                             <tbody>
-                                 @foreach (var item in ViewBag.studentList)
-                                 {
-                                     <tr onclick="location.href='@(Url.Action("EnrollStudentToCourse", "Course", new { couid = Model.Course_Id, stuid = item.StudentId }))'">
-                                         <td>@item.FirstName</td>
-                                         <td>@item.LastName</td>
-                                         <td>@item.Gmail</td>
-                                     </tr>
-                                 }
-                             </tbody>
-                         </table>
-                     </div>
-                 </div>
-                 }
-             </div>
-         </div>
-     </div>
- </div>
 }
-<script src="https://code.jquery.com/jquery-1.10.0.min.js" integrity="sha256-2+LznWeWgL7AJ1ciaIG5rFP7GKemzzl+K75tRyTByOE=" crossorigin="anonymous"></script>
-<script>
-    $("#btnLink").click(function () {
-        $('#ModalPopUp').modal('show');
-    })
-</script>
+<div class="modal fade" id="ModalPopUp" role="dialog">
+    <div class="modal-dialog modal-body" style="margin-left: 200px; width: 600px; margin-right: 200px;">
+        <div class="modal-content" style="width: 1202px">
+            <div class="modal-header">
+                <button id="DivClose" type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="text-align:center;">
+                    @if (ViewBag.studentList.Count == 0)
+                    {
+                        <h4> No data </h4>
+                    }
+                    else
+                    {
+                        <div class="table table-hover">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Student</h6>
+                                </div>
+                                @using (Html.BeginForm("EnrollStudentToCourse", "Course", FormMethod.Post))
+                                {
+                                    <div class="table-responsive">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                                                    @Html.HiddenFor(m => m.Course_Id)
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Action</th>
+                                                            <th>FirstName</th>
+                                                            <th>LastName</th>
+                                                            <th>Gmail</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var item in ViewBag.studentList)
+                                                        {
+                                                            @*<tr onclick="location.href='@(Url.Action("EnrollStudentToCourse", "Course", new { couid = Model.Course_Id, stuid = item.StudentId }))'">*@
+                                                            <tr>
+                                                                <td>
+                                                                    <input type="checkbox" name="StudentId" value="@item.StudentId" class="custom-checkbox" />
+                                                                </td>
+                                                                <td>@item.FirstName</td>
+                                                                <td>@item.LastName</td>
+                                                                <td>@item.Gmail</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" value="Enroll" onclick="return confirm('Are you sure to enroll selected student?');" class="btn btn-danger">Enroll </button>
+                                }
+                            </div>
+                        </div>
+                    }
+            </div>
+        </div>
+    </div>
+</div>
+
+

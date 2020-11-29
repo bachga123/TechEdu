@@ -22,7 +22,7 @@
     <link href="~/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="~/Content/PagedList.css" rel="stylesheet" />
 </head>
-    
+
 <body id="page-top">
 
 
@@ -88,7 +88,7 @@
                         <a class="collapse-item" href="@Url.Action("Index","Teacher")">Teacher List</a>
                         <a class="collapse-item" href="@Url.Action("Index","Student")">Student List</a>
                         @*<a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>*@
+                            <a class="collapse-item" href="utilities-other.html">Other</a>*@
                     </div>
                 </div>
             </li>
@@ -114,29 +114,29 @@
                         <a class="collapse-item" href="@Url.Action("Index","Course")">Course</a>
                         <a class="collapse-item" href="@Url.Action("CreateCourse","Course")">Add Course</a>
                         @*<a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>*@
+                            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Other Pages:</h6>
+                            <a class="collapse-item" href="404.html">404 Page</a>
+                            <a class="collapse-item" href="blank.html">Blank Page</a>*@
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
             <!--<li class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span>
-            </a>
-        </li>-->
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Charts</span>
+                </a>
+            </li>-->
             <!-- Nav Item - Tables -->
             <!--<li class="nav-item">
-            <a class="nav-link" href="@Html">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span>
-            </a>
-        </li>-->
+                <a class="nav-link" href="@Html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span>
+                </a>
+            </li>-->
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -147,10 +147,10 @@
 
             <!-- Sidebar Message -->
             @*<div class="sidebar-card">
-                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-            </div>*@
+                    <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="">
+                    <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+                    <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+                </div>*@
 
         </ul>
         <!-- End of Sidebar -->
@@ -394,57 +394,99 @@
                 </div>
             </div>
         </div>
+    </div>
 
-            <!-- Bootstrap core JavaScript-->
-            <script src="~/Assets/Admin/vendor/jquery/jquery.min.js"></script>
-            <script src="~/Assets/Admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Assets/Admin/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Assets/Admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-            <!-- Core plugin JavaScript-->
-            <script src="~/Assets/Admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Assets/Admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-            <!-- Custom scripts for all pages-->
-            <script src="~/Assets/Admin/js/sb-admin-2.min.js"></script>
-            <!-- Page level plugins -->
-            <script src="~/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
-            <script src="~/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-            <!-- Page level custom scripts -->
-            <script src="~/Assets/Admin/js/demo/datatables-demo.js"></script>
-            <script src="~/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Assets/Admin/js/sb-admin-2.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="~/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="~/Assets/Admin/js/demo/datatables-demo.js"></script>
+    <script src="~/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
 
-            <script>
-                $(document).ready(function () {
-                    $("#fileUpload").on('change', function () {
-                        //Get count of selected files
-                        var countFiles = $(this)[0].files.length;
-                        var imgPath = $(this)[0].value;
-                        var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
-                        var image_holder = $("#image-holder");
-                        var image_display = $("#image-display");
-                        image_holder.empty();
-                        if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
-                            if (typeof (FileReader) != "undefined") {
-                                //loop for each file selected for uploaded.
-                                for (var i = 0; i < countFiles; i++) {
-                                    var reader = new FileReader();
-                                    reader.onload = function (e) {
-                                        $("<img />", {
-                                            "src": e.target.result,
-                                            "class": "thumb-image"
-                                        }).appendTo(image_holder);
-                                    }
-                                    image_holder.show();
-                                    image_display.hide();
-                                    reader.readAsDataURL($(this)[0].files[i]);
-                                }
-                            } else {
-                                alert("This browser does not support FileReader.");
+    <script>
+        $(document).ready(function () {
+            $("#fileUpload").on('change', function () {
+                //Get count of selected files
+                var countFiles = $(this)[0].files.length;
+                var imgPath = $(this)[0].value;
+                var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+                var image_holder = $("#image-holder");
+                var image_display = $("#image-display");
+                image_holder.empty();
+                if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+                    if (typeof (FileReader) != "undefined") {
+                        //loop for each file selected for uploaded.
+                        for (var i = 0; i < countFiles; i++) {
+                            var reader = new FileReader();
+                            reader.onload = function (e) {
+                                $("<img />", {
+                                    "src": e.target.result,
+                                    "class": "thumb-image"
+                                }).appendTo(image_holder);
                             }
-                        } else {
-                            alert("Pls select only images");
+                            image_holder.show();
+                            image_display.hide();
+                            reader.readAsDataURL($(this)[0].files[i]);
                         }
-                    });
-                });
-            </script>
+                    } else {
+                        alert("This browser does not support FileReader.");
+                    }
+                } else {
+                    alert("Pls select only images");
+                }
+            });
+        });
+    </script>
+    <script>
+        $("#btnLink").click(function () {
+            $('#ModalPopUp').modal('show');
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable1').dataTable();
+            $('#dataTable2').dataTable();
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.table-bordered tr').click(function (event) {
+                if (event.target.type !== 'checkbox') {
+                    $(':checkbox', this).trigger('click');
+                }
+            });
+
+            $("input[type='checkbox']").change(function (e) {
+                if ($(this).is(":checked")) {
+                    $(this).closest('tr').addClass();
+                } else {
+                    $(this).closest('tr').removeClass();
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#dataTable2').DataTable();
+            $('#checkBoxAll').click(function () {
+                if ($(this).is(":checked")) {
+                    $(".chkCheckBoxId").prop("checked", true)
+                }
+                else {
+                    $(".chkCheckBoxId").prop("checked", false)
+                }
+            });
+        });  
+    </script>
 </body>
 
 </html>
