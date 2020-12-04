@@ -11,14 +11,19 @@ namespace BaiTapTuan7.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tb_Student
     {
         public int StudentId { get; set; }
+        [Required(ErrorMessage ="Please fill student first name")]
         public string FirstName { get; set; }
+        [Required(ErrorMessage = "Please fill student last name")]
         public string LastName { get; set; }
         public Nullable<int> UserId { get; set; }
+        [Required(ErrorMessage = "Please fill student gmail")]
         public string Gmail { get; set; }
+        [Required(ErrorMessage = "Please fill student contact")]
         public Nullable<int> PhoneNumber { get; set; }
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public string PlaceOfBirth { get; set; }

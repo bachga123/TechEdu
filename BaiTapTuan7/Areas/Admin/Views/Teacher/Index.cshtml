@@ -29,11 +29,10 @@
                                         <td>@item.TeacherFirstName</td>
                                         <td>@item.TeacherLastName</td>
                                         <td>@item.Gmail</td>
-
-                                        @*<td>
-                                            <a href="@Url.Action("EditTeacher",new { Id = item.TeacherId })"> Edit</a>|
-                                            @Html.ActionLink("Remove", "RemoveUser", "User", new { Id = item.UserId }, new { onclick = "return confirm('Are you sure to delete this user?');" })
-                                        </td>*@
+                                        <td>
+                                            @Html.ActionLink("Remove", "Delete", "Teacher", new { id = item.TeacherId }, new { onclick = "return confirm('Are you sure to remove this teacher?');", @class = "btn btn-danger" })
+                                            @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-l" value="@item.StudentId">Details</button>*@
+                                        </td>
                                     </tr>
                                 }
                             </tbody>

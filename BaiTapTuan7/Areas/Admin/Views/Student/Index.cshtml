@@ -23,6 +23,7 @@
                                     <th>FirstNam</th>
                                     <th>LastName</th>
                                     <th>Gmail</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,12 +33,10 @@
                                         <td>@item.FirstName</td>
                                         <td>@item.LastName</td>
                                         <td>@item.Gmail</td>
-                                        
-                                        @*<td>
-                                            <a href="@Url.Action("Details",new { Id = item.StudentId})">Details</a>
-                                            <a href="@Url.Action("EditStudent",new { Id = item.StudentId })"> Edit</a>|
-                                            @Html.ActionLink("Remove", "RemoveUser", "User", new { Id = item.UserId }, new { onclick = "return confirm('Are you sure to delete this user?');" })
-                                        </td>*@
+                                        <td>
+                                            @Html.ActionLink("Remove", "Delete", "Student", new { stuid = item.StudentId }, new { onclick = "return confirm('Are you sure to remove this student?');", @class = "btn btn-danger" })
+                                            @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-l" value="@item.StudentId">Details</button>*@
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
@@ -45,12 +44,12 @@
                     </div>
                 </div>
                 <div class="row">
-                <div class="col-sm-12 col-md-5">
-                    <div class="dataTables_paginate">
-                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_paginate">
+                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>

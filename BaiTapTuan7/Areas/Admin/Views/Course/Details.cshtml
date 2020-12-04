@@ -8,15 +8,18 @@
 
 @using (Html.BeginForm("Details", "Course", FormMethod.Get, new { enctype = "mutilpart/form-data" }))
 {<div class="container-fluid">
-        <div class="card-header">
-            <div class="d-sm-flex align-items-center justify-content-between mb-5 card-header-tabs">
-                <h1>@Html.DisplayFor(model => model.Course_Name)</h1>
-            </div>
-            <div class="d-sm-flex">
-                @Html.DisplayFor(m => m.Decription)
-            </div>
-        </div>
-        <hr />
+     <div class="card-header">
+         <div class="d-sm-flex align-items-center justify-content-between mb-5 card-header-tabs">
+             <h1>@Html.DisplayFor(model => model.Course_Name)</h1>
+         </div>
+         <div class="d-sm-flex">
+             @Html.DisplayFor(m => m.Decription)
+         </div>
+         <div>
+             @Html.ActionLink("Remove Course", "DeleteCourse", "Course", new { couid = Model.Course_Id }, new { onclick = "return confirm('Are you sure to remove this course?');", @class = "btn btn-danger" })
+         </div>
+     </div>
+    <hr />
         <div class="table table-hover">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -70,6 +73,7 @@
                                                 <th>Student Id</th>
                                                 <th>Student Name</th>
                                                 <th>Gmail</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -79,6 +83,9 @@
                                                     <td>@item.StudentId</td>
                                                     <td>@(item.FirstName + " " + item.LastName)</td>
                                                     <td>@item.Gmail</td>
+                                                    <td>
+                                                        @Html.ActionLink("Remove", "RemoveStudent", "Course", new { stuid = item.StudentId, couid = Model.Course_Id }, new { onclick = "return confirm('Are you sure to remove this student?');", @class = "btn btn-danger" })
+                                                    </td>
                                                 </tr>
                                             }
                                         </tbody>

@@ -72,5 +72,33 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 }
             }
         }
+        public ActionResult Delete(int? tcid)
+        {
+            if (tcid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                var tc = db.tb_Teacher.FirstOrDefault(m => m.TeacherId == tcid);
+                var us = db.tb_Users.Find(tc.UserId);
+                var cts = db.tb_CTS.Where(m => m.TeacherId == tcid).ToList();
+                var cou = db.tb_Course.Where(m => m.TeacherId == tcid).ToList();
+                db.Entry(us).State = EntityState.Deleted;
+                db.Entry(tc).State = EntityState.Deleted;
+                foreach(var item in cts)
+                {
+                    var ctss = db.tb_CTS.Find(item.Id);
+                    db.Entry(ctss).State = EntityState.Deleted;
+                }
+                foreach(var item in cou)
+                {
+                    var coua = db.tb_Course.Find(item.Course_Id);
+                    db.Entry(coua).State = EntityState.Deleted;
+                }
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

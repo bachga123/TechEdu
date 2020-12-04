@@ -49,10 +49,29 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
-        public ActionResult DeleteCourse()
-
+        public ActionResult DeleteCourse(int? couid)
         {
-            return View();
+            if (couid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if(ModelState.IsValid)
+            {
+                var cou = db.tb_Course.Find(couid);
+                var cts = db.tb_CTS.Where(m => m.CourseId == couid).ToList();
+                db.Entry(cou).State = EntityState.Deleted;
+                foreach(var item in cts)
+                {
+                    var ctss = db.tb_CTS.Find(item.Id);
+                    db.Entry(ctss).State = EntityState.Deleted;
+                }
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
         public ActionResult EditCourse(int id)
         {
@@ -112,28 +131,6 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             ViewBag.studentList = studentNotInCourseList;
             return View(result);
         }
-        //public ActionResult EnrollStudentToCourse(int? couid, int? stuid)
-        //{
-        //    if (couid == null || stuid == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    if (ModelState.IsValid)
-        //    {
-        //        var cou = db.tb_Course.FirstOrDefault(m => m.Course_Id == couid);
-        //        tb_CTS cts = new tb_CTS();
-        //        cts.StudentId = stuid;
-        //        cts.CourseId = cou.Course_Id;
-        //        cts.TeacherId = cou.TeacherId;
-        //        db.Entry(cts).State = EntityState.Added;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Details", new { id = couid });
-        //    }
-        //    else
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //}
 
         [HttpPost]
         public ActionResult EnrollStudentToCourse(FormCollection f)
@@ -155,6 +152,20 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 db.SaveChanges();
             }
             return RedirectToAction("Details", new { id = couid });
+        }
+        public ActionResult RemoveStudent(int? stuid,int? couid)
+        {
+            if (stuid == null || couid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                var cts = db.tb_CTS.SingleOrDefault(m => m.CourseId == couid && m.StudentId == stuid);
+                db.Entry(cts).State = EntityState.Deleted;
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = couid });
+            }
         }
     }
 }

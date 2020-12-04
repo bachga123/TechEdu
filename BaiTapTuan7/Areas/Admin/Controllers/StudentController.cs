@@ -16,10 +16,10 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
     {
         TechEduEntities db = new TechEduEntities();
         // GET: Student
-        public ActionResult Index(int page = 1,int pageSize = 10)
+        public ActionResult Index(int page = 1, int pageSize = 10)
         {
 
-            var listStudent = db.tb_Student.OrderByDescending(m => m.FirstName).ToPagedList(page,pageSize);
+            var listStudent = db.tb_Student.OrderByDescending(m => m.FirstName).ToPagedList(page, pageSize);
             return View(listStudent);
         }
         public ActionResult Details(int id)
@@ -37,39 +37,60 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult EditStudent(tb_Student stu)
         {
-            using (TechEduEntities db = new TechEduEntities())
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                tb_Student oldstu = db.tb_Student.FirstOrDefault(m => m.StudentId == stu.StudentId);
+                if (oldstu != null)
                 {
-                    tb_Student oldstu = db.tb_Student.FirstOrDefault(m => m.StudentId == stu.StudentId);
-                    if (oldstu != null)
+                    oldstu.FirstName = stu.FirstName;
+                    oldstu.LastName = stu.LastName;
+                    oldstu.Gmail = stu.Gmail;
+                    oldstu.PhoneNumber = stu.PhoneNumber;
+                    oldstu.DateOfBirth = stu.DateOfBirth;
+                    oldstu.PlaceOfBirth = stu.PlaceOfBirth;
+                    HttpPostedFileBase upload = Request.Files["image"];
+                    if (upload.FileName != "")
                     {
-                        oldstu.FirstName = stu.FirstName;
-                        oldstu.LastName = stu.LastName;
-                        oldstu.Gmail = stu.Gmail;
-                        oldstu.PhoneNumber = stu.PhoneNumber;
-                        oldstu.DateOfBirth = stu.DateOfBirth;
-                        oldstu.PlaceOfBirth = stu.PlaceOfBirth;
-                        HttpPostedFileBase upload = Request.Files["image"];
-                        if(upload.FileName != "")
-                        {
-                            using (var binaryReader = new BinaryReader(upload.InputStream))
-                                oldstu.Images = binaryReader.ReadBytes(upload.ContentLength);
-                        }
-                        db.Entry(oldstu).State = EntityState.Modified;
-                        db.SaveChanges();
-                        return RedirectToAction("Index", "Student");
+                        using (var binaryReader = new BinaryReader(upload.InputStream))
+                            oldstu.Images = binaryReader.ReadBytes(upload.ContentLength);
                     }
-                    else
-                    {
-                        ModelState.AddModelError("", "Edit Student failed");
-                        return View("EditStudent", stu);
-                    }
+                    db.Entry(oldstu).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Student");
                 }
                 else
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    ModelState.AddModelError("", "Edit Student failed");
+                    return View("EditStudent", stu);
                 }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Edit Student failed");
+                return View("EditStudent", stu);
+            }
+        }
+
+        public ActionResult Delete(int? stuid)
+        {
+            if (stuid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                var stu = db.tb_Student.FirstOrDefault(m => m.StudentId == stuid);
+                var us = db.tb_Users.Find(stu.UserId);
+                var cts = db.tb_CTS.Where(m => m.StudentId == stuid).ToList();
+                db.Entry(us).State = EntityState.Deleted;
+                db.Entry(stu).State = EntityState.Deleted;
+                foreach(var item in cts)
+                {
+                    var ctss = db.tb_CTS.Find(item.Id);
+                    db.Entry(ctss).State = EntityState.Deleted;
+                }
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
         }
     }

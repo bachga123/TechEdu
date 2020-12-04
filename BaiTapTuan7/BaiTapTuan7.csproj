@@ -4314,6 +4314,7 @@
     <Content Include="Areas\Admin\Views\Course\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Course\CreateCourse.cshtml" />
     <Content Include="Areas\Admin\Views\Course\EditCourse.cshtml" />
+    <Content Include="Areas\Teacher\Views\web.config" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -4401,6 +4402,8 @@
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\CourseController.cs" />
     <Compile Include="Areas\Admin\Model\AddUserModel.cs" />
+    <Compile Include="Areas\Teacher\Controllers\TeacherController.cs" />
+    <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\StudentController.cs" />
     <Compile Include="Areas\Admin\Controllers\TeacherController.cs" />
@@ -4483,6 +4486,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Teacher\Data\" />
+    <Folder Include="Areas\Teacher\Views\Shared\" />
+    <Folder Include="Areas\Teacher\Views\Teacher\" />
+    <Folder Include="Views\Teacher\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
