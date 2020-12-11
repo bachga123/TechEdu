@@ -50,7 +50,6 @@ namespace BaiTapTuan7.Areas.Student.Controllers
                 tb_CTS cts1 = new tb_CTS();
                 cts1.CourseId = couid;
                 cts1.StudentId = stu.StudentId;
-                cts1.TeacherId = cts.TeacherId;
                 cts1.Status = 2;
                 db.Entry(cts1).State = EntityState.Added;
                 db.SaveChanges();

@@ -16,6 +16,5 @@ namespace BaiTapTuan7.Models
     {
         public string UserTypeId { get; set; }
         public string RoleId { get; set; }
-        public string Details { get; set; }
     }
 }

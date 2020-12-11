@@ -174,7 +174,6 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 tb_CTS cts = new tb_CTS();
                 cts.StudentId = int.Parse(id);
                 cts.CourseId = cou.Course_Id;
-                cts.TeacherId = cou.TeacherId;
                 cts.Status = 1;
                 db.Entry(cts).State = EntityState.Added;
                 db.SaveChanges();

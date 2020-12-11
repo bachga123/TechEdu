@@ -24,7 +24,8 @@ namespace BaiTapTuan7.Areas.Student.Controllers
             //ViewBag.us = us;
             //tb_Student stu = db.tb_Student.FirstOrDefault(m => m.UserId == us.Id);
             tb_Student stu = (tb_Student)Session["student"];
-            return View("StudentProfile", stu);
+            var stuu = db.tb_Student.Find(stu.StudentId);
+            return View("StudentProfile", stuu);
         }
         [HttpPost]
         public ActionResult StudentProfile(tb_Student stu)

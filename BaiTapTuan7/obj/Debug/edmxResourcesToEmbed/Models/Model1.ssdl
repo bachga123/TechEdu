@@ -38,7 +38,6 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CourseId" Type="int" />
     <Property Name="StudentId" Type="int" />
-    <Property Name="TeacherId" Type="int" />
     <Property Name="Status" Type="int" />
   </EntityType>
   <EntityType Name="tb_Files">
@@ -57,14 +56,15 @@
     </Key>
     <Property Name="RoleId" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Details" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="tb_Score">
     <Key>
-      <PropertyRef Name="score_id" />
+      <PropertyRef Name="Assignment_id" />
+      <PropertyRef Name="Student_id" />
     </Key>
-    <Property Name="score_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Assignment_id" Type="int" />
-    <Property Name="Student_id" Type="int" />
+    <Property Name="Assignment_id" Type="int" Nullable="false" />
+    <Property Name="Student_id" Type="int" Nullable="false" />
     <Property Name="Score" Type="float" />
     <Property Name="details" Type="nvarchar" MaxLength="50" />
   </EntityType>
@@ -104,6 +104,7 @@
     <Property Name="DateOfBirth" Type="datetime" />
     <Property Name="PlaceOfBirth" Type="nchar" MaxLength="10" />
     <Property Name="Images" Type="varbinary(max)" />
+    <Property Name="Rank" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="tb_Users">
     <Key>
@@ -125,8 +126,6 @@
     <Property Name="UserTypeId" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="UserTypeName" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="tb_UserType_Roles">
     <Key>
       <PropertyRef Name="UserTypeId" />
@@ -134,7 +133,6 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
     </Key>
     <Property Name="UserTypeId" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="RoleId" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Details" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityContainer Name="TechEduModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -149,12 +147,6 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
     <EntitySet Name="tb_Teacher" EntityType="Self.tb_Teacher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Users" EntityType="Self.tb_Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_UserType" EntityType="Self.tb_UserType" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tb_UserType_Roles" EntityType="Self.tb_UserType_Roles" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tb_UserType_Roles].[UserTypeId] AS [UserTypeId], 
-    [tb_UserType_Roles].[RoleId] AS [RoleId], 
-    [tb_UserType_Roles].[Details] AS [Details]
-    FROM [dbo].[tb_UserType_Roles] AS [tb_UserType_Roles]</DefiningQuery>
-    </EntitySet>
+    <EntitySet Name="tb_UserType_Roles" EntityType="Self.tb_UserType_Roles" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

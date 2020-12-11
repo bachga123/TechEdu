@@ -10,13 +10,6 @@
     <Property Name="version" Type="Int32" />
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
-  <EntityType Name="tb_Roles">
-    <Key>
-      <PropertyRef Name="RoleId" />
-    </Key>
-    <Property Name="RoleId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="tb_Student">
     <Key>
       <PropertyRef Name="StudentId" />
@@ -44,6 +37,7 @@
     <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
     <Property Name="PlaceOfBirth" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Images" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Rank" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="tb_Users">
     <Key>
@@ -65,28 +59,19 @@
     <Property Name="UserTypeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="UserTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="tb_UserType_Roles">
-    <Key>
-      <PropertyRef Name="UserTypeId" />
-      <PropertyRef Name="RoleId" />
-    </Key>
-    <Property Name="UserTypeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="RoleId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityContainer Name="TechEduEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-    <EntitySet Name="tb_Roles" EntityType="Self.tb_Roles" />
     <EntitySet Name="tb_Student" EntityType="Self.tb_Student" />
     <EntitySet Name="tb_Teacher" EntityType="Self.tb_Teacher" />
     <EntitySet Name="tb_Users" EntityType="Self.tb_Users" />
     <EntitySet Name="tb_UserType" EntityType="Self.tb_UserType" />
-    <EntitySet Name="tb_UserType_Roles" EntityType="Self.tb_UserType_Roles" />
     <EntitySet Name="tb_Course" EntityType="TechEduModel.tb_Course" />
-    <EntitySet Name="tb_CTS" EntityType="TechEduModel.tb_CTS" />
     <EntitySet Name="tb_Files" EntityType="TechEduModel.tb_Files" />
     <EntitySet Name="tb_Assignment" EntityType="TechEduModel.tb_Assignment" />
     <EntitySet Name="tb_Student_Assignment" EntityType="TechEduModel.tb_Student_Assignment" />
+    <EntitySet Name="tb_CTS" EntityType="TechEduModel.tb_CTS" />
+    <EntitySet Name="tb_Roles" EntityType="TechEduModel.tb_Roles" />
+    <EntitySet Name="tb_UserType_Roles" EntityType="TechEduModel.tb_UserType_Roles" />
     <EntitySet Name="tb_Score" EntityType="TechEduModel.tb_Score" />
   </EntityContainer>
   <EntityType Name="tb_Course">
@@ -98,16 +83,6 @@
     <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="TeacherId" Type="Int32" />
-  </EntityType>
-  <EntityType Name="tb_CTS">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CourseId" Type="Int32" />
-    <Property Name="StudentId" Type="Int32" />
-    <Property Name="TeacherId" Type="Int32" />
-    <Property Name="Status" Type="Int32" />
   </EntityType>
   <EntityType Name="tb_Files">
     <Key>
@@ -139,13 +114,38 @@
     <Property Name="Student_Id" Type="Int32" />
     <Property Name="Decriptions" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="tb_CTS">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CourseId" Type="Int32" />
+    <Property Name="StudentId" Type="Int32" />
+    <Property Name="Status" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tb_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tb_UserType_Roles">
+    <Key>
+      <PropertyRef Name="UserTypeId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserTypeId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RoleId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
   <EntityType Name="tb_Score">
     <Key>
-      <PropertyRef Name="score_id" />
+      <PropertyRef Name="Assignment_id" />
+      <PropertyRef Name="Student_id" />
     </Key>
-    <Property Name="score_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Assignment_id" Type="Int32" />
-    <Property Name="Student_id" Type="Int32" />
+    <Property Name="Assignment_id" Type="Int32" Nullable="false" />
+    <Property Name="Student_id" Type="Int32" Nullable="false" />
     <Property Name="Score" Type="Double" />
     <Property Name="details" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>

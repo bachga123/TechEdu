@@ -50,6 +50,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                         Result.DateOfBirth = tc.DateOfBirth;
                         Result.PlaceOfBirth = tc.PlaceOfBirth;
                         Result.PhoneNumber = tc.PhoneNumber;
+                        Result.Rank = tc.Rank;
                         HttpPostedFileBase upload = Request.Files["image"];
                         if (upload.FileName != "")
                         {
@@ -82,15 +83,9 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             {
                 var tc = db.tb_Teacher.FirstOrDefault(m => m.TeacherId == tcid);
                 var us = db.tb_Users.Find(tc.UserId);
-                var cts = db.tb_CTS.Where(m => m.TeacherId == tcid).ToList();
                 var cou = db.tb_Course.Where(m => m.TeacherId == tcid).ToList();
                 db.Entry(us).State = EntityState.Deleted;
                 db.Entry(tc).State = EntityState.Deleted;
-                foreach(var item in cts)
-                {
-                    var ctss = db.tb_CTS.Find(item.Id);
-                    db.Entry(ctss).State = EntityState.Deleted;
-                }
                 foreach(var item in cou)
                 {
                     var coua = db.tb_Course.Find(item.Course_Id);

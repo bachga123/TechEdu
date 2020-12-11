@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="34a4e5937d3c43759c02befeb0e08f09" Name="Diagram1">
+      <Diagram DiagramId="34a4e5937d3c43759c02befeb0e08f09" Name="Diagram1" ZoomLevel="55">
         <EntityTypeShape EntityType="TechEduModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechEduModel.tb_Roles" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TechEduModel.tb_Student" Width="1.5" PointX="2.75" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechEduModel.tb_Teacher" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechEduModel.tb_Teacher" Width="1.5" PointX="4.625" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TechEduModel.tb_Users" Width="1.5" PointX="0.625" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechEduModel.tb_UserType" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechEduModel.tb_UserType_Roles" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechEduModel.tb_Course" Width="1.5" PointX="5.375" PointY="7.75" />
-        <EntityTypeShape EntityType="TechEduModel.tb_CTS" Width="1.5" PointX="7.375" PointY="7" />
+        <EntityTypeShape EntityType="TechEduModel.tb_UserType" Width="1.5" PointX="4.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechEduModel.tb_Course" Width="1.5" PointX="4.5" PointY="6.75" />
         <EntityTypeShape EntityType="TechEduModel.tb_Files" Width="1.5" PointX="2.875" PointY="0.75" />
-        <EntityTypeShape EntityType="TechEduModel.tb_Assignment" Width="1.5" PointX="9.375" PointY="3.75" />
-        <EntityTypeShape EntityType="TechEduModel.tb_Student_Assignment" Width="1.5" PointX="9.375" PointY="6.75" />
-        <EntityTypeShape EntityType="TechEduModel.tb_Score" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TechEduModel.tb_Assignment" Width="1.5" PointX="6.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TechEduModel.tb_Student_Assignment" Width="1.5" PointX="6.375" PointY="3.625" />
+        <EntityTypeShape EntityType="TechEduModel.tb_CTS" Width="1.5" PointX="0.5" PointY="6.75" />
+        <EntityTypeShape EntityType="TechEduModel.tb_Roles" Width="1.5" PointX="2.625" PointY="6.75" />
+        <EntityTypeShape EntityType="TechEduModel.tb_UserType_Roles" Width="1.5" PointX="6.5" PointY="6.625" />
+        <EntityTypeShape EntityType="TechEduModel.tb_Score" Width="1.5" PointX="8.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

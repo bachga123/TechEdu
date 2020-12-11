@@ -88,11 +88,11 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
         public List<tb_Course> MyCourseList()
         {
             tb_Teacher tc = (tb_Teacher)Session["teacher"];
-            var data = db.tb_CTS.Where(m => m.TeacherId == tc.TeacherId);
+            var data = db.tb_Course.Where(m => m.TeacherId == tc.TeacherId);
             List<tb_Course> myCourseList = new List<tb_Course>();
             foreach (var item in data)
             {
-                var cou = db.tb_Course.FirstOrDefault(m => m.Course_Id == item.CourseId && m.TeacherId == tc.TeacherId);
+                var cou = db.tb_Course.FirstOrDefault(m => m.Course_Id == item.Course_Id && m.TeacherId == tc.TeacherId);
                 if(myCourseList.Contains(cou) == false)
                     myCourseList.Add(cou);
             }

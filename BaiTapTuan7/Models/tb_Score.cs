@@ -14,9 +14,8 @@ namespace BaiTapTuan7.Models
     
     public partial class tb_Score
     {
-        public int score_id { get; set; }
-        public Nullable<int> Assignment_id { get; set; }
-        public Nullable<int> Student_id { get; set; }
+        public int Assignment_id { get; set; }
+        public int Student_id { get; set; }
         public Nullable<double> Score { get; set; }
         public string details { get; set; }
     }

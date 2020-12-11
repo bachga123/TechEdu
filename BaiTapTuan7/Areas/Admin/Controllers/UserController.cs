@@ -197,6 +197,12 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 tb_Teacher tc = db.tb_Teacher.FirstOrDefault(m => m.UserId == userid);
                 db.Entry(tc).State = EntityState.Deleted;
                 db.Entry(us).State = EntityState.Deleted;
+                var cou = db.tb_Course.Where(m => m.TeacherId == tc.TeacherId).ToList();
+                foreach (var item in cou)
+                {
+                    var coua = db.tb_Course.Find(item.Course_Id);
+                    db.Entry(coua).State = EntityState.Deleted;
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index", "User");
             }
@@ -204,7 +210,6 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
         }
         public ActionResult RemoveStudentByUserId(tb_Users us)
         {

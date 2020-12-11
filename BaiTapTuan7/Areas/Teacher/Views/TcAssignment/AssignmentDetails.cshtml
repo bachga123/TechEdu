@@ -55,6 +55,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">Student Answer</h6>
             </div>
             <div class="card-body">
+                <div id="PlaceHolderHere"></div>
                 <div class="table-responsive">
                     <div class="row">
                         <div class="col-sm-12">
@@ -70,12 +71,26 @@
                                 <tbody>
                                     @foreach (var item in ViewBag.studentAnswerList)
                                     {
-                                        <tr onclick="AddStudentScore(@item.StudentId)">
-                                            <td>@item.StudentId</td>
-                                            <td>@item.StudentName</td>
-                                            <td>@item.Answer</td>
-                                            <td>@item.Score</td>
-                                        </tr>
+                                    <tr>
+                                        <td>@item.StudentId</td>
+                                        <td>@item.StudentName</td>
+                                        <td>@item.Answer</td>
+                                        @if (item.Score == -1)
+                                        {
+                                            <td>
+                                                <button type="button" class="btn btn-primary" data-toggle="ajax-modal"
+                                                        data-target="#addScoreToStudent" data-url="@Url.Action("AddScoreToStudent","TcAssignment",new { stuid = item.StudentId,assid= Model.Assignment_Id})">
+                                                    Add Score
+                                                </button>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                @item.Score
+                                            </td>
+                                        }
+                                    </tr>
                                     }
                                 </tbody>
                             </table>
@@ -86,7 +101,6 @@
         </div>
     </div>
 </div>
-
 
 
 

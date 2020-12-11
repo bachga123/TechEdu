@@ -17,7 +17,6 @@ namespace BaiTapTuan7.Models
         public int Id { get; set; }
         public Nullable<int> CourseId { get; set; }
         public Nullable<int> StudentId { get; set; }
-        public Nullable<int> TeacherId { get; set; }
         public Nullable<int> Status { get; set; }
     }
 }

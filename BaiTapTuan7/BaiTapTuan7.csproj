@@ -4681,6 +4681,7 @@
     <Content Include="Areas\Student\Views\StuCourse\AnswerAssignment.cshtml" />
     <Content Include="Areas\Student\Views\StuCourse\EditAnswerAssignment.cshtml" />
     <Content Include="Areas\Teacher\Views\TcAssignment\AddScoreToStudent.cshtml" />
+    <Content Include="Areas\Teacher\Views\TcInfor\AccountSetting.cshtml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -4877,8 +4878,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Student\Data\" />
-    <Folder Include="Areas\Teacher\Views\Student\" />
-    <Folder Include="Areas\Teacher\Views\Teacher\" />
     <Folder Include="Views\Teacher\" />
   </ItemGroup>
   <ItemGroup>

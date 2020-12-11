@@ -70,9 +70,7 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
             //        StudentInAssignment.Add(stu);
             //}
             //ViewBag.StudentInAssignment = StudentInAssignment;
-            var studentAnswerList = db.tb_Student_Assignment.Where(m => m.Assignment_Id == assid);
             ViewBag.studentAnswerList = CreateAssigmetScore(assid);
-            ViewBag.studentScoreList = db.tb_Score.Where(m => m.Assignment_id == assid);
             tb_Assignment ass = db.tb_Assignment.Find(assid);
             return View("AssignmentDetails", ass);
         }
@@ -120,7 +118,8 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
             return RedirectToAction("Index", new { couid = ass.Course_Id });
         }
         // Score
-        public ActionResult AddScoreToStudent(int stuid, int assid)
+
+        public ActionResult AddScoreToStudent(int stuid,int assid)
         {
             tb_Score sco = new tb_Score();
             sco.Student_id = stuid;
@@ -132,9 +131,19 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sco).State = EntityState.Added;
+                if (sco.Score == null)
+                {
+                    return RedirectToAction("AssignmentDetails", new { assid = sco.Assignment_id });
+                }
+                tb_Score newsco = new tb_Score();
+                newsco.Assignment_id = sco.Assignment_id;
+                newsco.Student_id = sco.Student_id;
+                newsco.Score = sco.Score;
+                newsco.details = sco.details;
+                db.Entry(newsco).State = EntityState.Added;
                 db.SaveChanges();
                 return RedirectToAction("AssignmentDetails", new { assid = sco.Assignment_id });
+
             }
             else
             {
@@ -158,7 +167,7 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
                     asc.Score = (float)score.Score;
                 }
                 else
-                    asc.Score = 0;
+                    asc.Score = -1;
 
                 if (listAssignmentScore.Contains(asc) == false)
                 {
