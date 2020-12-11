@@ -265,3 +265,10 @@ E:\Web\Project\TechEdu\BaiTapTuan7\bin\PagedList.dll
 E:\Web\Project\TechEdu\BaiTapTuan7\bin\PagedList.Mvc.dll
 E:\Web\Project\TechEdu\BaiTapTuan7\bin\PagedList.xml
 E:\Web\Project\TechEdu\BaiTapTuan7\bin\PagedList.Mvc.xml
+E:\Web\Project\TechEdu\BaiTapTuan7\bin\Google.Apis.Core.dll
+E:\Web\Project\TechEdu\BaiTapTuan7\bin\Google.Apis.dll
+E:\Web\Project\TechEdu\BaiTapTuan7\bin\Google.Apis.PlatformServices.dll
+E:\Web\Project\TechEdu\BaiTapTuan7\bin\Google.Apis.pdb
+E:\Web\Project\TechEdu\BaiTapTuan7\bin\Google.Apis.xml
+E:\Web\Project\TechEdu\BaiTapTuan7\bin\Google.Apis.Core.pdb
+E:\Web\Project\TechEdu\BaiTapTuan7\bin\Google.Apis.Core.xml

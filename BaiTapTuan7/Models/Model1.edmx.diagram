@@ -14,6 +14,10 @@
         <EntityTypeShape EntityType="TechEduModel.tb_UserType_Roles" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TechEduModel.tb_Course" Width="1.5" PointX="5.375" PointY="7.75" />
         <EntityTypeShape EntityType="TechEduModel.tb_CTS" Width="1.5" PointX="7.375" PointY="7" />
+        <EntityTypeShape EntityType="TechEduModel.tb_Files" Width="1.5" PointX="2.875" PointY="0.75" />
+        <EntityTypeShape EntityType="TechEduModel.tb_Assignment" Width="1.5" PointX="9.375" PointY="3.75" />
+        <EntityTypeShape EntityType="TechEduModel.tb_Student_Assignment" Width="1.5" PointX="9.375" PointY="6.75" />
+        <EntityTypeShape EntityType="TechEduModel.tb_Score" Width="1.5" PointX="9.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

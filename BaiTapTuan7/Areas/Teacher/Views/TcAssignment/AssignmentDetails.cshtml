@@ -1,0 +1,92 @@
+﻿@model BaiTapTuan7.Models.tb_Assignment
+
+@{
+    ViewBag.Title = "AssignmentDetails";
+    Layout = "~/Areas/Teacher/Views/Shared/_TeacherLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("CourseDetails","TcCourse",new { couid = ViewBag.couid})">Details</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("EditCourseDetails","TcCourse")">Edit Course</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("StudentOnCourse","TcCourse")" aria-selected="false">Student</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="@Url.Action("Index","TcAssignment")">Assignment</a>
+        </li>
+    </ul>
+    <h4>tb_Assignment</h4>
+    <hr />
+    @Html.ActionLink("Edit", "EditAssignment", new { assid = Model.Assignment_Id }, new { @class = "btn btn-primary" })
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deadline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deadline)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayTextFor(model => model.Details)
+        </dd>
+    </dl>
+
+    <div class="table table-hover">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Student Answer</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Student id</th>
+                                        <th>Name</th>
+                                        <th>Answer</th>
+                                        <th>Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.studentAnswerList)
+                                    {
+                                        <tr onclick="AddStudentScore(@item.StudentId)">
+                                            <td>@item.StudentId</td>
+                                            <td>@item.StudentName</td>
+                                            <td>@item.Answer</td>
+                                            <td>@item.Score</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

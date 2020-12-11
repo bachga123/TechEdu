@@ -29,6 +29,10 @@ namespace BaiTapTuan7.Controllers
             //nếu user nhập đúng mật khẩu
             if (us != null)
             {
+                if (us.Block == true)
+                {
+                    return Content("er_block");
+                }
                 Session["user"] = us;
                 Session["userName"] = us.Username;
 
@@ -38,15 +42,24 @@ namespace BaiTapTuan7.Controllers
                 }
                 else if (us.Usertype == "student")
                 {
+                    Session["student"] = db.tb_Student.FirstOrDefault(m => m.UserId == us.Id);
                     return Content("/Student");
                 }
                 else if (us.Usertype == "teacher")
                 {
+                    Session["teacher"] = db.tb_Teacher.FirstOrDefault(m => m.UserId == us.Id);
                     return Content("/Teacher");
                 }
+                else
+                {
+                    return Content("false");
+                }
             }
-            return Content("false");
+            else
+            {
+                return Content("false");
+            }
         }
-        
+
     }
 }

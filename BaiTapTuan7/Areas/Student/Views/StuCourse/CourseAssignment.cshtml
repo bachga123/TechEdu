@@ -1,0 +1,65 @@
+﻿@model List<BaiTapTuan7.Models.tb_Assignment>
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Areas/Student/Views/Shared/_StudentLayout.cshtml";
+    }
+    @Url.Action("")
+<table class="table">
+    <tr>
+        <th>
+            Deadline
+        </th>
+        <th>
+            <a>Time left</a>
+        </th>
+        <th>
+            Question
+        </th>
+        <th>
+           Status
+        </th>
+        <th>
+            Action
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deadline)
+            </td>
+            <td>
+                @if (item.Deadline < DateTime.Now)
+                {
+                    <a>Closed</a>
+                }
+                else if (((TimeSpan)(item.Deadline - DateTime.Now)).Days != 0)
+                {
+                    <a>@(((TimeSpan)(item.Deadline - DateTime.Now)).Days) days</a>
+                }
+                else
+                {
+                    <div id="hms">@(((TimeSpan)(item.Deadline - DateTime.Now)).ToString("t"))</div>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @if (item.Status == 1)
+                {
+                    <a>Active</a>
+                }
+                else
+                {
+                    <a>Closed</a>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Details", "AssignmentDetails", new { assid = item.Assignment_Id }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+</table>

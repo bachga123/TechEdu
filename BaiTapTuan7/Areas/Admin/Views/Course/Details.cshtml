@@ -8,18 +8,18 @@
 
 @using (Html.BeginForm("Details", "Course", FormMethod.Get, new { enctype = "mutilpart/form-data" }))
 {<div class="container-fluid">
-     <div class="card-header">
-         <div class="d-sm-flex align-items-center justify-content-between mb-5 card-header-tabs">
-             <h1>@Html.DisplayFor(model => model.Course_Name)</h1>
-         </div>
-         <div class="d-sm-flex">
-             @Html.DisplayFor(m => m.Decription)
-         </div>
-         <div>
-             @Html.ActionLink("Remove Course", "DeleteCourse", "Course", new { couid = Model.Course_Id }, new { onclick = "return confirm('Are you sure to remove this course?');", @class = "btn btn-danger" })
-         </div>
-     </div>
-    <hr />
+        <div class="card-header">
+            <div class="d-sm-flex align-items-center justify-content-between mb-5 card-header-tabs">
+                <h1>@Html.DisplayFor(model => model.Course_Name)</h1>
+            </div>
+            <div class="d-sm-flex">
+                @Html.DisplayFor(m => m.Decription)
+            </div>
+            <div>
+                @Html.ActionLink("Remove Course", "DeleteCourse", "Course", new { couid = Model.Course_Id }, new { onclick = "return confirm('Are you sure to remove this course?');", @class = "btn btn-danger" })
+            </div>
+        </div>
+        <hr />
         <div class="table table-hover">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -60,6 +60,8 @@
                             </div>
                             <div class="col-6 col-md-4">
                                 <button type="button" name="btnLink" id="btnLink" class="btn btn-primary">Enroll Student</button>
+                                <button type="button" name="btnLink1" id="btnLink1" class="btn btn-primary">Request Enroll</button>
+
                             </div>
                         </div>
                     </div>
@@ -109,58 +111,117 @@
                 <button id="DivClose" type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body" style="text-align:center;">
-                    @if (ViewBag.studentList.Count == 0)
-                    {
-                        <h4> No data </h4>
-                    }
-                    else
-                    {
-                        <div class="table table-hover">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Student</h6>
-                                </div>
-                                @using (Html.BeginForm("EnrollStudentToCourse", "Course", FormMethod.Post))
-                                {
-                                    <div class="table-responsive">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
-                                                    @Html.HiddenFor(m => m.Course_Id)
-                                                    <thead>
+                @if (ViewBag.studentList.Count == 0)
+                {
+                    <h4> No data </h4>
+                }
+                else
+                {
+                    <div class="table table-hover">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Student</h6>
+                            </div>
+                            @using (Html.BeginForm("EnrollStudentToCourse", "Course", FormMethod.Post))
+                            {
+                                <div class="table-responsive">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                                                @Html.HiddenFor(m => m.Course_Id)
+                                                <thead>
+                                                    <tr>
+                                                        <th>Action</th>
+                                                        <th>FirstName</th>
+                                                        <th>LastName</th>
+                                                        <th>Gmail</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in ViewBag.studentList)
+                                                    {
+                                                        @*<tr onclick="location.href='@(Url.Action("EnrollStudentToCourse", "Course", new { couid = Model.Course_Id, stuid = item.StudentId }))'">*@
                                                         <tr>
-                                                            <th>Action</th>
-                                                            <th>FirstName</th>
-                                                            <th>LastName</th>
-                                                            <th>Gmail</th>
+                                                            <td>
+                                                                <input type="checkbox" name="StudentId" value="@item.StudentId" class="custom-checkbox" />
+                                                            </td>
+                                                            <td>@item.FirstName</td>
+                                                            <td>@item.LastName</td>
+                                                            <td>@item.Gmail</td>
                                                         </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach (var item in ViewBag.studentList)
-                                                        {
-                                                            @*<tr onclick="location.href='@(Url.Action("EnrollStudentToCourse", "Course", new { couid = Model.Course_Id, stuid = item.StudentId }))'">*@
-                                                            <tr>
-                                                                <td>
-                                                                    <input type="checkbox" name="StudentId" value="@item.StudentId" class="custom-checkbox" />
-                                                                </td>
-                                                                <td>@item.FirstName</td>
-                                                                <td>@item.LastName</td>
-                                                                <td>@item.Gmail</td>
-                                                            </tr>
-                                                        }
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    }
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
-                                    <button type="submit" value="Enroll" onclick="return confirm('Are you sure to enroll selected student?');" class="btn btn-danger">Enroll </button>
-                                }
-                            </div>
+                                </div>
+                                <button type="submit" value="Enroll" onclick="return confirm('Are you sure to enroll selected student?');" class="btn btn-danger">Enroll </button>
+                            }
                         </div>
-                    }
+                    </div>
+                }
             </div>
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="ModalPopUp1" role="dialog">
+    <div class="modal-dialog modal-body" style="margin-left: 200px; width: 600px; margin-right: 200px;">
+        <div class="modal-content" style="width: 1202px">
+            <div class="modal-header">
+                <button id="DivClose" type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="text-align:center;">
+                @if (ViewBag.studentWantToEnroll.Count == 0)
+                {
+                    <h4> No data </h4>
+                }
+                else
+                {
+                    <div class="table table-hover">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Student</h6>
+                            </div>
+                            <div class="table-responsive">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                                            @Html.HiddenFor(m => m.Course_Id)
+                                            <thead>
+                                                <tr>
+                                                    <th>FirstName</th>
+                                                    <th>LastName</th>
+                                                    <th>Gmail</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in ViewBag.studentWantToEnroll)
+                                                {
+                                                    @*<tr onclick="location.href='@(Url.Action("EnrollStudentToCourse", "Course", new { couid = Model.Course_Id, stuid = item.StudentId }))'">*@
+                                                <tr>
+                                                    <td>@item.FirstName</td>
+                                                    <td>@item.LastName</td>
+                                                    <td>@item.Gmail</td>
+                                                    <td>
+                                                        @Html.ActionLink("Enroll","EnrollStudentWantToEnroll", new { stuid = item.StudentId, couid = Model.Course_Id },new {@class = "btn btn-primary" })
+                                                         @Html.ActionLink("Delete","DeleteStudentWantToEnroll", "Course", new { stuid = item.StudentId, couid = Model.Course_Id }, new { @class = "btn btn-primary" })
+                                                    </td>
+                                                </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
 
 

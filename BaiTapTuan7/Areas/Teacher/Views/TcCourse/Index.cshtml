@@ -1,0 +1,25 @@
+﻿@model List<BaiTapTuan7.Models.tb_Course>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Teacher/Views/Shared/_TeacherLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <h2>My Course</h2>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        @item.Course_Name
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">@item.Decription</p>
+                        <a href="@Url.Action("CourseDetails","TcCourse",new { couid = item.Course_Id})" class="btn btn-primary">Go To Course</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

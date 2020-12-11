@@ -21,6 +21,17 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         {
             return View();
         }
+        public ActionResult Logout()
+        {
+            ClearCache();
+            return RedirectToAction("Index", "Home",new { @area = ""});
+        }
+        public void ClearCache()
+        {
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
+            Response.Cache.SetNoStore();
+        }
         
     }
 }

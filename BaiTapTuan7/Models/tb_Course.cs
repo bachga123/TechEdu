@@ -11,17 +11,13 @@ namespace BaiTapTuan7.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class tb_Course
     {
         public int Course_Id { get; set; }
-        [Required(ErrorMessage = "Course name can't be empty")]
         public string Course_Name { get; set; }
-        [Required(ErrorMessage = "Decription name can't be empty")]
         public string Decription { get; set; }
         public string Details { get; set; }
-        [Required(ErrorMessage ="Please select teacher")]
         public Nullable<int> TeacherId { get; set; }
     }
 }

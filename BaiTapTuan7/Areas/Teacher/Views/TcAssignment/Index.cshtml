@@ -1,0 +1,87 @@
+﻿@model IEnumerable<BaiTapTuan7.Models.tb_Assignment>
+
+@{
+    ViewBag.Title = "CourseDetails";
+    Layout = "~/Areas/Teacher/Views/Shared/_TeacherLayout.cshtml";
+}
+<div class="container-fluid">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("CourseDetails","TcCourse",new { couid = ViewBag.couid})">Details</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("EditCourseDetails","TcCourse")">Edit Course</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("StudentOnCourse","TcCourse")" aria-selected="false">Student</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="@Url.Action("Index","TcAssignment")">Assignment</a>
+        </li>
+    </ul>
+    @Html.ActionLink("Create Assignment", "CreateAssignment", new { couid = ViewBag.couid }, new { @class = "btn btn-primary" })
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Deadline)
+            </th>
+            <th>
+                <a>Time left</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                Action
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deadline)
+                </td>
+                <td>
+                    @if (item.Deadline < DateTime.Now)
+                    {
+                        <a>Closed</a>
+                    }
+                    else if (((TimeSpan)(item.Deadline - DateTime.Now)).Days != 0)
+                    {
+                        <a>@(((TimeSpan)(item.Deadline - DateTime.Now)).Days) days</a>
+                    }
+                    else
+                    {
+                        <div id="hms">@(((TimeSpan)(item.Deadline - DateTime.Now)).ToString("t"))</div>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Details)
+                </td>
+                <td>
+                    @if (item.Status == 1)
+                    {
+                        <a>Active</a>
+                    }
+                    else
+                    {
+                        <a>Inactive</a>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "AssignmentDetails", new { assid = item.Assignment_Id }, new { @class = "btn btn-primary" })
+                    @if (item.Status == 1)
+                    {
+                        @Html.ActionLink("Close Assignment", "CloseAssignment", new { assid = item.Assignment_Id }, new { @class = "btn btn-danger" })
+                    }
+                    @Html.ActionLink("Delete", "DeleteAssignment", new { assid = item.Assignment_Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

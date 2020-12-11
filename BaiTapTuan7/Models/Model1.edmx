@@ -15,6 +15,17 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="tb_Assignment">
+          <Key>
+            <PropertyRef Name="Assignment_Id" />
+          </Key>
+          <Property Name="Assignment_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Course_Id" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Deadline" Type="datetime" />
+          <Property Name="Details" Type="nvarchar" MaxLength="150" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
         <EntityType Name="tb_Course">
           <Key>
             <PropertyRef Name="Course_Id" />
@@ -33,6 +44,17 @@
           <Property Name="CourseId" Type="int" />
           <Property Name="StudentId" Type="int" />
           <Property Name="TeacherId" Type="int" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_Files">
+          <Key>
+            <PropertyRef Name="File_id" />
+          </Key>
+          <Property Name="File_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="FileType" Type="varchar" MaxLength="50" />
+          <Property Name="DataFiles" Type="varbinary" MaxLength="50" />
+          <Property Name="CreateOn" Type="datetime" />
         </EntityType>
         <EntityType Name="tb_Roles">
           <Key>
@@ -40,6 +62,16 @@
           </Key>
           <Property Name="RoleId" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_Score">
+          <Key>
+            <PropertyRef Name="score_id" />
+          </Key>
+          <Property Name="score_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Assignment_id" Type="int" />
+          <Property Name="Student_id" Type="int" />
+          <Property Name="Score" Type="float" />
+          <Property Name="details" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tb_Student">
           <Key>
@@ -54,6 +86,15 @@
           <Property Name="DateOfBirth" Type="datetime" />
           <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="150" />
           <Property Name="Images" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tb_Student_Assignment">
+          <Key>
+            <PropertyRef Name="AS_Id" />
+          </Key>
+          <Property Name="AS_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Assignment_Id" Type="int" />
+          <Property Name="Student_Id" Type="int" />
+          <Property Name="Decriptions" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="tb_Teacher">
           <Key>
@@ -102,10 +143,14 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
         </EntityType>
         <EntityContainer Name="TechEduModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Assignment" EntityType="Self.tb_Assignment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Course" EntityType="Self.tb_Course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_CTS" EntityType="Self.tb_CTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Files" EntityType="Self.tb_Files" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Roles" EntityType="Self.tb_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Score" EntityType="Self.tb_Score" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Student" EntityType="Self.tb_Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Student_Assignment" EntityType="Self.tb_Student_Assignment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Teacher" EntityType="Self.tb_Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Users" EntityType="Self.tb_Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_UserType" EntityType="Self.tb_UserType" Schema="dbo" store:Type="Tables" />
@@ -205,6 +250,10 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
           <EntitySet Name="tb_UserType_Roles" EntityType="Self.tb_UserType_Roles" />
           <EntitySet Name="tb_Course" EntityType="TechEduModel.tb_Course" />
           <EntitySet Name="tb_CTS" EntityType="TechEduModel.tb_CTS" />
+          <EntitySet Name="tb_Files" EntityType="TechEduModel.tb_Files" />
+          <EntitySet Name="tb_Assignment" EntityType="TechEduModel.tb_Assignment" />
+          <EntitySet Name="tb_Student_Assignment" EntityType="TechEduModel.tb_Student_Assignment" />
+          <EntitySet Name="tb_Score" EntityType="TechEduModel.tb_Score" />
         </EntityContainer>
         <EntityType Name="tb_Course">
           <Key>
@@ -224,6 +273,47 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
           <Property Name="CourseId" Type="Int32" />
           <Property Name="StudentId" Type="Int32" />
           <Property Name="TeacherId" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tb_Files">
+          <Key>
+            <PropertyRef Name="File_id" />
+          </Key>
+          <Property Name="File_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FileType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DataFiles" Type="Binary" MaxLength="50" FixedLength="false" />
+          <Property Name="CreateOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tb_Assignment">
+          <Key>
+            <PropertyRef Name="Assignment_Id" />
+          </Key>
+          <Property Name="Assignment_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Course_Id" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Deadline" Type="DateTime" Precision="3" />
+          <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tb_Student_Assignment">
+          <Key>
+            <PropertyRef Name="AS_Id" />
+          </Key>
+          <Property Name="AS_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Assignment_Id" Type="Int32" />
+          <Property Name="Student_Id" Type="Int32" />
+          <Property Name="Decriptions" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tb_Score">
+          <Key>
+            <PropertyRef Name="score_id" />
+          </Key>
+          <Property Name="score_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Assignment_id" Type="Int32" />
+          <Property Name="Student_id" Type="Int32" />
+          <Property Name="Score" Type="Double" />
+          <Property Name="details" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -325,10 +415,55 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
           <EntitySetMapping Name="tb_CTS">
             <EntityTypeMapping TypeName="TechEduModel.tb_CTS">
               <MappingFragment StoreEntitySet="tb_CTS">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Files">
+            <EntityTypeMapping TypeName="TechEduModel.tb_Files">
+              <MappingFragment StoreEntitySet="tb_Files">
+                <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+                <ScalarProperty Name="DataFiles" ColumnName="DataFiles" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="File_id" ColumnName="File_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Assignment">
+            <EntityTypeMapping TypeName="TechEduModel.tb_Assignment">
+              <MappingFragment StoreEntitySet="tb_Assignment">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Course_Id" ColumnName="Course_Id" />
+                <ScalarProperty Name="Assignment_Id" ColumnName="Assignment_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Student_Assignment">
+            <EntityTypeMapping TypeName="TechEduModel.tb_Student_Assignment">
+              <MappingFragment StoreEntitySet="tb_Student_Assignment">
+                <ScalarProperty Name="Decriptions" ColumnName="Decriptions" />
+                <ScalarProperty Name="Student_Id" ColumnName="Student_Id" />
+                <ScalarProperty Name="Assignment_Id" ColumnName="Assignment_Id" />
+                <ScalarProperty Name="AS_Id" ColumnName="AS_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Score">
+            <EntityTypeMapping TypeName="TechEduModel.tb_Score">
+              <MappingFragment StoreEntitySet="tb_Score">
+                <ScalarProperty Name="details" ColumnName="details" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Student_id" ColumnName="Student_id" />
+                <ScalarProperty Name="Assignment_id" ColumnName="Assignment_id" />
+                <ScalarProperty Name="score_id" ColumnName="score_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

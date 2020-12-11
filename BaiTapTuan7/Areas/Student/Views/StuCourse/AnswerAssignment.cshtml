@@ -1,0 +1,38 @@
+﻿@model BaiTapTuan7.Models.tb_Student_Assignment
+
+@{
+    ViewBag.Title = "AnswerAssignmentDetails";
+    Layout = "~/Areas/Student/Views/Shared/_StudentLayout.cshtml";
+}
+
+<h2>AnswerAssignmentDetails</h2>
+
+@using (Html.BeginForm("AnswerAssignment","StuCourse",FormMethod.Post,new { enctype="multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>tb_Student_Assignment</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(m => m.Assignment_Id)
+        @Html.HiddenFor(m => m.Student_Id)
+        <div class="form-group">
+            <h3>Answer</h3>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Decriptions, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Decriptions, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

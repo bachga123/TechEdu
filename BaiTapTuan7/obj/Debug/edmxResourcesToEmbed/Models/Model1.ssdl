@@ -10,6 +10,17 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <EntityType Name="tb_Assignment">
+    <Key>
+      <PropertyRef Name="Assignment_Id" />
+    </Key>
+    <Property Name="Assignment_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Course_Id" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="Deadline" Type="datetime" />
+    <Property Name="Details" Type="nvarchar" MaxLength="150" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
   <EntityType Name="tb_Course">
     <Key>
       <PropertyRef Name="Course_Id" />
@@ -28,6 +39,17 @@
     <Property Name="CourseId" Type="int" />
     <Property Name="StudentId" Type="int" />
     <Property Name="TeacherId" Type="int" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_Files">
+    <Key>
+      <PropertyRef Name="File_id" />
+    </Key>
+    <Property Name="File_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="FileType" Type="varchar" MaxLength="50" />
+    <Property Name="DataFiles" Type="varbinary" MaxLength="50" />
+    <Property Name="CreateOn" Type="datetime" />
   </EntityType>
   <EntityType Name="tb_Roles">
     <Key>
@@ -35,6 +57,16 @@
     </Key>
     <Property Name="RoleId" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_Score">
+    <Key>
+      <PropertyRef Name="score_id" />
+    </Key>
+    <Property Name="score_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Assignment_id" Type="int" />
+    <Property Name="Student_id" Type="int" />
+    <Property Name="Score" Type="float" />
+    <Property Name="details" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="tb_Student">
     <Key>
@@ -49,6 +81,15 @@
     <Property Name="DateOfBirth" Type="datetime" />
     <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="150" />
     <Property Name="Images" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tb_Student_Assignment">
+    <Key>
+      <PropertyRef Name="AS_Id" />
+    </Key>
+    <Property Name="AS_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Assignment_Id" Type="int" />
+    <Property Name="Student_Id" Type="int" />
+    <Property Name="Decriptions" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="tb_Teacher">
     <Key>
@@ -97,10 +138,14 @@ warning 6002: The table/view 'TechEdu.dbo.tb_UserType_Roles' does not have a pri
   </EntityType>
   <EntityContainer Name="TechEduModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Assignment" EntityType="Self.tb_Assignment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Course" EntityType="Self.tb_Course" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_CTS" EntityType="Self.tb_CTS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Files" EntityType="Self.tb_Files" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Roles" EntityType="Self.tb_Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Score" EntityType="Self.tb_Score" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Student" EntityType="Self.tb_Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Student_Assignment" EntityType="Self.tb_Student_Assignment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Teacher" EntityType="Self.tb_Teacher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Users" EntityType="Self.tb_Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_UserType" EntityType="Self.tb_UserType" Schema="dbo" store:Type="Tables" />

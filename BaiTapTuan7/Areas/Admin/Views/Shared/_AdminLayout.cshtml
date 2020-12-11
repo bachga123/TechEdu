@@ -387,7 +387,7 @@
                             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <a class="btn btn-primary" href="@Html.ActionLink("Index","Home",new { area = ""})">Logout</a>
+                                <a class="btn btn-primary" href="@Url.Action("Logout","Admin")">Logout</a>
                             </div>
                         </div>
                     </div>
@@ -447,6 +447,11 @@
         });
     </script>
     <script>
+        $("#btnLink1").click(function () {
+            $('#ModalPopUp1').modal('show');
+        })
+    </script>
+    <script>
         $("#btnLink").click(function () {
             $('#ModalPopUp').modal('show');
         })
@@ -485,7 +490,7 @@
                     $(".chkCheckBoxId").prop("checked", false)
                 }
             });
-        });  
+        });
     </script>
 </body>
 

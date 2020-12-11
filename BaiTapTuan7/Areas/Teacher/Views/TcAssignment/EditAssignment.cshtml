@@ -1,0 +1,66 @@
+﻿@model BaiTapTuan7.Models.tb_Assignment
+
+@{
+    ViewBag.Title = "EditAssignment";
+    Layout = "~/Areas/Teacher/Views/Shared/_TeacherLayout.cshtml";
+}
+<div class="container-fluid">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("CourseDetails","TcCourse",new { couid = ViewBag.couid})">Details</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("EditCourseDetails","TcCourse")">Edit Course</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("StudentOnCourse","TcCourse")" aria-selected="false">Student</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="@Url.Action("Index","TcAssignment")">Assignment</a>
+        </li>
+    </ul>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>tb_Assignment</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Assignment_Id)
+            @Html.HiddenFor(model => model.Course_Id)
+            @Html.HiddenFor(model => model.CreatedDate)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Deadline, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @if (Model.Deadline != null)
+                    {
+                        @Html.EditorFor(model => model.Deadline, new { htmlAttributes = new { @class = "form-control form-control-line datepicker", @Value = ((DateTime)Model.Deadline).ToString("yyyy-MM-dd"), @type = "date" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.Deadline, new { htmlAttributes = new { @class = "form-control form-control-line datepicker", @type = "date" } })
+
+                    }
+                    @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Details, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
