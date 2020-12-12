@@ -20,5 +20,6 @@ namespace BaiTapTuan7.Models
         public Nullable<System.DateTime> Deadline { get; set; }
         public string Details { get; set; }
         public Nullable<int> Status { get; set; }
+        public string File { get; set; }
     }
 }

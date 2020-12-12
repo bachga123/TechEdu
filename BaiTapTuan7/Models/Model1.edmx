@@ -25,6 +25,7 @@
           <Property Name="Deadline" Type="datetime" />
           <Property Name="Details" Type="nvarchar" MaxLength="150" />
           <Property Name="Status" Type="int" />
+          <Property Name="File" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="tb_Course">
           <Key>
@@ -35,15 +36,6 @@
           <Property Name="Decription" Type="nvarchar" MaxLength="150" />
           <Property Name="Details" Type="nvarchar" MaxLength="150" />
           <Property Name="TeacherId" Type="int" />
-        </EntityType>
-        <EntityType Name="tb_CTS">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CourseId" Type="int" />
-          <Property Name="StudentId" Type="int" />
-          <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="tb_Files">
           <Key>
@@ -95,6 +87,16 @@
           <Property Name="Assignment_Id" Type="int" />
           <Property Name="Student_Id" Type="int" />
           <Property Name="Decriptions" Type="nvarchar" MaxLength="150" />
+          <Property Name="File" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="tb_StudentCourse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseId" Type="int" />
+          <Property Name="StudentId" Type="int" />
+          <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="tb_Teacher">
           <Key>
@@ -143,12 +145,12 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Assignment" EntityType="Self.tb_Assignment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Course" EntityType="Self.tb_Course" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tb_CTS" EntityType="Self.tb_CTS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Files" EntityType="Self.tb_Files" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Roles" EntityType="Self.tb_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Score" EntityType="Self.tb_Score" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Student" EntityType="Self.tb_Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Student_Assignment" EntityType="Self.tb_Student_Assignment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_StudentCourse" EntityType="Self.tb_StudentCourse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Teacher" EntityType="Self.tb_Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Users" EntityType="Self.tb_Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_UserType" EntityType="Self.tb_UserType" Schema="dbo" store:Type="Tables" />
@@ -227,10 +229,10 @@
           <EntitySet Name="tb_Files" EntityType="TechEduModel.tb_Files" />
           <EntitySet Name="tb_Assignment" EntityType="TechEduModel.tb_Assignment" />
           <EntitySet Name="tb_Student_Assignment" EntityType="TechEduModel.tb_Student_Assignment" />
-          <EntitySet Name="tb_CTS" EntityType="TechEduModel.tb_CTS" />
           <EntitySet Name="tb_Roles" EntityType="TechEduModel.tb_Roles" />
           <EntitySet Name="tb_UserType_Roles" EntityType="TechEduModel.tb_UserType_Roles" />
           <EntitySet Name="tb_Score" EntityType="TechEduModel.tb_Score" />
+          <EntitySet Name="tb_StudentCourse" EntityType="TechEduModel.tb_StudentCourse" />
         </EntityContainer>
         <EntityType Name="tb_Course">
           <Key>
@@ -262,6 +264,7 @@
           <Property Name="Deadline" Type="DateTime" Precision="3" />
           <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="File" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tb_Student_Assignment">
           <Key>
@@ -271,15 +274,7 @@
           <Property Name="Assignment_Id" Type="Int32" />
           <Property Name="Student_Id" Type="Int32" />
           <Property Name="Decriptions" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="tb_CTS">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CourseId" Type="Int32" />
-          <Property Name="StudentId" Type="Int32" />
-          <Property Name="Status" Type="Int32" />
+          <Property Name="File" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tb_Roles">
           <Key>
@@ -306,6 +301,15 @@
           <Property Name="Student_id" Type="Int32" Nullable="false" />
           <Property Name="Score" Type="Double" />
           <Property Name="details" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tb_StudentCourse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseId" Type="Int32" />
+          <Property Name="StudentId" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -402,6 +406,7 @@
           <EntitySetMapping Name="tb_Assignment">
             <EntityTypeMapping TypeName="TechEduModel.tb_Assignment">
               <MappingFragment StoreEntitySet="tb_Assignment">
+                <ScalarProperty Name="File" ColumnName="File" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="Deadline" ColumnName="Deadline" />
@@ -414,20 +419,11 @@
           <EntitySetMapping Name="tb_Student_Assignment">
             <EntityTypeMapping TypeName="TechEduModel.tb_Student_Assignment">
               <MappingFragment StoreEntitySet="tb_Student_Assignment">
+                <ScalarProperty Name="File" ColumnName="File" />
                 <ScalarProperty Name="Decriptions" ColumnName="Decriptions" />
                 <ScalarProperty Name="Student_Id" ColumnName="Student_Id" />
                 <ScalarProperty Name="Assignment_Id" ColumnName="Assignment_Id" />
                 <ScalarProperty Name="AS_Id" ColumnName="AS_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_CTS">
-            <EntityTypeMapping TypeName="TechEduModel.tb_CTS">
-              <MappingFragment StoreEntitySet="tb_CTS">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -455,6 +451,16 @@
                 <ScalarProperty Name="Score" ColumnName="Score" />
                 <ScalarProperty Name="Student_id" ColumnName="Student_id" />
                 <ScalarProperty Name="Assignment_id" ColumnName="Assignment_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_StudentCourse">
+            <EntityTypeMapping TypeName="TechEduModel.tb_StudentCourse">
+              <MappingFragment StoreEntitySet="tb_StudentCourse">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

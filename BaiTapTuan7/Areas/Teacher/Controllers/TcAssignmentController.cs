@@ -70,8 +70,9 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
             //        StudentInAssignment.Add(stu);
             //}
             //ViewBag.StudentInAssignment = StudentInAssignment;
-            ViewBag.studentAnswerList = CreateAssigmetScore(assid);
+            ViewBag.studentAnswerList = CreateAssignmentScore(assid);
             tb_Assignment ass = db.tb_Assignment.Find(assid);
+            ViewBag.couid = ass.Course_Id;
             return View("AssignmentDetails", ass);
         }
         public ActionResult EditAssignment(int assid)
@@ -150,7 +151,7 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
-        public List<AssignmentScore> CreateAssigmetScore(int assid)
+        public List<AssignmentScore> CreateAssignmentScore(int assid)
         {
             List<AssignmentScore> listAssignmentScore = new List<AssignmentScore>();
             var listAssignmentAnswer = db.tb_Student_Assignment.Where(m => m.Assignment_Id == assid).ToList();

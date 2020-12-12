@@ -18,5 +18,6 @@ namespace BaiTapTuan7.Models
         public Nullable<int> Assignment_Id { get; set; }
         public Nullable<int> Student_Id { get; set; }
         public string Decriptions { get; set; }
+        public string File { get; set; }
     }
 }

@@ -34,9 +34,9 @@ namespace BaiTapTuan7.Models
         public virtual DbSet<tb_Files> tb_Files { get; set; }
         public virtual DbSet<tb_Assignment> tb_Assignment { get; set; }
         public virtual DbSet<tb_Student_Assignment> tb_Student_Assignment { get; set; }
-        public virtual DbSet<tb_CTS> tb_CTS { get; set; }
         public virtual DbSet<tb_Roles> tb_Roles { get; set; }
         public virtual DbSet<tb_UserType_Roles> tb_UserType_Roles { get; set; }
         public virtual DbSet<tb_Score> tb_Score { get; set; }
+        public virtual DbSet<tb_StudentCourse> tb_StudentCourse { get; set; }
     }
 }

@@ -61,7 +61,7 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
         {
             int couid = Convert.ToInt32(Session["couid"]);
             ViewBag.couid = couid;
-            var stuInCourse = db.tb_CTS.Where(m => m.CourseId == couid);
+            var stuInCourse = db.tb_StudentCourse.Where(m => m.CourseId == couid);
             List<tb_Student> stuList = new List<tb_Student>();
             foreach(var item in stuInCourse)
             {

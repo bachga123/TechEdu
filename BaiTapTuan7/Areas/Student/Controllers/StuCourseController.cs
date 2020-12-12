@@ -22,7 +22,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
         {
             tb_Student stu = (tb_Student)Session["student"];
             var courseList = db.tb_Course.ToList();
-            var listOfMyCourse = db.tb_CTS.Where(m => m.StudentId == stu.StudentId);
+            var listOfMyCourse = db.tb_StudentCourse.Where(m => m.StudentId == stu.StudentId);
             List<tb_Course> cls = new List<tb_Course>();
             foreach(var item in listOfMyCourse)
             {
@@ -47,7 +47,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
             {
                 tb_Student stu = (tb_Student)Session["student"];
                 var cts = db.tb_Course.SingleOrDefault(m => m.Course_Id == couid);
-                tb_CTS cts1 = new tb_CTS();
+                tb_StudentCourse cts1 = new tb_StudentCourse();
                 cts1.CourseId = couid;
                 cts1.StudentId = stu.StudentId;
                 cts1.Status = 2;
@@ -65,7 +65,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
             if (ModelState.IsValid)
             {
                 tb_Student stu = (tb_Student)Session["student"];
-                tb_CTS cts = db.tb_CTS.FirstOrDefault(m => m.StudentId == stu.StudentId && m.CourseId == couid && m.Status == 1);
+                tb_StudentCourse cts = db.tb_StudentCourse.FirstOrDefault(m => m.StudentId == stu.StudentId && m.CourseId == couid && m.Status == 1);
                 db.Entry(cts).State = EntityState.Deleted;
                 return RedirectToAction("Index");
             }
@@ -159,7 +159,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
         public List<tb_Course> MyCourseList()
         {
             tb_Student stu = (tb_Student)Session["student"];
-            var data = db.tb_CTS.Where(m => m.StudentId == stu.StudentId && m.Status == 1).ToList();
+            var data = db.tb_StudentCourse.Where(m => m.StudentId == stu.StudentId && m.Status == 1).ToList();
             List<tb_Course> myCourseList = new List<tb_Course>();
             foreach (var item in data)
             {

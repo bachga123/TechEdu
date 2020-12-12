@@ -81,12 +81,12 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             {
                 var stu = db.tb_Student.FirstOrDefault(m => m.StudentId == stuid);
                 var us = db.tb_Users.Find(stu.UserId);
-                var cts = db.tb_CTS.Where(m => m.StudentId == stuid).ToList();
+                var cts = db.tb_StudentCourse.Where(m => m.StudentId == stuid).ToList();
                 db.Entry(us).State = EntityState.Deleted;
                 db.Entry(stu).State = EntityState.Deleted;
                 foreach(var item in cts)
                 {
-                    var ctss = db.tb_CTS.Find(item.Id);
+                    var ctss = db.tb_StudentCourse.Find(item.Id);
                     db.Entry(ctss).State = EntityState.Deleted;
                 }
                 db.SaveChanges();

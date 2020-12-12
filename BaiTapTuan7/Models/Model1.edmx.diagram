@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="34a4e5937d3c43759c02befeb0e08f09" Name="Diagram1" ZoomLevel="55">
+      <Diagram DiagramId="34a4e5937d3c43759c02befeb0e08f09" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="TechEduModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TechEduModel.tb_Student" Width="1.5" PointX="2.75" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TechEduModel.tb_Teacher" Width="1.5" PointX="4.625" PointY="0.75" IsExpanded="true" />
@@ -14,10 +14,10 @@
         <EntityTypeShape EntityType="TechEduModel.tb_Files" Width="1.5" PointX="2.875" PointY="0.75" />
         <EntityTypeShape EntityType="TechEduModel.tb_Assignment" Width="1.5" PointX="6.375" PointY="0.75" />
         <EntityTypeShape EntityType="TechEduModel.tb_Student_Assignment" Width="1.5" PointX="6.375" PointY="3.625" />
-        <EntityTypeShape EntityType="TechEduModel.tb_CTS" Width="1.5" PointX="0.5" PointY="6.75" />
         <EntityTypeShape EntityType="TechEduModel.tb_Roles" Width="1.5" PointX="2.625" PointY="6.75" />
         <EntityTypeShape EntityType="TechEduModel.tb_UserType_Roles" Width="1.5" PointX="6.5" PointY="6.625" />
         <EntityTypeShape EntityType="TechEduModel.tb_Score" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TechEduModel.tb_StudentCourse" Width="1.5" PointX="8.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

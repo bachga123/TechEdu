@@ -58,11 +58,11 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             if(ModelState.IsValid)
             {
                 var cou = db.tb_Course.Find(couid);
-                var cts = db.tb_CTS.Where(m => m.CourseId == couid).ToList();
+                var cts = db.tb_StudentCourse.Where(m => m.CourseId == couid).ToList();
                 db.Entry(cou).State = EntityState.Deleted;
                 foreach(var item in cts)
                 {
-                    var ctss = db.tb_CTS.Find(item.Id);
+                    var ctss = db.tb_StudentCourse.Find(item.Id);
                     db.Entry(ctss).State = EntityState.Deleted;
                 }
                 db.SaveChanges();
@@ -114,7 +114,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             if (result == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             ViewBag.teacher = db.tb_Teacher.FirstOrDefault(m => m.TeacherId == result.TeacherId);
-            var data = db.tb_CTS.Where(m => m.CourseId == id && m.Status == 1).ToList();
+            var data = db.tb_StudentCourse.Where(m => m.CourseId == id && m.Status == 1).ToList();
             List<tb_Student> studentInCourseList = new List<tb_Student>();
             foreach(var item in data)
             {
@@ -123,7 +123,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             }
             ViewBag.studentInCourseList = studentInCourseList;
             List<tb_Student> studentWantToEnroll = new List<tb_Student>();
-            var data2 = db.tb_CTS.Where(m => m.CourseId == id && m.Status == 2).ToList();
+            var data2 = db.tb_StudentCourse.Where(m => m.CourseId == id && m.Status == 2).ToList();
             foreach (var item in data2)
             {
                 var stu = db.tb_Student.FirstOrDefault(m => m.StudentId == item.StudentId);
@@ -146,7 +146,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         }
         public ActionResult EnrollStudentWantToEnroll(int stuid,int couid)
         {
-            var cts = db.tb_CTS.FirstOrDefault(m => m.CourseId == couid && m.StudentId == stuid);
+            var cts = db.tb_StudentCourse.FirstOrDefault(m => m.CourseId == couid && m.StudentId == stuid);
             cts.Status = 1;
             db.Entry(cts).State = EntityState.Modified;
             db.SaveChanges();
@@ -154,7 +154,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         }
         public ActionResult DeleteStudentWantToEnroll(int stuid,int couid)
         {
-            var cts = db.tb_CTS.FirstOrDefault(m => m.CourseId == couid && m.StudentId == stuid);
+            var cts = db.tb_StudentCourse.FirstOrDefault(m => m.CourseId == couid && m.StudentId == stuid);
             db.Entry(cts).State = EntityState.Deleted;
             db.SaveChanges();
             return RedirectToAction("Details", new { id = couid });
@@ -171,7 +171,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             }
             foreach(string id in StudentIdList)
             {
-                tb_CTS cts = new tb_CTS();
+                tb_StudentCourse cts = new tb_StudentCourse();
                 cts.StudentId = int.Parse(id);
                 cts.CourseId = cou.Course_Id;
                 cts.Status = 1;
@@ -188,7 +188,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             }
             else
             {
-                var cts = db.tb_CTS.SingleOrDefault(m => m.CourseId == couid && m.StudentId == stuid);
+                var cts = db.tb_StudentCourse.SingleOrDefault(m => m.CourseId == couid && m.StudentId == stuid);
                 db.Entry(cts).State = EntityState.Deleted;
                 db.SaveChanges();
                 return RedirectToAction("Details", new { id = couid });

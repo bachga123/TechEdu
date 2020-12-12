@@ -90,6 +90,7 @@
     <EntitySetMapping Name="tb_Assignment">
       <EntityTypeMapping TypeName="TechEduModel.tb_Assignment">
         <MappingFragment StoreEntitySet="tb_Assignment">
+          <ScalarProperty Name="File" ColumnName="File" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Details" ColumnName="Details" />
           <ScalarProperty Name="Deadline" ColumnName="Deadline" />
@@ -102,20 +103,11 @@
     <EntitySetMapping Name="tb_Student_Assignment">
       <EntityTypeMapping TypeName="TechEduModel.tb_Student_Assignment">
         <MappingFragment StoreEntitySet="tb_Student_Assignment">
+          <ScalarProperty Name="File" ColumnName="File" />
           <ScalarProperty Name="Decriptions" ColumnName="Decriptions" />
           <ScalarProperty Name="Student_Id" ColumnName="Student_Id" />
           <ScalarProperty Name="Assignment_Id" ColumnName="Assignment_Id" />
           <ScalarProperty Name="AS_Id" ColumnName="AS_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tb_CTS">
-      <EntityTypeMapping TypeName="TechEduModel.tb_CTS">
-        <MappingFragment StoreEntitySet="tb_CTS">
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-          <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -143,6 +135,16 @@
           <ScalarProperty Name="Score" ColumnName="Score" />
           <ScalarProperty Name="Student_id" ColumnName="Student_id" />
           <ScalarProperty Name="Assignment_id" ColumnName="Assignment_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_StudentCourse">
+      <EntityTypeMapping TypeName="TechEduModel.tb_StudentCourse">
+        <MappingFragment StoreEntitySet="tb_StudentCourse">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

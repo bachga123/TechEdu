@@ -12,7 +12,7 @@ namespace BaiTapTuan7.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_CTS
+    public partial class tb_StudentCourse
     {
         public int Id { get; set; }
         public Nullable<int> CourseId { get; set; }
