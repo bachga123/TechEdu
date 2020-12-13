@@ -19,12 +19,17 @@
         @Html.HiddenFor(m => m.Student_Id)
         <div class="form-group">
             <h3>Answer</h3>
+            <!--File-->
+            <div class="col-md-10">
+                <input type="file" name="file" />
+            </div>
+            <!--Descriptions-->
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Decriptions, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Decriptions, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <!--submit-->
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Submit" class="btn btn-default" />

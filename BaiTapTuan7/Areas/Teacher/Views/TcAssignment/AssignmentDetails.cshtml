@@ -41,6 +41,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.File)
+        </dt>
+
+        <dd>
+            @Model.File.Substring(11)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Details)
         </dt>
 
@@ -64,6 +72,7 @@
                                     <tr>
                                         <th>Student id</th>
                                         <th>Name</th>
+                                        <th>File</th>
                                         <th>Answer</th>
                                         <th>Score</th>
                                     </tr>
@@ -74,6 +83,10 @@
                                     <tr>
                                         <td>@item.StudentId</td>
                                         <td>@item.StudentName</td>
+                                        <td>
+                                            <!--file show để download-->
+                                            <a href="~/@Model.File" download>@Model.File.Substring(11)</a>
+                                        </td>
                                         <td>@item.Answer</td>
                                         @if (item.Score == -1)
                                         {
