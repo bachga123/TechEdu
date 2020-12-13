@@ -13,10 +13,13 @@
             <a>Time left</a>
         </th>
         <th>
+            File
+        </th>
+        <th>
             Question
         </th>
         <th>
-           Status
+            Status
         </th>
         <th>
             Action
@@ -42,6 +45,16 @@
                 else
                 {
                     <div id="hms">@(((TimeSpan)(item.Deadline - DateTime.Now)).ToString("t"))</div>
+                }
+            </td>
+            <td>
+                @if (item.File != null)
+                {
+                    @item.File.Substring(11)
+                }
+                else
+                {
+                    <a>Null</a>
                 }
             </td>
             <td>

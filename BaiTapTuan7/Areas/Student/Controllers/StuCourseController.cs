@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -113,7 +114,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
             }
         }
         [HttpPost]
-        public ActionResult AnswerAssignment(tb_Student_Assignment tsa)
+        public ActionResult AnswerAssignment(tb_Student_Assignment tsa, HttpPostedFileBase file)
         {
             if(ModelState.IsValid)
             {
@@ -121,6 +122,10 @@ namespace BaiTapTuan7.Areas.Student.Controllers
                 a.Assignment_Id = tsa.Assignment_Id;
                 a.Student_Id = tsa.Student_Id;
                 a.Assignment_Id = tsa.Assignment_Id;
+                if (file != null)
+                {
+                    a.File = this.AddFileToFiles_Here(file);
+                }
                 a.Decriptions = tsa.Decriptions;
                 db.Entry(a).State = EntityState.Added;
                 db.SaveChanges();
@@ -131,22 +136,38 @@ namespace BaiTapTuan7.Areas.Student.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
+        //add file to Files_Here
+        public String AddFileToFiles_Here(HttpPostedFileBase file)
+        {
+            string path = Server.MapPath("~/Files_Here");
+            string fileName = Path.GetFileName(file.FileName);
+            //cần xử lý fullPath tránh bị trùng?
+            string fullPath = Path.Combine(path, fileName);
+
+            file.SaveAs(fullPath);
+            string filePath = "Files_Here/" + fileName;
+            return filePath;
+        }
         public ActionResult EditAnswerAssignment(int? asid)
         {
-            if(asid == null)
+            tb_Student stu = (tb_Student)Session["student"];
+            var tsa = db.tb_Student_Assignment.FirstOrDefault(m => m.Assignment_Id == asid && m.Student_Id == stu.StudentId);
+            if (tsa == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var asa = db.tb_Student_Assignment.Find(asid);
-            return View("EditAnswerAssignment", asa);
-
+            return View("EditAnswerAssignment", tsa);
         }
         [HttpPost]
-        public ActionResult EditAnswerAssignment(tb_Student_Assignment tsa)
+        public ActionResult EditAnswerAssignment(tb_Student_Assignment tsa, HttpPostedFileBase file)
         {
             var result = db.tb_Student_Assignment.FirstOrDefault(m => m.Assignment_Id == tsa.Assignment_Id && m.Student_Id == tsa.Student_Id);
-            if(ModelState.IsValid)
+            if(result != null && ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    result.File = this.AddFileToFiles_Here(file);
+                }
                 result.Decriptions = tsa.Decriptions;
                 db.Entry(result).State = EntityState.Modified;
                 db.SaveChanges();

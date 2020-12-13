@@ -4878,6 +4878,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Student\Data\" />
+    <Folder Include="Files_Here\" />
     <Folder Include="Views\Teacher\" />
   </ItemGroup>
   <ItemGroup>

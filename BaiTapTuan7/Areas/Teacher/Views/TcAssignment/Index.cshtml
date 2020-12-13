@@ -29,6 +29,9 @@
                 <a>Time left</a>
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.File)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Details)
             </th>
             <th>
@@ -44,10 +47,21 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Deadline)
+                    @if (item.Deadline != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Deadline)
+                    }
+                    else
+                    {
+                        <a>Unset</a>
+                    }
                 </td>
                 <td>
-                    @if (item.Deadline < DateTime.Now)
+                    @if (item.Deadline == null)
+                    {
+                        <a>Unset</a>
+                    }
+                    else if (item.Deadline < DateTime.Now)
                     {
                         <a>Closed</a>
                     }
@@ -61,7 +75,24 @@
                     }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Details)
+                    @if (item.File != null)
+                    {
+                        <a>@item.File.Substring(11)</a>
+                    }
+                    else
+                    {
+                        <a>null</a>
+                    }
+                </td>
+                <td>
+                    @if (item.Details != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Details)
+                    }
+                    else
+                    {
+                        <a>null</a>
+                    }
                 </td>
                 <td>
                     @if (item.Status == 1)

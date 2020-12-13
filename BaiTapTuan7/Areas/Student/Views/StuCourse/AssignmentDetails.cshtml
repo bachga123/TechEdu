@@ -27,6 +27,15 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.File)
+        </dt>
+
+        <dd>
+            <!--file show để download-->
+            <a href="~/@Model.File" download>@Model.File.Substring(11)</a>
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Details)
         </dt>
 
@@ -50,7 +59,7 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Student id</th>
+                                        <th>File</th>
                                         <th>Description</th>
                                     </tr>
                                 </thead>
@@ -58,10 +67,8 @@
                                     @foreach (var item in ViewBag.studentAnswerList)
                                     {
                                         <tr>
-                                            <td>@item.Student_Id</td>
-                                            <td>
-                                                @item.Decriptions
-                                            </td>
+                                            <td>@item.File.Substring(11)</td>
+                                            <td>@item.Decriptions</td>
                                         </tr>
                                     }
                                 </tbody>

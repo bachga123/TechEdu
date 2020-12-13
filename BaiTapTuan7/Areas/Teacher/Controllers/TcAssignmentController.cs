@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using BaiTapTuan7.Models;
 using BaiTapTuan7.Areas.Teacher.Model;
+using System.IO;
 
 namespace BaiTapTuan7.Areas.Teacher.Controllers
 {
@@ -36,19 +37,29 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
             return View("CreateAssignment", ass);
         }
         [HttpPost]
-        public ActionResult CreateAssignment(tb_Assignment ass)
+        public ActionResult CreateAssignment(tb_Assignment ass, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                DateTime ta = (DateTime)ass.Deadline;
-                ta = ta.AddHours(23);
-                ta = ta.AddMinutes(59);
-                ta = ta.AddSeconds(59);
                 tb_Assignment as1 = new tb_Assignment();
                 as1.Course_Id = ass.Course_Id;
                 as1.CreatedDate = ass.CreatedDate;
-                as1.Deadline = ta;
-                as1.Details = ass.Details;
+                if (ass.Deadline != null)
+                {
+                    DateTime ta = (DateTime)ass.Deadline;
+                    ta = ta.AddHours(23);
+                    ta = ta.AddMinutes(59);
+                    ta = ta.AddSeconds(59);
+                    as1.Deadline = ta;
+                }
+                if (file != null)
+                {
+                    as1.File = this.AddFileToFiles_Here(file);
+                }
+                if (ass.Details != null)
+                {
+                    as1.Details = ass.Details;
+                }
                 as1.Status = 1;
                 db.Entry(as1).State = EntityState.Added;
                 db.SaveChanges();
@@ -59,6 +70,19 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
+        //add file to Files_Here
+        public String AddFileToFiles_Here(HttpPostedFileBase file)
+        {
+            string path = Server.MapPath("~/Files_Here");
+            string fileName = Path.GetFileName(file.FileName);
+            //cần xử lý fullPath tránh bị trùng?
+            string fullPath = Path.Combine(path, fileName);
+
+            file.SaveAs(fullPath);
+            string filePath = "Files_Here/" + fileName;
+            return filePath;
+        }
+
         public ActionResult AssignmentDetails(int assid)
         {
             //List<tb_Student> StudentInAssignment = new List<tb_Student>();
@@ -81,12 +105,16 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
             return View("EditAssignment", ass);
         }
         [HttpPost]
-        public ActionResult EditAssignment(tb_Assignment ass)
+        public ActionResult EditAssignment(tb_Assignment ass, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
                 var aas = db.tb_Assignment.Find(ass.Assignment_Id);
                 aas.Deadline = ass.Deadline;
+                if (file != null)
+                {
+                    aas.File = this.AddFileToFiles_Here(file);
+                }
                 aas.Details = ass.Details;
                 db.Entry(aas).State = EntityState.Modified;
                 db.SaveChanges();

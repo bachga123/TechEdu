@@ -1,0 +1,2 @@
+//cần xóa trường AS_ID trong student_assignment
+//Tạo nút xem Score cho student trong CourseDetail

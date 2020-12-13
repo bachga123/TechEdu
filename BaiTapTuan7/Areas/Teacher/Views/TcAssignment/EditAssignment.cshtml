@@ -31,7 +31,7 @@
             @Html.HiddenFor(model => model.Assignment_Id)
             @Html.HiddenFor(model => model.Course_Id)
             @Html.HiddenFor(model => model.CreatedDate)
-
+            <!--deadline-->
             <div class="form-group">
                 @Html.LabelFor(model => model.Deadline, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -47,7 +47,21 @@
                     @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
                 </div>
             </div>
-
+            <!--File-->
+            <div class="form-group">
+                <div>
+                    <!--file show để download-->
+                    <div>
+                        <h4>File hiện tại</h4>
+                        <a href="~/@Model.File" download>@Model.File.Substring(11)</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Đổi file: </h4>
+                    <input type="file" name="file"/>
+                </div>
+            </div>
+            <!--details-->
             <div class="form-group">
                 @Html.LabelFor(model => model.Details, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
