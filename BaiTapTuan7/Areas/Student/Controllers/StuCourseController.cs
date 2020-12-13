@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BaiTapTuan7.Models;
 using PagedList;
+using BaiTapTuan7.Areas.Student.Data;
 namespace BaiTapTuan7.Areas.Student.Controllers
 {
     [AuthorizeController]
@@ -79,6 +80,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
         {
             tb_Course cou = db.tb_Course.Find(id);
             ViewBag.Teacher = db.tb_Teacher.Find(cou.TeacherId);
+            Session["courseid"] = cou.Course_Id;
             return View("CourseDetails", cou);
         }
 
@@ -177,6 +179,12 @@ namespace BaiTapTuan7.Areas.Student.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
+
+        //Xem diem cua assignment minh da lam
+        public ActionResult MyAssignmentDid(int page = 1,int pageSize = 10)
+        {
+            return View("MyAssignmentDid",MyAnswerAssignmentList().ToPagedList(page,pageSize));
+        }
         public List<tb_Course> MyCourseList()
         {
             tb_Student stu = (tb_Student)Session["student"];
@@ -188,6 +196,39 @@ namespace BaiTapTuan7.Areas.Student.Controllers
                 myCourseList.Add(cou);
             }
             return myCourseList;
+        }
+        public List<AssignmentScore> MyAnswerAssignmentList()
+        {
+            int couid = (int)Session["courseid"];
+            List<AssignmentScore> assList = new List<AssignmentScore>();
+            tb_Student stu = (tb_Student)Session["student"];
+            var assOfCourseList = db.tb_Assignment.Where(m => m.Course_Id == couid).ToList();
+            foreach(var item in assOfCourseList)
+            {
+                AssignmentScore ass = new AssignmentScore();
+                var result = db.tb_Student_Assignment.Where(m => m.Student_Id == stu.StudentId && m.Assignment_Id == item.Assignment_Id);
+                if(result != null)
+                {
+                    ass.AssigmentDetails = item.Details;
+                    ass.File = item.File;
+                    var sco = db.tb_Score.FirstOrDefault(m => m.Student_id == stu.StudentId && m.Assignment_id == item.Assignment_Id);
+                    if(sco != null)
+                    {
+                        ass.Score = (float)sco.Score;
+                        ass.CommentOfTeacher = sco.details;
+                    }
+                    else
+                    {
+                        ass.Score = -1;
+                        ass.CommentOfTeacher = "Teacher not comment yet !";
+                    }
+                    if(assList.Contains(ass) == false)
+                    {
+                        assList.Add(ass);
+                    }
+                }
+            }
+            return assList;
         }
     }
 }

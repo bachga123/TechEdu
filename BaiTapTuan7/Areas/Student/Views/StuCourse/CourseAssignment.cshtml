@@ -1,9 +1,10 @@
 ﻿@model List<BaiTapTuan7.Models.tb_Assignment>
-    @{
-        ViewBag.Title = "Index";
-        Layout = "~/Areas/Student/Views/Shared/_StudentLayout.cshtml";
-    }
-    @Url.Action("")
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Student/Views/Shared/_StudentLayout.cshtml";
+}
+@Html.ActionLink("My Answer", "MyAssignmentDid","", new { @class = "btn btn-primary" })
+
 <table class="table">
     <tr>
         <th>

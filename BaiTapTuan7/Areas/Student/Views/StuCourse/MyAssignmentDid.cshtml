@@ -1,0 +1,59 @@
+﻿@model PagedList.IPagedList<BaiTapTuan7.Areas.Student.Data.AssignmentScore>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "MyAssigntmentDid";
+    Layout = "~/Areas/Teacher/Views/Shared/_TeacherLayout.cshtml";
+}
+
+<div class="table table-hover">
+    <h2>My Answer of Assignment</h2>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">List Of Course</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Question</th>
+                                    <th>My file</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.AssigmentDetails</td>
+                                        <td>@item.File</td>
+                                        @if (item.Score != -1)
+                                        {
+                                            <td>@item.Score</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Not mark yet !</td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_paginate">
+                            @Html.PagedListPager(Model, page => Url.Action("MyAssignmentDid", new { page }))
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
