@@ -125,6 +125,23 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
+
+        public ActionResult DeleteFileInAssignment(int assid)
+        {
+            if (ModelState.IsValid)
+            {
+                var aas = db.tb_Assignment.Find(assid);
+                aas.File= null;
+                //cần delte file trong Files_Here
+                db.Entry(aas).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("EditAssignment", new { assid = assid });
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
         public ActionResult DeleteAssignment(int assid)
         {
             var ass = db.tb_Assignment.Find(assid);

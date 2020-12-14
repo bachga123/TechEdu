@@ -32,7 +32,14 @@
 
         <dd>
             <!--file show để download-->
-            <a href="~/@Model.File" download>@Model.File.Substring(11)</a>
+            @if (Model.File != null)
+            {
+                <a href="~/@Model.File" download>@Model.File.Substring(11)</a>
+            }
+            else
+            {
+                <p>null</p>
+            }
         </dd>
 
         <dt>
@@ -66,10 +73,17 @@
                                 <tbody>
                                     @foreach (var item in ViewBag.studentAnswerList)
                                     {
-                                        <tr>
+                                    <tr>
+                                        @if (item.File != null)
+                                        {
                                             <td>@item.File.Substring(11)</td>
-                                            <td>@item.Decriptions</td>
-                                        </tr>
+                                        }
+                                        else
+                                        {
+                                            <td>null</td>
+                                        }
+                                        <td>@item.Decriptions</td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>
