@@ -4,7 +4,7 @@
     Layout = "~/Areas/Teacher/Views/Shared/_TeacherLayout.cshtml";
 }
 
-<div class="container-fluid">
+
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link active" href="@Url.Action("CourseDetails","TcCourse",new { couid = Model.Course_Id} )">Details</a>
@@ -19,13 +19,37 @@
             <a class="nav-link" href="@Url.Action("Index","TcAssignment")">Assignment</a>
         </li>
     </ul>
-    <div class="col-12">
-        <h2>@Model.Course_Name</h2>
-        <h3>Teacher: @(ViewBag.Teacher.TeacherFirstName + " " + ViewBag.Teacher.TeacherLastName)</h3>
-        <div class="card">
-            <div class="card-body">
-                @Html.DisplayFor(m => m.Decription)
+    <div class="card-body">
+        <div class="col-12">
+            <h2>@Model.Course_Name</h2>
+            <h3>Teacher: @(ViewBag.Teacher.TeacherFirstName + " " + ViewBag.Teacher.TeacherLastName)</h3>
+            <div class="card">
+                <div class="card-body">
+                    @Html.DisplayFor(m => m.Decription)
+                </div>
             </div>
+            @foreach (var item in ViewBag.contentList)
+            {
+                <div class="card">
+                    <div class="card-header">
+                        <div class="col-sm-12 m-1">
+                            <h3>@item.Title
+                            <button type="button" class="fa fa-wrench" data-toggle="ajax-modal"
+                                    data-target="#editContent" data-url="@Url.Action("EditContent","TcCourse",new { conid = item.Content_Id})">
+                            </button>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h4>@item.Description</h4>
+                        <h4>@item.File</h4>
+                    </div>
+                </div>
+            }
         </div>
+        <button type="button" class="btn btn-primary" data-toggle="content"
+                data-target="#addContent" data-url="@Url.Action("AddContent","TcCourse")">
+            Add Content
+        </button>
+        <div id="PlaceHolderHere"></div>
     </div>
-</div>

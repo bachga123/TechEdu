@@ -4683,6 +4683,9 @@
     <Content Include="Areas\Teacher\Views\TcAssignment\AddScoreToStudent.cshtml" />
     <Content Include="Areas\Teacher\Views\TcInfor\AccountSetting.cshtml" />
     <Content Include="Areas\Student\Views\StuCourse\MyAssignmentDid.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\AdminProfile.cshtml" />
+    <Content Include="Areas\Teacher\Views\TcCourse\AddContent.cshtml" />
+    <Content Include="Areas\Teacher\Views\TcCourse\EditContent.cshtml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -4815,7 +4818,13 @@
     <Compile Include="Models\tb_Assignment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tb_Content.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tb_Course.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_Course_Content.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_Files.cs">

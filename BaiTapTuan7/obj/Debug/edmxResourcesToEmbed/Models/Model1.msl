@@ -148,5 +148,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tb_Course_Content">
+      <EntityTypeMapping TypeName="TechEduModel.tb_Course_Content">
+        <MappingFragment StoreEntitySet="tb_Course_Content">
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="Content_Id" ColumnName="Content_Id" />
+          <ScalarProperty Name="Course_Id" ColumnName="Course_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_Content">
+      <EntityTypeMapping TypeName="TechEduModel.tb_Content">
+        <MappingFragment StoreEntitySet="tb_Content">
+          <ScalarProperty Name="File" ColumnName="File" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Content_Id" ColumnName="Content_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

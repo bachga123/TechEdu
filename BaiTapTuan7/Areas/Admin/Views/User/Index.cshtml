@@ -35,17 +35,24 @@
                                         <td>@item.Usertype</td>
                                         <td>@item.Block</td>
                                         <td>
-                                            @if (item.Block == true)
-                                            {
-                                                @Html.ActionLink("Active", "ActiveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to active this user?');" })
-                                            }
-                                            else if (item.Block == false)
-                                            {
-                                                @Html.ActionLink("Unactive", "UnactiveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to unactive this user?');" })
-                                            }
-                                            |
-                                            <a href="@Url.Action("EditUser","User",new { Id = item.Id })"> Edit User</a>|
-                                            @Html.ActionLink("Remove", "RemoveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to delete this user?');" })
+                                            <a>
+                                                @if (item.Usertype != "admin")
+                                                {
+                                                    if (item.Block == true)
+                                                    {
+                                                        @Html.ActionLink("Active", "ActiveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to active this user?');", @class = "btn btn-primary" })
+                                                    }
+                                                    else if (item.Block == false)
+                                                    {
+                                                        @Html.ActionLink("Unactive", "UnactiveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to unactive this user?');", @class = "btn btn-danger" })
+                                                    }
+                                                }
+                                            </a>
+
+                                            <a href="@Url.Action("EditUser","User",new { Id = item.Id })" class="btn btn-success"> Edit User</a>
+                                            <a>
+                                                @Html.ActionLink("Remove", "RemoveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to delete this user?');", @class = "btn btn-danger" })
+                                            </a>
                                         </td>
                                     </tr>
                                 }

@@ -27,6 +27,15 @@
           <Property Name="Status" Type="int" />
           <Property Name="File" Type="nvarchar" MaxLength="150" />
         </EntityType>
+        <EntityType Name="tb_Content">
+          <Key>
+            <PropertyRef Name="Content_Id" />
+          </Key>
+          <Property Name="Content_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="File" Type="nvarchar" MaxLength="150" />
+        </EntityType>
         <EntityType Name="tb_Course">
           <Key>
             <PropertyRef Name="Course_Id" />
@@ -36,6 +45,15 @@
           <Property Name="Decription" Type="nvarchar" MaxLength="150" />
           <Property Name="Details" Type="nvarchar" MaxLength="150" />
           <Property Name="TeacherId" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_Course_Content">
+          <Key>
+            <PropertyRef Name="Course_Id" />
+            <PropertyRef Name="Content_Id" />
+          </Key>
+          <Property Name="Course_Id" Type="int" Nullable="false" />
+          <Property Name="Content_Id" Type="int" Nullable="false" />
+          <Property Name="Details" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="tb_Files">
           <Key>
@@ -144,7 +162,9 @@
         <EntityContainer Name="TechEduModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Assignment" EntityType="Self.tb_Assignment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Content" EntityType="Self.tb_Content" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Course" EntityType="Self.tb_Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Course_Content" EntityType="Self.tb_Course_Content" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Files" EntityType="Self.tb_Files" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Roles" EntityType="Self.tb_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Score" EntityType="Self.tb_Score" Schema="dbo" store:Type="Tables" />
@@ -233,6 +253,8 @@
           <EntitySet Name="tb_UserType_Roles" EntityType="TechEduModel.tb_UserType_Roles" />
           <EntitySet Name="tb_Score" EntityType="TechEduModel.tb_Score" />
           <EntitySet Name="tb_StudentCourse" EntityType="TechEduModel.tb_StudentCourse" />
+          <EntitySet Name="tb_Course_Content" EntityType="TechEduModel.tb_Course_Content" />
+          <EntitySet Name="tb_Content" EntityType="TechEduModel.tb_Content" />
         </EntityContainer>
         <EntityType Name="tb_Course">
           <Key>
@@ -310,6 +332,24 @@
           <Property Name="CourseId" Type="Int32" />
           <Property Name="StudentId" Type="Int32" />
           <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tb_Course_Content">
+          <Key>
+            <PropertyRef Name="Course_Id" />
+            <PropertyRef Name="Content_Id" />
+          </Key>
+          <Property Name="Course_Id" Type="Int32" Nullable="false" />
+          <Property Name="Content_Id" Type="Int32" Nullable="false" />
+          <Property Name="Details" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tb_Content">
+          <Key>
+            <PropertyRef Name="Content_Id" />
+          </Key>
+          <Property Name="Content_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="File" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -461,6 +501,25 @@
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Course_Content">
+            <EntityTypeMapping TypeName="TechEduModel.tb_Course_Content">
+              <MappingFragment StoreEntitySet="tb_Course_Content">
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Content_Id" ColumnName="Content_Id" />
+                <ScalarProperty Name="Course_Id" ColumnName="Course_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Content">
+            <EntityTypeMapping TypeName="TechEduModel.tb_Content">
+              <MappingFragment StoreEntitySet="tb_Content">
+                <ScalarProperty Name="File" ColumnName="File" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Content_Id" ColumnName="Content_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

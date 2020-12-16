@@ -17,7 +17,6 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
         {
             return View();
         }
-
         public ActionResult TeacherProfile()
         {
             tb_Teacher tc = (tb_Teacher)Session["teacher"];
@@ -35,6 +34,8 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
                     oldtc.TeacherFirstName = tc.TeacherFirstName;
                     oldtc.TeacherLastName = tc.TeacherLastName;
                     oldtc.DateOfBirth = tc.DateOfBirth;
+                    oldtc.Gmail = tc.Gmail;
+                    oldtc.PhoneNumber = tc.PhoneNumber;
                     oldtc.PlaceOfBirth = tc.PlaceOfBirth;
                     HttpPostedFileBase upload = Request.Files["image"];
                     if (upload.FileName != "")

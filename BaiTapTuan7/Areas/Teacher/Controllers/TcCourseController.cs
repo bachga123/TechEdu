@@ -18,19 +18,12 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
         {
             return View(MyCourseList());
         }
-        public ActionResult EnrollStudentToCourse(int stu, int cou)
-        {
-            return View();
-        }
-        public ActionResult RemoveStudentFromCourse(int stu, int cou)
-        {
-            return View();
-        }
         public ActionResult CourseDetails(int couid)
         {
             tb_Teacher tc = (tb_Teacher)Session["teacher"];
             ViewBag.Teacher = tc;
             Session["couid"] = couid;
+            ViewBag.contentList = MyContentList(couid);
             tb_Course cou = db.tb_Course.FirstOrDefault(m => m.Course_Id == couid && m.TeacherId == tc.TeacherId);
             return View("CourseDetails", cou);
         }
@@ -73,17 +66,59 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
             }
             return View("StudentOnCourse",stuList.ToPagedList(page,pageSize));
         }
-        public ActionResult OpenNewCourse()
+        // Thêm vào một content trong course
+        public ActionResult AddContent()
         {
-            return View();
+            tb_Content newCon = new tb_Content();
+            return PartialView("AddContent",newCon);
         }
-        public ActionResult DeleteCourse()
+        [HttpPost]
+        public ActionResult AddContent(tb_Content newCon)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                tb_Content con = new tb_Content();
+                con.Title = newCon.Title;
+                con.Description = newCon.Description;
+                con.File = newCon.File;
+                db.Entry(con).State = EntityState.Added;
+                db.SaveChanges();
+                tb_Course_Content tcc = new tb_Course_Content();
+                tcc.Content_Id = con.Content_Id;
+                tcc.Course_Id = (int)Session["couid"];
+                db.Entry(tcc).State = EntityState.Added;
+                db.SaveChanges();
+                return RedirectToAction("CourseDetails", new { couid = tcc.Course_Id });
+            }
+            else
+            {
+                ModelState.AddModelError("", "False");
+                return View("AddContent", newCon);
+            }
         }
-        public ActionResult StudentScore()
+        public ActionResult EditContent(int conid)
         {
-            return View();
+            var con = db.tb_Content.Find(conid);
+            return PartialView("EditContent", con);
+        }
+        [HttpPost]
+        public ActionResult EditContent(tb_Content con)
+        {
+            int couid = (int)Session["couid"];
+            if(ModelState.IsValid)
+            {
+                tb_Content tc = db.tb_Content.Find(con.Content_Id);
+                tc.Description = con.Description;
+                tc.Title = con.Title;
+                tc.File = con.File;
+                db.Entry(tc).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("CourseDetails", new { couid = couid });
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
         public List<tb_Course> MyCourseList()
         {
@@ -97,6 +132,20 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
                     myCourseList.Add(cou);
             }
             return myCourseList;
+        }
+        public List<tb_Content> MyContentList(int couid)
+        {
+            List<tb_Course_Content> tcc = db.tb_Course_Content.Where(m => m.Course_Id == couid).ToList();
+            List<tb_Content> tc = new List<tb_Content>();
+            foreach(var item in tcc)
+            {
+                tb_Content tc1 = db.tb_Content.Find(item.Content_Id);
+                if(tc.Contains(tc1) == false)
+                {
+                    tc.Add(tc1);
+                }
+            }
+            return tc;
         }
     }
 }

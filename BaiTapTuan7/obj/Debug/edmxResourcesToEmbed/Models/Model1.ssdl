@@ -22,6 +22,15 @@
     <Property Name="Status" Type="int" />
     <Property Name="File" Type="nvarchar" MaxLength="150" />
   </EntityType>
+  <EntityType Name="tb_Content">
+    <Key>
+      <PropertyRef Name="Content_Id" />
+    </Key>
+    <Property Name="Content_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="File" Type="nvarchar" MaxLength="150" />
+  </EntityType>
   <EntityType Name="tb_Course">
     <Key>
       <PropertyRef Name="Course_Id" />
@@ -31,6 +40,15 @@
     <Property Name="Decription" Type="nvarchar" MaxLength="150" />
     <Property Name="Details" Type="nvarchar" MaxLength="150" />
     <Property Name="TeacherId" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_Course_Content">
+    <Key>
+      <PropertyRef Name="Course_Id" />
+      <PropertyRef Name="Content_Id" />
+    </Key>
+    <Property Name="Course_Id" Type="int" Nullable="false" />
+    <Property Name="Content_Id" Type="int" Nullable="false" />
+    <Property Name="Details" Type="nchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="tb_Files">
     <Key>
@@ -139,7 +157,9 @@
   <EntityContainer Name="TechEduModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Assignment" EntityType="Self.tb_Assignment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Content" EntityType="Self.tb_Content" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Course" EntityType="Self.tb_Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Course_Content" EntityType="Self.tb_Course_Content" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Files" EntityType="Self.tb_Files" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Roles" EntityType="Self.tb_Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Score" EntityType="Self.tb_Score" Schema="dbo" store:Type="Tables" />

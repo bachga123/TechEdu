@@ -38,6 +38,7 @@ namespace BaiTapTuan7.Controllers
 
                 if (us.Usertype == "admin")
                 {
+                    Session["admin"] = db.tb_Teacher.FirstOrDefault(m => m.UserId == us.Id);
                     return Content("/Admin");
                 }
                 else if (us.Usertype == "student")

@@ -264,7 +264,9 @@
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            @RenderBody()
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
@@ -404,6 +406,19 @@
             })
         })
     </script>
+    <script type="text/javascript">
+        $(function () {
+            var PlaceHolderElement = $('#PlaceHolderHere');
+            $('button[data-toggle="content"]').click(function (event) {
+                var url = $(this).data('url');
+                $.get(url).done(function (data) {
+                    PlaceHolderElement.html(data);
+                    PlaceHolderElement.show;
+                });
+            });        
+        })
+    </script>
+
 </body>
 
 

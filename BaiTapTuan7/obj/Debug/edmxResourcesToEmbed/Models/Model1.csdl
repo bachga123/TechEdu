@@ -73,6 +73,8 @@
     <EntitySet Name="tb_UserType_Roles" EntityType="TechEduModel.tb_UserType_Roles" />
     <EntitySet Name="tb_Score" EntityType="TechEduModel.tb_Score" />
     <EntitySet Name="tb_StudentCourse" EntityType="TechEduModel.tb_StudentCourse" />
+    <EntitySet Name="tb_Course_Content" EntityType="TechEduModel.tb_Course_Content" />
+    <EntitySet Name="tb_Content" EntityType="TechEduModel.tb_Content" />
   </EntityContainer>
   <EntityType Name="tb_Course">
     <Key>
@@ -150,5 +152,23 @@
     <Property Name="CourseId" Type="Int32" />
     <Property Name="StudentId" Type="Int32" />
     <Property Name="Status" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tb_Course_Content">
+    <Key>
+      <PropertyRef Name="Course_Id" />
+      <PropertyRef Name="Content_Id" />
+    </Key>
+    <Property Name="Course_Id" Type="Int32" Nullable="false" />
+    <Property Name="Content_Id" Type="Int32" Nullable="false" />
+    <Property Name="Details" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tb_Content">
+    <Key>
+      <PropertyRef Name="Content_Id" />
+    </Key>
+    <Property Name="Content_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="File" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>
