@@ -45,7 +45,14 @@
         </dt>
 
         <dd>
-            @Model.File.Substring(11)
+            @if (Model.File != null)
+            {
+                @Model.File.Substring(11)
+            }
+            else
+            {
+                <p>null</p>
+            }
         </dd>
 
         <dt>
@@ -85,7 +92,14 @@
                                         <td>@item.StudentName</td>
                                         <td>
                                             <!--file show để download-->
-                                            <a href="~/@Model.File" download>@Model.File.Substring(11)</a>
+                                            @if (Model.File != null)
+                                            {
+                                                <a href="~/@Model.File" download>@Model.File.Substring(11)</a>
+                                            }
+                                            else
+                                            {
+                                                <p>null</p>
+                                            }
                                         </td>
                                         <td>@item.Answer</td>
                                         @if (item.Score == -1)

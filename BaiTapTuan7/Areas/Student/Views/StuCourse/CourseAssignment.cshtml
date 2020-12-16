@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Student/Views/Shared/_StudentLayout.cshtml";
 }
-@Html.ActionLink("My Answer", "MyAssignmentDid","", new { @class = "btn btn-primary" })
+@Html.ActionLink("My Answer", "MyAssignmentDid", "", new { @class = "btn btn-primary" })
 
 <table class="table">
     <tr>
@@ -32,10 +32,21 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Deadline)
+                @if (item.Deadline == null)
+                {
+                    <a>Unset</a>
+                }
+                else
+                {
+                    <a>@Html.DisplayFor(modelItem => item.Deadline)</a>
+                }
             </td>
             <td>
-                @if (item.Deadline < DateTime.Now)
+                @if (item.Deadline == null)
+                {
+                    <a>Unset</a>
+                }
+                else if (item.Deadline < DateTime.Now)
                 {
                     <a>Closed</a>
                 }

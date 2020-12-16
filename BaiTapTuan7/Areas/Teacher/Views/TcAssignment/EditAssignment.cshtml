@@ -20,7 +20,7 @@
         </li>
     </ul>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("EditAssignment", "TcAssignment", FormMethod.Post, new { @enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
@@ -49,17 +49,29 @@
             </div>
             <!--File-->
             <div class="form-group">
-                <div>
-                    <!--file show để download-->
+                <!--file show để download-->
+                <h4>File hiện tại</h4>
+                @if (Model.File != null)
+                {
+            <div>
+                <a href="~/@Model.File" download>@Model.File.Substring(11)</a>
+                <a type="button" class="btn btn-primary" href="@Url.Action("DeleteFileInAssignment","TcAssignment",new { assid = Model.Assignment_Id})">Xóa</a>
+                <!--Hay-->
+                <!--@Html.ActionLink("Bỏ", "DeleteFileInAssignment", new { assid = Model.Assignment_Id }, new { @class = "btn btn-primary" })-->
+            </div>
                     <div>
-                        <h4>File hiện tại</h4>
-                        <a href="~/@Model.File" download>@Model.File.Substring(11)</a>
+                        <h4>Đổi file: </h4>
+                        <input type="file" name="file" />
                     </div>
-                </div>
-                <div>
-                    <h4>Đổi file: </h4>
-                    <input type="file" name="file"/>
-                </div>
+                }
+                else
+                {
+                    <p>null</p>
+                    <div>
+                        <h4>Thêm file: </h4>
+                        <input type="file" name="file" />
+                    </div>
+                }
             </div>
             <!--details-->
             <div class="form-group">
