@@ -120,6 +120,23 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
+        public ActionResult DeleteContent(int conid)
+        {
+            int couid = (int)Session["couid"];
+            if (ModelState.IsValid)
+            {
+                var con = db.tb_Content.Find(conid);
+                var ccon = db.tb_Course_Content.FirstOrDefault(m => m.Content_Id == conid);
+                db.Entry(con).State = EntityState.Deleted;
+                db.Entry(ccon).State = EntityState.Deleted;
+                db.SaveChanges();
+                return RedirectToAction("CourseDetails", new { couid = couid });
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
         public List<tb_Course> MyCourseList()
         {
             tb_Teacher tc = (tb_Teacher)Session["teacher"];

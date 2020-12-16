@@ -21,42 +21,42 @@
             <a class="nav-link" href="@Url.Action("Index","TcAssignment")">Assignment</a>
         </li>
     </ul>
-
-    <div class="table table-hover">
-        <h2>Student</h2>
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">List Of Student</h6>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Student Id</th>
-                                        <th>Name</th>
-                                        <th>Gmail</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model)
-                                    {
+    <div class="card-body">
+        <div class="table table-hover">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">List Of Student</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
                                         <tr>
-                                            <td>@item.StudentId</td>
-                                            <td>@(item.FirstName + " "+ item.LastName)</td>
-                                            <td>@item.Gmail</td>
+                                            <th>Student Id</th>
+                                            <th>Name</th>
+                                            <th>Gmail</th>
                                         </tr>
-                                    }
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.StudentId</td>
+                                                <td>@(item.FirstName + " "+ item.LastName)</td>
+                                                <td>@item.Gmail</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_paginate">
-                                @Html.PagedListPager(Model, page => Url.Action("StudentOnCourse", new { page }))
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_paginate">
+                                    @Html.PagedListPager(Model, page => Url.Action("StudentOnCourse", new { page }))
+                                </div>
                             </div>
                         </div>
                     </div>

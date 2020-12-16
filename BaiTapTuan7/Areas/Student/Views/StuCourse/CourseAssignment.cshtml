@@ -3,88 +3,100 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Student/Views/Shared/_StudentLayout.cshtml";
 }
-@Html.ActionLink("My Answer", "MyAssignmentDid", "", new { @class = "btn btn-primary" })
 
-<table class="table">
-    <tr>
-        <th>
-            Deadline
-        </th>
-        <th>
-            <a>Time left</a>
-        </th>
-        <th>
-            File
-        </th>
-        <th>
-            Question
-        </th>
-        <th>
-            Status
-        </th>
-        <th>
-            Action
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="container-fluid">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("CourseDetails","StuCourse",new { couid = ViewBag.couid})">Details</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="@Url.Action("CourseAssignment","StuCourse",new { couid = ViewBag.couid})">Assignment</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("MyAssignmentDid","StuCourse")">My Answer</a>
+        </li>
+    </ul>
+    <table class="table">
         <tr>
-            <td>
-                @if (item.Deadline == null)
-                {
-                    <a>Unset</a>
-                }
-                else
-                {
-                    <a>@Html.DisplayFor(modelItem => item.Deadline)</a>
-                }
-            </td>
-            <td>
-                @if (item.Deadline == null)
-                {
-                    <a>Unset</a>
-                }
-                else if (item.Deadline < DateTime.Now)
-                {
-                    <a>Closed</a>
-                }
-                else if (((TimeSpan)(item.Deadline - DateTime.Now)).Days != 0)
-                {
-                    <a>@(((TimeSpan)(item.Deadline - DateTime.Now)).Days) days</a>
-                }
-                else
-                {
-                    <div id="hms">@(((TimeSpan)(item.Deadline - DateTime.Now)).ToString("t"))</div>
-                }
-            </td>
-            <td>
-                @if (item.File != null)
-                {
-                    @item.File.Substring(11)
-                }
-                else
-                {
-                    <a>Null</a>
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Details)
-            </td>
-            <td>
-                @if (item.Status == 1)
-                {
-                    <a>Active</a>
-                }
-                else
-                {
-                    <a>Closed</a>
-                }
-            </td>
-            <td>
-                @Html.ActionLink("Details", "AssignmentDetails", new { assid = item.Assignment_Id }, new { @class = "btn btn-primary" })
-            </td>
+            <th>
+                Deadline
+            </th>
+            <th>
+                <a>Time left</a>
+            </th>
+            <th>
+                File
+            </th>
+            <th>
+                Question
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Action
+            </th>
+            <th></th>
         </tr>
-    }
-</table>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.Deadline == null)
+                    {
+                        <a>Unset</a>
+                    }
+                    else
+                    {
+                        <a>@Html.DisplayFor(modelItem => item.Deadline)</a>
+                    }
+                </td>
+                <td>
+                    @if (item.Deadline == null)
+                    {
+                        <a>Unset</a>
+                    }
+                    else if (item.Deadline < DateTime.Now)
+                    {
+                        <a>Closed</a>
+                    }
+                    else if (((TimeSpan)(item.Deadline - DateTime.Now)).Days != 0)
+                    {
+                        <a>@(((TimeSpan)(item.Deadline - DateTime.Now)).Days) days</a>
+                    }
+                    else
+                    {
+                        <div id="hms">@(((TimeSpan)(item.Deadline - DateTime.Now)).ToString("t"))</div>
+                    }
+                </td>
+                <td>
+                    @if (item.File != null)
+                    {
+                        @item.File.Substring(11)
+                    }
+                    else
+                    {
+                        <a>Null</a>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Details)
+                </td>
+                <td>
+                    @if (item.Status == 1)
+                    {
+                        <a>Active</a>
+                    }
+                    else
+                    {
+                        <a>Closed</a>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "AssignmentDetails", new { assid = item.Assignment_Id }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

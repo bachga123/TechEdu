@@ -76,10 +76,12 @@ namespace BaiTapTuan7.Areas.Student.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
-        public ActionResult CourseDetails(int? id)
+        public ActionResult CourseDetails(int? couid)
         {
-            tb_Course cou = db.tb_Course.Find(id);
+            tb_Course cou = db.tb_Course.Find(couid);
             ViewBag.Teacher = db.tb_Teacher.Find(cou.TeacherId);
+            ViewBag.contentList = MyContentList(cou.Course_Id);
+            ViewBag.couid = cou.Course_Id;
             Session["courseid"] = cou.Course_Id;
             return View("CourseDetails", cou);
         }
@@ -96,6 +98,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
             var studentAnswerList = db.tb_Student_Assignment.Where(m => m.Assignment_Id == assid);
             ViewBag.studentAnswerList = studentAnswerList;
             tb_Assignment ass = db.tb_Assignment.Find(assid);
+            ViewBag.couid = ass.Course_Id;
             return View("AssignmentDetails", ass);
         }
 
@@ -199,6 +202,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
         //Xem diem cua assignment minh da lam
         public ActionResult MyAssignmentDid(int page = 1,int pageSize = 10)
         {
+            ViewBag.couid = (int)Session["courseid"];
             return View("MyAssignmentDid",MyAnswerAssignmentList().ToPagedList(page,pageSize));
         }
         public List<tb_Course> MyCourseList()
@@ -245,6 +249,21 @@ namespace BaiTapTuan7.Areas.Student.Controllers
                 }
             }
             return assList;
+        }
+
+        public List<tb_Content> MyContentList(int couid)
+        {
+            List<tb_Course_Content> tcc = db.tb_Course_Content.Where(m => m.Course_Id == couid).ToList();
+            List<tb_Content> tc = new List<tb_Content>();
+            foreach (var item in tcc)
+            {
+                tb_Content tc1 = db.tb_Content.Find(item.Content_Id);
+                if (tc.Contains(tc1) == false)
+                {
+                    tc.Add(tc1);
+                }
+            }
+            return tc;
         }
     }
 }
