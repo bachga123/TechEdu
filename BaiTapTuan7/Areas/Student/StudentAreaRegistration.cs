@@ -17,7 +17,7 @@ namespace BaiTapTuan7.Areas.Student
             context.MapRoute(
                 "Student_default",
                 "Student/{controller}/{action}/{id}",
-                new { action = "Index",controller = "StuCourse", id = UrlParameter.Optional }
+                new { action = "Index",controller = "StuInfor", id = UrlParameter.Optional }
             );
         }
     }

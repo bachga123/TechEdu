@@ -16,6 +16,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
         // GET: Student/Student
         public ActionResult Index()
         {
+            ViewBag.myDeadlineList = MyDeadlineList();
             return View();
         }
         public ActionResult StudentProfile()
@@ -100,6 +101,43 @@ namespace BaiTapTuan7.Areas.Student.Controllers
         {
             ClearCache();
             return RedirectToAction("Index", "Home", new { @area = "" });
+        }
+        public List<tb_Course> MyCourseList()
+        {
+            tb_Student stu = (tb_Student)Session["student"];
+            var data = db.tb_StudentCourse.Where(m => m.StudentId == stu.StudentId && m.Status == 1).ToList();
+            List<tb_Course> myCourseList = new List<tb_Course>();
+            foreach (var item in data)
+            {
+                var cou = db.tb_Course.FirstOrDefault(m => m.Course_Id == item.CourseId);
+                myCourseList.Add(cou);
+            }
+            return myCourseList;
+        }
+        public List<tb_Assignment> MyCourseAssignment(int couid)
+        {
+            List<tb_Assignment> assList = db.tb_Assignment.Where(m => m.Course_Id == couid).ToList();
+            return assList;
+        }
+        public List<tb_Assignment> MyDeadlineList()
+        {
+            List<tb_Assignment> MyDeadlineList = new List<tb_Assignment>();
+            var couList = MyCourseList();
+            foreach (var item in couList)
+            {
+                var assList = MyCourseAssignment(item.Course_Id);
+                foreach (var item1 in assList)
+                {
+                    if ((item1.Deadline - DateTime.Now) > TimeSpan.Zero)
+                    {
+                        if (MyDeadlineList.Contains(item1) == false)
+                        {
+                            MyDeadlineList.Add(item1);
+                        }
+                    }
+                }
+            }
+            return MyDeadlineList;
         }
         public void ClearCache()
         {
