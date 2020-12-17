@@ -41,7 +41,15 @@
                     </div>
                     <div class="card-body">
                         <h4>@item.Description</h4>
-                        <h4>@item.File</h4>
+                        <!--file show để download-->
+                        @if (item.File != null)
+                        {
+                            <a href="~/@item.File" download>@item.File.Substring(11)</a>
+                        }
+                        else
+                        {
+                            <a>null</a>
+                        }
                     </div>
                 </div>
             }

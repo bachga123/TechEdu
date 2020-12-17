@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -73,14 +74,17 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
             return PartialView("AddContent",newCon);
         }
         [HttpPost]
-        public ActionResult AddContent(tb_Content newCon)
+        public ActionResult AddContent(tb_Content newCon, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
                 tb_Content con = new tb_Content();
                 con.Title = newCon.Title;
                 con.Description = newCon.Description;
-                con.File = newCon.File;
+                if (file != null)
+                {
+                    con.File = this.AddFileToFiles_Here(file);
+                }
                 db.Entry(con).State = EntityState.Added;
                 db.SaveChanges();
                 tb_Course_Content tcc = new tb_Course_Content();
@@ -102,7 +106,7 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
             return PartialView("EditContent", con);
         }
         [HttpPost]
-        public ActionResult EditContent(tb_Content con)
+        public ActionResult EditContent(tb_Content con, HttpPostedFileBase file)
         {
             int couid = (int)Session["couid"];
             if(ModelState.IsValid)
@@ -110,7 +114,10 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
                 tb_Content tc = db.tb_Content.Find(con.Content_Id);
                 tc.Description = con.Description;
                 tc.Title = con.Title;
-                tc.File = con.File;
+                if (file != null)
+                {
+                    tc.File = this.AddFileToFiles_Here(file);
+                }
                 db.Entry(tc).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("CourseDetails", new { couid = couid });
@@ -136,6 +143,34 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+        }
+        public ActionResult DeleteFileInContent(int conid)
+        {
+            if (ModelState.IsValid)
+            {
+                int couid = (int)Session["couid"];
+                var aas = db.tb_Content.Find(conid);
+                aas.File = null;
+                //cần delte file trong Files_Here
+                db.Entry(aas).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("CourseDetails", new { couid = couid });
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
+        public String AddFileToFiles_Here(HttpPostedFileBase file)
+        {
+            string path = Server.MapPath("~/Files_Here");
+            string fileName = Path.GetFileName(file.FileName);
+            //cần xử lý fullPath tránh bị trùng?
+            string fullPath = Path.Combine(path, fileName);
+
+            file.SaveAs(fullPath);
+            string filePath = "Files_Here/" + fileName;
+            return filePath;
         }
         public List<tb_Course> MyCourseList()
         {

@@ -142,7 +142,6 @@ E:\Web\Project\TechEdu\BaiTapTuan7\bin\System.Web.Webpages.Razor.xml
 E:\Web\Project\TechEdu\BaiTapTuan7\bin\System.Web.Helpers.xml
 E:\Web\Project\TechEdu\BaiTapTuan7\bin\System.Web.Mvc.xml
 E:\Web\Project\TechEdu\BaiTapTuan7\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-E:\Web\Project\TechEdu\BaiTapTuan7\obj\Debug\BaiTapTuan7.csprojAssemblyReference.cache
 E:\Web\Project\TechEdu\BaiTapTuan7\obj\Debug\BaiTapTuan7.csproj.CoreCompileInputs.cache
 E:\Web\Project\TechEdu\BaiTapTuan7\obj\Debug\BaiTapTuan7.csproj.CopyComplete
 E:\Web\Project\TechEdu\BaiTapTuan7\obj\Debug\BaiTapTuan7.dll
