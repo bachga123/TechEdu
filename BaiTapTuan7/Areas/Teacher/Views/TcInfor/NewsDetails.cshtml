@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "NewsDetails";
+    Layout = "~/Areas/Teacher/Views/Shared/_TeacherLayout.cshtml";
+}
+
+<div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <div class="inputdate">
+                    [Date: @Model.CreatedDate]
+                </div>
+                <div class="card-body">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td height="22" align="left">
+                                    <span class="content"> @Html.Raw(Model.Details)</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

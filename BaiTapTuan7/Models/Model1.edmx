@@ -65,6 +65,17 @@
           <Property Name="DataFiles" Type="varbinary" MaxLength="50" />
           <Property Name="CreateOn" Type="datetime" />
         </EntityType>
+        <EntityType Name="tb_News">
+          <Key>
+            <PropertyRef Name="News_Id" />
+          </Key>
+          <Property Name="News_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Details" Type="nvarchar(max)" />
+          <Property Name="From" Type="nvarchar" MaxLength="50" />
+          <Property Name="To" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="tb_Roles">
           <Key>
             <PropertyRef Name="RoleId" />
@@ -166,6 +177,7 @@
           <EntitySet Name="tb_Course" EntityType="Self.tb_Course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Course_Content" EntityType="Self.tb_Course_Content" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Files" EntityType="Self.tb_Files" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_News" EntityType="Self.tb_News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Roles" EntityType="Self.tb_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Score" EntityType="Self.tb_Score" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Student" EntityType="Self.tb_Student" Schema="dbo" store:Type="Tables" />
@@ -255,6 +267,7 @@
           <EntitySet Name="tb_StudentCourse" EntityType="TechEduModel.tb_StudentCourse" />
           <EntitySet Name="tb_Course_Content" EntityType="TechEduModel.tb_Course_Content" />
           <EntitySet Name="tb_Content" EntityType="TechEduModel.tb_Content" />
+          <EntitySet Name="tb_News" EntityType="TechEduModel.tb_News" />
         </EntityContainer>
         <EntityType Name="tb_Course">
           <Key>
@@ -350,6 +363,17 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="File" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tb_News">
+          <Key>
+            <PropertyRef Name="News_Id" />
+          </Key>
+          <Property Name="News_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="From" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="To" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -520,6 +544,18 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Content_Id" ColumnName="Content_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_News">
+            <EntityTypeMapping TypeName="TechEduModel.tb_News">
+              <MappingFragment StoreEntitySet="tb_News">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="From" ColumnName="From" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="News_Id" ColumnName="News_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

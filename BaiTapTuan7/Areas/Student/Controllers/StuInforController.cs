@@ -17,6 +17,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
         public ActionResult Index()
         {
             ViewBag.myDeadlineList = MyDeadlineList();
+            ViewBag.newsList = MyNews();
             return View();
         }
         public ActionResult StudentProfile()
@@ -97,6 +98,12 @@ namespace BaiTapTuan7.Areas.Student.Controllers
             }
 
         }
+        // News
+        public ActionResult NewsDetails(int newsid)
+        {
+            var news = db.tb_News.Find(newsid);
+            return View("NewsDetails", news);
+        }
         public ActionResult Logout()
         {
             ClearCache();
@@ -139,6 +146,12 @@ namespace BaiTapTuan7.Areas.Student.Controllers
             }
             return MyDeadlineList;
         }
+        public List<tb_News> MyNews()
+        {
+            var newsLists = db.tb_News.Where(m => m.To == "4" || m.To == "1").ToList();
+            return newsLists;
+        }
+
         public void ClearCache()
         {
             Response.Cache.SetCacheability(HttpCacheability.NoCache);

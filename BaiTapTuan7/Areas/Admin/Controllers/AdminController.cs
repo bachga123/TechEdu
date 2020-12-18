@@ -21,7 +21,82 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         // GET: Admin
         public ActionResult Index()
         {
+            ViewBag.newsList = MyNews();
             return View();
+        }
+        // Phần thông báo của admin
+        public ActionResult NewsDetails(int newsid)
+        {
+            var news = db.tb_News.Find(newsid);
+            return View("NewsDetails",news);
+        }
+        public ActionResult AddNews()
+        {
+            ViewBag.RoleList = GetRoleNews();
+            tb_News news = new tb_News();
+            return View("AddNews",news);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult AddNews(tb_News news)
+        {
+            if(ModelState.IsValid)
+            {
+                tb_News ne = new tb_News();
+                ne.Title = news.Title;
+                ne.Details = news.Details;
+                ne.CreatedDate = DateTime.Now;
+                ne.From = ((tb_Teacher)Session["admin"]).TeacherFirstName + " "+ ((tb_Teacher)Session["admin"]).TeacherLastName;
+                ne.To = news.To;
+                db.Entry(ne).State = EntityState.Added;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
+        public ActionResult EditNews(int newsid)
+        {
+            ViewBag.RoleList = GetRoleNews();
+            tb_News ne = db.tb_News.Find(newsid);
+            return View("EditNews",ne);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult EditNews(tb_News news)
+        {
+            if (ModelState.IsValid)
+            {
+                tb_News ne = db.tb_News.Find(news.News_Id);
+                ne.Title = news.Title;
+                ne.Details = news.Details;
+                ne.CreatedDate = DateTime.Now;
+                ne.From = ((tb_Teacher)Session["admin"]).TeacherFirstName + " " + ((tb_Teacher)Session["admin"]).TeacherLastName;
+                ne.To = news.To;
+                db.Entry(ne).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
+        public ActionResult DeleteNews(int newsid)
+        {
+            if (ModelState.IsValid)
+            {
+                var news = db.tb_News.Find(newsid);
+                db.Entry(news).State = EntityState.Deleted;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
         // Thông tin cá nhân của admin (admin ví dụ là một teacher)
         public ActionResult Logout()
@@ -109,6 +184,22 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
             Response.Cache.SetNoStore();
+        }
+
+        public List<SelectListItem> GetRoleNews()
+        {
+            var list = new List<SelectListItem>();
+            list.Add(new SelectListItem { Value = "1", Text = "All" });
+            list.Add(new SelectListItem { Value = "2", Text = "Admin" });
+            list.Add(new SelectListItem { Value = "3", Text = "Teacher" });
+            list.Add(new SelectListItem { Value = "4", Text = "Student" });
+            return list;
+        }
+
+        public List<tb_News> MyNews()
+        {
+            var newsLists = db.tb_News.ToList();
+            return newsLists;
         }
         
     }

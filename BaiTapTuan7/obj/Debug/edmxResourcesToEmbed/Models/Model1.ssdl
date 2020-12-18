@@ -60,6 +60,17 @@
     <Property Name="DataFiles" Type="varbinary" MaxLength="50" />
     <Property Name="CreateOn" Type="datetime" />
   </EntityType>
+  <EntityType Name="tb_News">
+    <Key>
+      <PropertyRef Name="News_Id" />
+    </Key>
+    <Property Name="News_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" />
+    <Property Name="Details" Type="nvarchar(max)" />
+    <Property Name="From" Type="nvarchar" MaxLength="50" />
+    <Property Name="To" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
   <EntityType Name="tb_Roles">
     <Key>
       <PropertyRef Name="RoleId" />
@@ -161,6 +172,7 @@
     <EntitySet Name="tb_Course" EntityType="Self.tb_Course" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Course_Content" EntityType="Self.tb_Course_Content" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Files" EntityType="Self.tb_Files" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_News" EntityType="Self.tb_News" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Roles" EntityType="Self.tb_Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Score" EntityType="Self.tb_Score" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Student" EntityType="Self.tb_Student" Schema="dbo" store:Type="Tables" />

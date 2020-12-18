@@ -459,3 +459,4 @@ D:\LTWeb_Nhom\TechEdu\BaiTapTuan7\obj\Debug\BaiTapTuan7.csproj.CoreCompileInputs
 D:\LTWeb_Nhom\TechEdu\BaiTapTuan7\obj\Debug\BaiTapTuan7.csproj.CopyComplete
 D:\LTWeb_Nhom\TechEdu\BaiTapTuan7\obj\Debug\BaiTapTuan7.dll
 D:\LTWeb_Nhom\TechEdu\BaiTapTuan7\obj\Debug\BaiTapTuan7.pdb
+E:\Web\Project\TechEdu\BaiTapTuan7\obj\Debug\BaiTapTuan7.csprojAssemblyReference.cache

@@ -20,6 +20,7 @@
         <EntityTypeShape EntityType="TechEduModel.tb_StudentCourse" Width="1.5" PointX="8.375" PointY="3.75" />
         <EntityTypeShape EntityType="TechEduModel.tb_Course_Content" Width="1.5" PointX="2.75" PointY="9.75" />
         <EntityTypeShape EntityType="TechEduModel.tb_Content" Width="1.5" PointX="4.5" PointY="9.625" />
+        <EntityTypeShape EntityType="TechEduModel.tb_News" Width="1.5" PointX="6.5" PointY="6.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

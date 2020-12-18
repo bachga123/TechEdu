@@ -15,6 +15,7 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
         // GET: Teacher/Student
         public ActionResult Index()
         {
+            ViewBag.newsList = MyNews();
             return View();
         }
         public ActionResult TeacherProfile()
@@ -91,6 +92,16 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
                 return RedirectToAction("AccountSetting", us);
             }
 
+        }
+        public ActionResult NewsDetails(int newsid)
+        {
+            var news = db.tb_News.Find(newsid);
+            return View("NewsDetails", news);
+        }
+        public List<tb_News> MyNews()
+        {
+            var newsLists = db.tb_News.Where(m => m.To == "3" || m.To == "1").ToList();
+            return newsLists;
         }
         public ActionResult Logout()
         {
