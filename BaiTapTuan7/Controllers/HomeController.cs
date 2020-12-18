@@ -1,6 +1,8 @@
 ﻿using BaiTapTuan7.Models;
 using Microsoft.AspNet.Identity;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web.Mvc;
 using WebMatrix.WebData;
 
@@ -23,7 +25,7 @@ namespace BaiTapTuan7.Controllers
         public ActionResult DangNhap(FormCollection f)
         {
             string taikhoan = f["username"].ToString();
-            string matkhau = f["password"].ToString();
+            string matkhau = MD5(f["password"].ToString());
             //string matkhaumd5 = GetMD5(matkhau);
             tb_Users us = db.tb_Users.SingleOrDefault(n => n.Username == taikhoan && n.Password == matkhau);
             //nếu user nhập đúng mật khẩu
@@ -60,6 +62,18 @@ namespace BaiTapTuan7.Controllers
             {
                 return Content("false");
             }
+        }
+        private static string MD5(string Metin)
+        {
+            MD5CryptoServiceProvider MD5Code = new MD5CryptoServiceProvider();
+            byte[] byteDizisi = Encoding.UTF8.GetBytes(Metin);
+            byteDizisi = MD5Code.ComputeHash(byteDizisi);
+            StringBuilder sb = new StringBuilder();
+            foreach (byte ba in byteDizisi)
+            {
+                sb.Append(ba.ToString("x2").ToLower());
+            }
+            return sb.ToString();
         }
 
     }

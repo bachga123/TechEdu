@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using BaiTapTuan7.Models;
@@ -80,7 +82,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
                 var uss = db.tb_Users.Find(us.Id);
                 if(uss != null)
                 {
-                    uss.Password = us.Password;
+                    uss.Password = MD5(us.Password);
                     db.Entry(uss).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("AccountSetting");
@@ -158,5 +160,18 @@ namespace BaiTapTuan7.Areas.Student.Controllers
             Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
             Response.Cache.SetNoStore();
         }
+        private static string MD5(string Metin)
+        {
+            MD5CryptoServiceProvider MD5Code = new MD5CryptoServiceProvider();
+            byte[] byteDizisi = Encoding.UTF8.GetBytes(Metin);
+            byteDizisi = MD5Code.ComputeHash(byteDizisi);
+            StringBuilder sb = new StringBuilder();
+            foreach (byte ba in byteDizisi)
+            {
+                sb.Append(ba.ToString("x2").ToLower());
+            }
+            return sb.ToString();
+        }
     }
+
 }

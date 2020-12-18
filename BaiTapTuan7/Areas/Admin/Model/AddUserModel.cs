@@ -18,7 +18,7 @@ namespace BaiTapTuan7.Areas.Admin.Model
         [Display(Name = "Username")]
         public string Username { get; set; }
         [Required(ErrorMessage = "This box is empty")]
-        [Display(Name ="password")]
+        [Display(Name ="Password")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [Required(ErrorMessage = "This box is empty")]

@@ -7,7 +7,8 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using PagedList;
-
+using System.Security.Cryptography;
+using System.Text;
 
 namespace BaiTapTuan7.Areas.Admin.Controllers
 {
@@ -39,13 +40,21 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                     us.Username = us1.Username;
                     us.Usertype = us1.Usertype;
                     us.Email = us1.Email;
-                    us.Password = us1.Password;
-                    us.Block = true;
+                    us.Password = MD5(us1.Password);
+                    if (us1.Usertype != "admin")
+                    {
+                        us.Block = true;
+                    }
+                    else
+                    {
+                        us.Block = false;
+                    }
                     us.RegisterDate = DateTime.Now;
                     db.tb_Users.Add(us);
                     db.SaveChanges();
                     tb_Users uz = db.tb_Users.FirstOrDefault(m => m.Username == us.Username);
-                    if (uz.Usertype == "teacher")
+                    if (uz.Usertype == "teacher"  || uz.Usertype == "admin")
+
                     {
                         tb_Teacher tc = new tb_Teacher();
                         tc.TeacherFirstName = us1.FirstName;
@@ -98,7 +107,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 var result = db.tb_Users.Find(tb.Id);
                 if (result != null)
                 {
-                    result.Password = tb.Password;
+                    result.Password = MD5(tb.Password);
                     db.Entry(result).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -227,8 +236,20 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
         }
 
+        //Encrypt
+        private static string MD5(string Metin)
+        {
+            MD5CryptoServiceProvider MD5Code = new MD5CryptoServiceProvider();
+            byte[] byteDizisi = Encoding.UTF8.GetBytes(Metin);
+            byteDizisi = MD5Code.ComputeHash(byteDizisi);
+            StringBuilder sb = new StringBuilder();
+            foreach (byte ba in byteDizisi)
+            {
+                sb.Append(ba.ToString("x2").ToLower());
+            }
+            return sb.ToString();
+        }
     }
 }

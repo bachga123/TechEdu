@@ -4,66 +4,82 @@
     ViewBag.Title = "UserList";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-<div class="table table-hover">
-    <h2>UserList</h2>
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Register Date</th>
-                                    <th>Usertype</th>
-                                    <th>Block</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>@item.Username</td>
-                                        <td>@item.Email</td>
-                                        <td>@item.RegisterDate</td>
-                                        <td>@item.Usertype</td>
-                                        <td>@item.Block</td>
-                                        <td>
-                                            <a>
-                                                @if (item.Usertype != "admin")
-                                                {
-                                                    if (item.Block == true)
-                                                    {
-                                                        @Html.ActionLink("Active", "ActiveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to active this user?');", @class = "btn btn-primary" })
-                                                    }
-                                                    else if (item.Block == false)
-                                                    {
-                                                        @Html.ActionLink("Unactive", "UnactiveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to unactive this user?');", @class = "btn btn-danger" })
-                                                    }
-                                                }
-                                            </a>
+<div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+        <div class="container-fluid">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">               
+                <h1 class="h3 mb-0 text-gray-800">User Manager</h1>
+            </div>
+            <div class="table table-hover">
 
-                                            <a href="@Url.Action("EditUser","User",new { Id = item.Id })" class="btn btn-success"> Edit User</a>
-                                            <a>
-                                                @Html.ActionLink("Remove", "RemoveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to delete this user?');", @class = "btn btn-danger" })
-                                            </a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <h5 class="m-0 font-weight-bold text-primary">User List</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <a class="btn btn-primary" href="@Url.Action("AddUser","User")">Add User</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_paginate">
-                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Username</th>
+                                                <th>Email</th>
+                                                <th>Register Date</th>
+                                                <th>Usertype</th>
+                                                <th>Block</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@item.Username</td>
+                                                    <td>@item.Email</td>
+                                                    <td>@item.RegisterDate</td>
+                                                    <td>@item.Usertype</td>
+                                                    <td>@item.Block</td>
+                                                    <td>
+                                                        <a>
+                                                            @if (item.Usertype != "admin")
+                                                            {
+                                                                if (item.Block == true)
+                                                                {
+                                                                    @Html.ActionLink("Active", "ActiveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to active this user?');", @class = "btn btn-primary" })
+                                                                }
+                                                                else if (item.Block == false)
+                                                                {
+                                                                    @Html.ActionLink("Unactive", "UnactiveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to unactive this user?');", @class = "btn btn-danger" })
+                                                                }
+                                                            }
+                                                        </a>
+
+                                                        <a href="@Url.Action("EditUser","User",new { Id = item.Id })" class="btn btn-success"> Edit User</a>
+                                                        <a>
+                                                            @Html.ActionLink("Remove", "RemoveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to delete this user?');", @class = "btn btn-danger" })
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="dataTables_paginate">
+                                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
