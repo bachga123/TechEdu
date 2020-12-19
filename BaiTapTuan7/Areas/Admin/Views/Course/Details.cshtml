@@ -9,17 +9,30 @@
 @using (Html.BeginForm("Details", "Course", FormMethod.Get, new { enctype = "mutilpart/form-data" }))
 {<div class="container-fluid">
         <div class="card-header">
-            <div class="d-sm-flex align-items-center justify-content-between mb-5 card-header-tabs">
-                <h1>@Html.DisplayFor(model => model.Course_Name)</h1>
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="d-sm-flex align-items-center justify-content-between">
+                        <h3>@Html.DisplayFor(model => model.Course_Name)</h3>
+                    </div>
+                    <div class="d-sm-flex">
+                        @Html.DisplayFor(m => m.Decription)
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Action
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="@Url.Action("EditCourse","Course",new { couid= Model.Course_Id})">Edit</a>
+                            <a class="dropdown-item" href="@Url.Action("DeleteCourse","Course",new { couid= Model.Course_Id})" onclick = "return confirm('Are you sure to remove this course?');">Delete</a>
+                        </div>
+                        @*@Html.ActionLink("Remove Course", "DeleteCourse", "Course", new { couid = Model.Course_Id }, new { onclick = "return confirm('Are you sure to remove this course?');", @class = "btn btn-danger" })*@
+                    </div>
+                </div>
             </div>
-            <div class="d-sm-flex">
-                @Html.DisplayFor(m => m.Decription)
-            </div>
-            <div>
-                @Html.ActionLink("Remove Course", "DeleteCourse", "Course", new { couid = Model.Course_Id }, new { onclick = "return confirm('Are you sure to remove this course?');", @class = "btn btn-danger" })
-            </div>
+            <hr />
         </div>
-        <hr />
         <div class="table table-hover">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">

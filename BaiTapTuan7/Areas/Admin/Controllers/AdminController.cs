@@ -23,8 +23,9 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         // GET: Admin
         public ActionResult Index()
         {
+            var tc = (tb_Teacher)Session["admin"];
             ViewBag.newsList = MyNews();
-            return View();
+            return View(tc);
         }
         // Phần thông báo của admin
         public ActionResult NewsDetails(int newsid)
@@ -78,6 +79,27 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 ne.From = ((tb_Teacher)Session["admin"]).TeacherFirstName + " " + ((tb_Teacher)Session["admin"]).TeacherLastName;
                 ne.To = news.To;
                 db.Entry(ne).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
+        public ActionResult AccountSettings()
+        {
+            var us = (tb_Users)Session["user"];
+            return PartialView("AccountSettings", us);
+        }
+        [HttpPost]
+        public ActionResult AccountSettings(tb_Users us)
+        {
+            if(ModelState.IsValid)
+            {
+                var uss = db.tb_Users.Find(us.Id);
+                uss.Password = MD5(us.Password);
+                db.Entry(uss).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

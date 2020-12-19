@@ -21,14 +21,6 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             var listTeacher = db.tb_Teacher.OrderByDescending(m => m.TeacherFirstName).ToPagedList(page, pageSize);
             return View(listTeacher);
         }
-        public ActionResult Details(int id)
-        {
-            var stu = db.tb_Teacher.Find(id);
-            if (stu == null)
-                return new HttpNotFoundResult();
-            return View(stu);
-
-        }
         public ActionResult EditTeacher(int id)
         {
             tb_Teacher tc = db.tb_Teacher.Find(id);

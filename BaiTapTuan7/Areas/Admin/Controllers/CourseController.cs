@@ -73,9 +73,9 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
-        public ActionResult EditCourse(int id)
+        public ActionResult EditCourse(int couid)
         {
-            var check = db.tb_Course.Find(id);
+            var check = db.tb_Course.Find(couid);
             if (check != null)
             {
                 return View("EditCourse", check);

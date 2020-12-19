@@ -5,99 +5,102 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>EditStudent</h2>
-
-@using (Html.BeginForm("EditStudent","Student",FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>tb_Student</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.StudentId)
-    @Html.HiddenFor(model => model.UserId)
-    <div class="form-group">
-        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Gmail, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Gmail, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Gmail, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" } )
-        <div class="col-md-10">
-            @if (Model.DateOfBirth != null)
+<div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+        <div class="container-fluid">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h2 mb-0 text-gray-800">Student Profile</h1>
+            </div>
+            @using (Html.BeginForm("EditStudent", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control datepicker", @Value = ((DateTime)Model.DateOfBirth).ToString("yyyy-MM-dd"), @type = "date" } })
-            }
-            else
-            {
-                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control datepicker",@type = "date" } })
+                @Html.AntiForgeryToken()
 
-            }
-            @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                <div class="form-horizontal">
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.StudentId)
+                    @Html.HiddenFor(model => model.UserId)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.PlaceOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.PlaceOfBirth, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.PlaceOfBirth, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Images, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @if (Model.Images != null)
-            {
-                var base64 = Convert.ToBase64String(Model.Images);
-                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                <input type="file" id="fileUpload" name="image" multiple="multiple" />
-                <img src='@imgSrc' style="max-width:100px; max-height:100px;" id="image-display"/>
-                <div id='image-holder'/>
-            }
-            else
-            {
-                <input type="file" id="image" name="image" />
-            }
-            @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-primary" />
-        </div>
-    </div>
-</div>
-}
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Gmail, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Gmail, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Gmail, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @if (Model.DateOfBirth != null)
+                            {
+                                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control datepicker", @Value = ((DateTime)Model.DateOfBirth).ToString("yyyy-MM-dd"), @type = "date" } })
+                            }
+                            else
+                            {
+                                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control datepicker", @type = "date" } })
+
+                            }
+                            @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PlaceOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.PlaceOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PlaceOfBirth, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Images, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @if (Model.Images != null)
+                            {
+                                var base64 = Convert.ToBase64String(Model.Images);
+                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                <input type="file" id="fileUpload" name="image" multiple="multiple" />
+                                <img src='@imgSrc' style="max-width:100px; max-height:100px;" id="image-display" />
+                                <div id='image-holder' />
+                            }
+                            else
+                            {
+                                <input type="file" id="image" name="image" />
+                            }
+                            @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
 </div>

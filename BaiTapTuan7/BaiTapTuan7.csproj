@@ -4411,8 +4411,6 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\Student\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Teacher\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Course\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Course\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Course\CreateCourse.cshtml" />
@@ -4691,6 +4689,7 @@
     <Content Include="Areas\Admin\Views\Admin\EditNews.cshtml" />
     <Content Include="Areas\Student\Views\StuInfor\NewsDetails.cshtml" />
     <Content Include="Areas\Teacher\Views\TcInfor\NewsDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\AccountSettings.cshtml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
