@@ -19,7 +19,14 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         // GET: User
         public ActionResult Index(int page = 1,int pageSize = 10)
         {
-            var lst = db.tb_Users.OrderBy(x => x.Usertype).ToPagedList(page, pageSize);
+            var admin = (tb_Users)Session["user"];
+            var list = db.tb_Users.ToList();
+            var item = list.FirstOrDefault(m => m.Id == admin.Id);
+            if(item != null)
+            {
+                list.Remove(item);
+            }
+            var lst = list.OrderBy(x => x.Usertype).ToPagedList(page, pageSize);
             return View(lst);
         }
         public ActionResult AddUser()

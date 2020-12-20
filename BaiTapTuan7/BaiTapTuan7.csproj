@@ -363,6 +363,7 @@
     <Content Include="Assets\Admin\js\demo\datatables-demo.js" />
     <Content Include="Assets\Admin\js\sb-admin-2.js" />
     <Content Include="Assets\Admin\js\sb-admin-2.min.js" />
+    <Content Include="Assets\Admin\img\undraw_environmental_study_skau.svg" />
     <Content Include="Assets\Admin\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="Assets\Admin\vendor\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="Assets\Admin\vendor\bootstrap\js\bootstrap.js" />

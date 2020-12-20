@@ -18,6 +18,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
         // GET: Student/Student
         public ActionResult Index()
         {
+            ViewBag.myCourseList = MyCourseList();
             ViewBag.myDeadlineList = MyDeadlineList();
             ViewBag.newsList = MyNews();
             return View();
@@ -53,6 +54,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
                     }
                     db.Entry(oldstu).State = EntityState.Modified;
                     db.SaveChanges();
+                    Session["student"] = oldstu;
                     return View("StudentProfile", oldstu);
                 }
                 else
@@ -153,6 +155,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
             var newsLists = db.tb_News.Where(m => m.To == "4" || m.To == "1").ToList();
             return newsLists;
         }
+
 
         public void ClearCache()
         {

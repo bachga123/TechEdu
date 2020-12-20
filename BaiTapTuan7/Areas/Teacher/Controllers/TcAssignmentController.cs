@@ -33,6 +33,7 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
         {
             tb_Assignment ass = new tb_Assignment();
             ass.Course_Id = couid;
+            ViewBag.couid = couid;
             ass.CreatedDate = DateTime.Now;
             return View("CreateAssignment", ass);
         }

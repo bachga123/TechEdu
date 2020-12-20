@@ -4,165 +4,169 @@
     Layout = "~/Areas/Student/Views/Shared/_StudentLayout.cshtml";
 }
 
-@using (Html.BeginForm("StudentProfile", "StuInfor", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
+
 <div class="container-fluid">
-    <div class="row">
-        <!-- Column -->
-        <div class="col-lg-4 col-xlg-3 col-md-5">
-            <div class="card">
-                <div class="card-body">
-                    <center class="m-t-30">
-                        <div class="col-md-10">
-                            @if (Model.Images != null)
-                            {
-                                var base64 = Convert.ToBase64String(Model.Images);
-                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                                <img src='@imgSrc' class="rounded-circle" width="150" onclick="" id='image-display' />
-                                <div class="rounded-circle" width="150" id='image-holder' />
-                            }
-                            else
-                            {
-                                <img src="Assets/xtreme/assets/images/users/5.jpg"
-                                     class="rounded-circle" width="150" />
-                            }
-                            @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
+    <div id="content">
+        @using (Html.BeginForm("StudentProfile", "StuInfor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <!-- Column -->
+                <div class="col-lg-4 col-xlg-3 col-md-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <center class="m-t-30">
+                                <div class="col-md-10">
+                                    @if (Model.Images != null)
+                                    {
+                                        var base64 = Convert.ToBase64String(Model.Images);
+                                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                        <img src='@imgSrc' class="rounded-circle" width="150" onclick="" id='image-display' />
+                                        <div class="rounded-circle" width="150" id='image-holder' />
+                                    }
+                                    else
+                                    {
+                                        <img src="Assets/xtreme/assets/images/users/5.jpg"
+                                             class="rounded-circle" width="150" />
+                                    }
+                                    @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
+                                </div>
+                                <h4 class="card-title m-t-10">@(Model.LastName + " " + Model.FirstName)</h4>
+                                <h6 class="card-subtitle">Student</h6>
+                                @*<div class="row text-center justify-content-md-center">
+                                        <div class="col-4">
+                                            <a href="javascript:void(0)" class="link">
+                                                <i class="icon-people"></i>
+                                                <font class="font-medium">254</font>
+                                            </a>
+                                        </div>
+                                        <div class="col-4">
+                                            <a href="javascript:void(0)" class="link">
+                                                <i class="icon-picture"></i>
+                                                <font class="font-medium">54</font>
+                                            </a>
+                                        </div>
+                                    </div>*@
+                            </center>
                         </div>
-                        <h4 class="card-title m-t-10">@(Model.LastName + " " + Model.FirstName)</h4>
-                        <h6 class="card-subtitle">Student</h6>
-                        @*<div class="row text-center justify-content-md-center">
-                                <div class="col-4">
-                                    <a href="javascript:void(0)" class="link">
-                                        <i class="icon-people"></i>
-                                        <font class="font-medium">254</font>
-                                    </a>
+                        <div>
+                            <hr>
+                        </div>
+                        <div class="card-body">
+                            <small class="text-muted">Email address </small>
+                            <h6>@(Model.Gmail)</h6> <small class="text-muted p-t-30 db">Phone</small>
+                            <h6>@(Model.PhoneNumber)</h6> <small class="text-muted p-t-30 db">Address</small>
+                            <h6>@Model.PlaceOfBirth</h6>
+                            @*<div class="map-box">
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d470029.1604841957!2d72.29955005258641!3d23.019996818380896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C+Gujarat!5e0!3m2!1sen!2sin!4v1493204785508"
+                                            width="100%" height="150" frameborder="0" style="border:0"
+                                            allowfullscreen></iframe>
+                                </div>*@ <small class="text-muted p-t-30 db">Social Profile</small>
+                            <br />
+                            <button class="btn btn-circle btn-secondary"><i class="fab fa-facebook-f"></i></button>
+                            <button class="btn btn-circle btn-secondary"><i class="fab fa-twitter"></i></button>
+                            <button class="btn btn-circle btn-secondary"><i class="fab fa-youtube"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column -->
+                <!-- Column -->
+                <div class="col-lg-8 col-xlg-9 col-md-7">
+                    <div class="card">
+                        <div class="card-body">
+                            <form class="form-horizontal form-material">
+                                <div class="form-group">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(m => m.StudentId)
+                                    <label class="col-md-12">First Name</label>
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(m => m.FirstName, new { @type = "text", @placeholder = "Johnathan ", @class = "form-control form-control-line" })
+                                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <a href="javascript:void(0)" class="link">
-                                        <i class="icon-picture"></i>
-                                        <font class="font-medium">54</font>
-                                    </a>
+                                <div class="form-group">
+                                    <label class="col-md-12">Last Name</label>
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(m => m.LastName, new { @type = "text", @placeholder = "Doe", @class = "form-control form-control-line" })
+                                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
-                            </div>*@
-                    </center>
+                                <div class="form-group">
+                                    <label for="example-email" class="col-md-12">Email</label>
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(m => m.Gmail, new { @type = "email", @placeholder = "johnathan@admin.com", @class = "form-control form-control-line", @name = "example-email", @id = "example-email" })
+                                        @Html.ValidationMessageFor(m => m.Gmail, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                @*<div class="form-group">
+                                        <label class="col-md-12">Password</label>
+                                        <div class="col-md-12">
+                                            @Html.(ViewBag.us.Password,new {@type = "password",@value = "@ViewBag.us.Password"
+                                                   ,@class="form-control form-control-line"})
+                                            <input type="password" value="@ViewBag.us.Password"
+                                                   class="form-control form-control-line">
+                                        </div>
+                                    </div>*@
+                                <div class="form-group">
+                                    <label class="col-md-12">Phone No</label>
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(m => m.PhoneNumber, new { @type = "text", @placeholder = "123 456 7890", @class = "form-control form-control-line" })
+                                        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @if (Model.DateOfBirth != null)
+                                        {
+                                            @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control form-control-line datepicker", @Value = ((DateTime)Model.DateOfBirth).ToString("yyyy-MM-dd"), @type = "date" } })
+                                        }
+                                        else
+                                        {
+                                            @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control form-control-line datepicker", @type = "date" } })
+
+                                        }
+                                        @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Place of birth</label>
+                                    <div class="col-md-12">
+                                        @Html.TextAreaFor(m => m.PlaceOfBirth, new { @rows = "5", @class = "form-control form-control-line" })
+                                        @Html.ValidationMessageFor(m => m.PlaceOfBirth, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Image</label>
+                                    <div class="col-md-12">
+                                        <input type="file" id="fileUpload" name="image" />
+                                    </div>
+                                </div>
+
+                                @*<div class="form-group">
+                                        <label class="col-sm-12">Select Country</label>
+                                        <div class="col-sm-12">
+                                            <select class="form-control form-control-line">
+                                                <option>London</option>
+                                                <option>India</option>
+                                                <option>Usa</option>
+                                                <option>Canada</option>
+                                                <option>Thailand</option>
+                                            </select>
+                                        </div>
+                                    </div>*@
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button class="btn btn-success">Update Profile</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <hr>
-                </div>
-                <div class="card-body">
-                    <small class="text-muted">Email address </small>
-                    <h6>@(Model.Gmail)</h6> <small class="text-muted p-t-30 db">Phone</small>
-                    <h6>@(Model.PhoneNumber)</h6> <small class="text-muted p-t-30 db">Address</small>
-                    <h6>@Model.PlaceOfBirth</h6>
-                    @*<div class="map-box">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d470029.1604841957!2d72.29955005258641!3d23.019996818380896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C+Gujarat!5e0!3m2!1sen!2sin!4v1493204785508"
-                                    width="100%" height="150" frameborder="0" style="border:0"
-                                    allowfullscreen></iframe>
-                        </div>*@ <small class="text-muted p-t-30 db">Social Profile</small>
-                    <br />
-                    <button class="btn btn-circle btn-secondary"><i class="fab fa-facebook-f"></i></button>
-                    <button class="btn btn-circle btn-secondary"><i class="fab fa-twitter"></i></button>
-                    <button class="btn btn-circle btn-secondary"><i class="fab fa-youtube"></i></button>
-                </div>
+
+                <!-- Column -->
             </div>
-        </div>
-        <!-- Column -->
-        <!-- Column -->
-        <div class="col-lg-8 col-xlg-9 col-md-7">
-            <div class="card">
-                <div class="card-body">
-                    <form class="form-horizontal form-material">
-                        <div class="form-group">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            @Html.HiddenFor(m => m.StudentId)
-                            <label class="col-md-12">First Name</label>
-                            <div class="col-md-12">
-                                @Html.TextBoxFor(m => m.FirstName, new { @type = "text", @placeholder = "Johnathan ", @class = "form-control form-control-line" })
-                                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-12">Last Name</label>
-                            <div class="col-md-12">
-                                @Html.TextBoxFor(m => m.LastName, new { @type = "text", @placeholder = "Doe", @class = "form-control form-control-line" })
-                                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="example-email" class="col-md-12">Email</label>
-                            <div class="col-md-12">
-                                @Html.TextBoxFor(m => m.Gmail, new { @type = "email", @placeholder = "johnathan@admin.com", @class = "form-control form-control-line", @name = "example-email", @id = "example-email" })
-                                @Html.ValidationMessageFor(m => m.Gmail, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        @*<div class="form-group">
-                                <label class="col-md-12">Password</label>
-                                <div class="col-md-12">
-                                    @Html.(ViewBag.us.Password,new {@type = "password",@value = "@ViewBag.us.Password"
-                                           ,@class="form-control form-control-line"})
-                                    <input type="password" value="@ViewBag.us.Password"
-                                           class="form-control form-control-line">
-                                </div>
-                            </div>*@
-                        <div class="form-group">
-                            <label class="col-md-12">Phone No</label>
-                            <div class="col-md-12">
-                                @Html.TextBoxFor(m => m.PhoneNumber, new { @type = "text", @placeholder = "123 456 7890", @class = "form-control form-control-line" })
-                                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @if (Model.DateOfBirth != null)
-                                {
-                                    @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control form-control-line datepicker", @Value = ((DateTime)Model.DateOfBirth).ToString("yyyy-MM-dd"), @type = "date" } })
-                                }
-                                else
-                                {
-                                    @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control form-control-line datepicker", @type = "date" } })
 
-                                }
-                                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-12">Place of birth</label>
-                            <div class="col-md-12">
-                                @Html.TextAreaFor(m => m.PlaceOfBirth, new { @rows = "5", @class = "form-control form-control-line" })
-                                @Html.ValidationMessageFor(m => m.PlaceOfBirth, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-12">Image</label>
-                            <div class="col-md-12">
-                                <input type="file" id="fileUpload" name="image" />
-                            </div>
-                        </div>
-
-                        @*<div class="form-group">
-                                <label class="col-sm-12">Select Country</label>
-                                <div class="col-sm-12">
-                                    <select class="form-control form-control-line">
-                                        <option>London</option>
-                                        <option>India</option>
-                                        <option>Usa</option>
-                                        <option>Canada</option>
-                                        <option>Thailand</option>
-                                    </select>
-                                </div>
-                            </div>*@
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <button class="btn btn-success">Update Profile</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Column -->
+        }
     </div>
 </div>
-}

@@ -18,7 +18,14 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         // GET: Teacher
         public ActionResult Index(int page = 1, int pageSize = 10)
         {
-            var listTeacher = db.tb_Teacher.OrderByDescending(m => m.TeacherFirstName).ToPagedList(page, pageSize);
+            var admin = (tb_Teacher)Session["admin"];
+            var list = db.tb_Teacher.ToList();
+            if(list.Contains(admin))
+            {
+                //Remove mình khỏi list
+                list.Remove(admin);
+            }
+            var listTeacher = list.OrderByDescending(m => m.TeacherFirstName).ToPagedList(page, pageSize);
             return View(listTeacher);
         }
         public ActionResult EditTeacher(int id)
