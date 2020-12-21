@@ -4,8 +4,23 @@
     Layout = "~/Areas/Teacher/Views/Shared/_TeacherLayout.cshtml";
 }
 
+<div class="page-breadcrumb">
+    <div class="row align-items-center">
+        <div class="col-5">
+            <h3 class="page-title">My Course</h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","TcInfor")">Home</a></li>
+                        <li class="breadcrumb-item active" aria-page="current"><a href="@Url.Action("Index","TcCourse")">Course</a></li>
+
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container-fluid">
-    <h2>My Course</h2>
     <div class="row">
         @foreach (var item in Model)
         {

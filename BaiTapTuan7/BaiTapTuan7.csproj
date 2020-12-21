@@ -4792,6 +4792,7 @@
     <Compile Include="Areas\Teacher\Controllers\TcCourseController.cs" />
     <Compile Include="Areas\Teacher\Controllers\TcInforController.cs" />
     <Compile Include="Areas\Teacher\Model\AssignmentScore.cs" />
+    <Compile Include="Areas\Teacher\Model\CourseAssignment.cs" />
     <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\StudentController.cs" />

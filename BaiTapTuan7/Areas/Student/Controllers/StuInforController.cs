@@ -105,6 +105,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
         // News
         public ActionResult NewsDetails(int newsid)
         {
+            ViewBag.newsList = MyNews();
             var news = db.tb_News.Find(newsid);
             return View("NewsDetails", news);
         }

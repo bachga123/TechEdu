@@ -6,103 +6,102 @@
 
 <div class="container-fluid">
     <div id="content">
-            <h2>Dashboard</h2>
-            <div class="row">
-                <div class="col-xl-8 col-lg-7">
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h5 class="m-0 font-weight-bold text-primary">News</h5>
-                        </div>
-                        <!-- Card Body -->
-                        <div class="card-body">
-                            <table class="table">
-                                @foreach (var item in ViewBag.newsList)
-                                {
-                                    <tr>
-                                        <td>
-                                            <a href="@Url.Action("NewsDetails","StuInfor",new { newsid = item.News_Id})" class="fa-hacker-news">
-                                                @item.Title
-                                            </a>
-                                            <br />
-                                        </td>
-                                    </tr>
+        <h2>Dashboard</h2>
+        <div class="row">
+            <div class="col-xl-8 col-lg-7">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h5 class="m-0 font-weight-bold text-primary">News</h5>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <table class="table">
+                            @foreach (var item in ViewBag.newsList)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="@Url.Action("NewsDetails","StuInfor",new { newsid = item.News_Id})" class="fa-hacker-news">
+                                            @item.Title
+                                        </a>
+                                        <br />
+                                    </td>
+                                </tr>
 
-                                }
-                            </table>
-                        </div>
+                            }
+                        </table>
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-5">
-                    <div class="card shadow mb-4">
-                        <div class="card-header">
-                            <h5 class="card-title">Timeline</h5>
-                        </div>
-                        <div class="card-body">
-                            @if (ViewBag.myDeadlineList != null)
-                            {
-                                <div class="timeline">
-                                    <div class="card-body p-3">
-                                        <div class="tab-content">
-                                            <div class="tab-pane active show fade" data-limit="5">
-                                                <div class="border-bottom pb-2">
-                                                    @foreach (var item in ViewBag.myDeadlineList)
-                                                    {
-                                                        <h5 class="h6 mt-3 mb-0">@item.Deadline.ToString("dddd, MMMM dd", DateTimeFormatInfo.InvariantInfo)</h5>
-                                                        <div class="pl-0 list-group list-group-flush">
-                                                            <div class="list-group-item flex-column py-2 pl-0 pr-0 border-0">
-                                                                <div class="d-flex">
-                                                                    @*<div class="icon-size-4 d-flex align-self-top">
+            </div>
+            <div class="col-xl-4 col-lg-5">
+                <div class="card shadow mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title">Timeline</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (ViewBag.myDeadlineList != null)
+                        {
+                            <div class="timeline">
+                                <div class="card-body p-3">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active show fade" data-limit="5">
+                                            <div class="border-bottom pb-2">
+                                                @foreach (var item in ViewBag.myDeadlineList)
+                                                {
+                                                    <h5 class="h6 mt-3 mb-0">@item.Deadline.ToString("dddd, MMMM dd", DateTimeFormatInfo.InvariantInfo)</h5>
+                                                    <div class="pl-0 list-group list-group-flush">
+                                                        <div class="list-group-item flex-column py-2 pl-0 pr-0 border-0">
+                                                            <div class="d-flex">
+                                                                @*<div class="icon-size-4 d-flex align-self-top">
                                                                         <img class="icon" src="https://utexlms.hcmute.edu.vn/theme/image.php/maker/assign/1607359133/icon" alt="Activity event" title="Activity event">
                                                                     </div>*@
-                                                                    <a href="@Url.Action("AssignmentDetails","StuCourse",new { assid= item.Assignment_Id})" title="@item.Details">
-                                                                        <h6 class="event-name text-truncate mb-0">"@item.Details" is due</h6>
-                                                                    </a>
-                                                                </div>
+                                                                <a href="@Url.Action("AssignmentDetails","StuCourse",new { assid= item.Assignment_Id})" title="@item.Details">
+                                                                    <h6 class="event-name text-truncate mb-0">"@item.Details" is due</h6>
+                                                                </a>
                                                             </div>
                                                         </div>
-                                                        <hr />
-                                                    }
-                                                </div>
+                                                    </div>
+                                                    <hr />
+                                                }
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            }
-                        </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card shadow mb-4">
-                        <div class="card-body">
-                            <div class="d-md-flex align-items-center">
-                                <div>
-                                    <h4 class="card-title">My Course</h4>
-                                    <h5 class="card-subtitle">My Course</h5>
-                                </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <div class="d-md-flex align-items-center">
+                            <div>
+                                <h4 class="card-title">My Course</h4>
+                                <h5 class="card-subtitle">My Course</h5>
                             </div>
-                            <hr />
-                            <div class="container-fluid p-0">
-                                <div class="card-deck">
-                                    <div class="row">
-                                        @foreach (var item in ViewBag.myCourseList)
-                                        {
-                                            <div class="col-md-4">
-                                                <div class="card border shadow mb-4 fa-dashboard">
-                                                    <a href="@Url.Action("CourseDetails","StuCourse",new { couid = item.Course_Id})">
-                                                        <img class="card-img-top" alt="100%x200" src="~/Assets/Admin/img/undraw_environmental_study_skau.svg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
-                                                    </a>
-                                                    <div class="card-body">
-                                                        <a class="card-title stretched-link" href="@Url.Action("CourseDetails","StuCourse",new { couid = item.Course_Id})">@item.Course_Name</a>
-                                                        <p class="card-text">@item.Decription</p>
-                                                        <p class="card-text"><small class="text-muted">@item.Details</small></p>
-                                                    </div>
+                        </div>
+                        <hr />
+                        <div class="container-fluid p-0">
+                            <div class="card-deck">
+                                <div class="row">
+                                    @foreach (var item in ViewBag.myCourseList)
+                                    {
+                                        <div class="col-md-4">
+                                            <div class="card border shadow mb-4 fa-dashboard">
+                                                <a href="@Url.Action("CourseDetails","StuCourse",new { couid = item.Course_Id})">
+                                                    <img class="card-img-top" alt="100%x200" src="~/Assets/Admin/img/undraw_environmental_study_skau.svg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                                                </a>
+                                                <div class="card-body">
+                                                    <a class="card-title stretched-link" href="@Url.Action("CourseDetails","StuCourse",new { couid = item.Course_Id})">@item.Course_Name</a>
+                                                    <p class="card-text">@item.Decription</p>
+                                                    <p class="card-text"><small class="text-muted">@item.Details</small></p>
                                                 </div>
                                             </div>
-                                        }
-                                    </div>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -111,3 +110,4 @@
             </div>
         </div>
     </div>
+</div>

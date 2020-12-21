@@ -30,6 +30,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         // Phần thông báo của admin
         public ActionResult NewsDetails(int newsid)
         {
+            ViewBag.newsList = MyNews();
             var news = db.tb_News.Find(newsid);
             return View("NewsDetails",news);
         }

@@ -3,72 +3,87 @@
     ViewBag.Title = "CourseDetails";
     Layout = "~/Areas/Teacher/Views/Shared/_TeacherLayout.cshtml";
 }
-
-
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link active" href="@Url.Action("CourseDetails","TcCourse",new { couid = Model.Course_Id} )">Details</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="@Url.Action("EditCourseDetails","TcCourse")">Edit Course</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="@Url.Action("StudentOnCourse","TcCourse")" aria-selected="false">Student</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="@Url.Action("Index","TcAssignment")">Assignment</a>
-    </li>
-</ul>
-<div class="card-body">
-    <div class="col-12">
-        <h2>@Model.Course_Name</h2>
-        <h3>Teacher: @(ViewBag.Teacher.TeacherFirstName + " " + ViewBag.Teacher.TeacherLastName)</h3>
-        <div class="card">
-            <div class="card-body">
-                @Html.DisplayFor(m => m.Decription)
+<div class="page-breadcrumb">
+    <div class="row align-items-center">
+        <div class="col-5">
+            <h3 class="page-title">My Course</h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","TcInfor")">Home</a></li>
+                        <li class="breadcrumb-item active" aria-page="current"><a href="@Url.Action("Index","TcCourse")">Course</a></li>
+                        <li class="breadcrumb-item active" aria-page="current"><a href="@Url.Action("CourseDetails","TcCourse",new { couid= Model.Course_Id})">@Model.Course_Name</a></li>
+                    </ol>
+                </nav>
             </div>
         </div>
-        @foreach (var item in ViewBag.contentList)
-        {
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-sm-11">
-                            <h3>
-                                @item.Title
-                            </h3>
-                        </div>
-                        <div class="col-sm-1">
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-cog" width="16" height="16"></i>
+    </div>
+</div>
+<div class="container-fluid">
+
+
+    <h2>@Model.Course_Name</h2>
+    <h3>Teacher: @(ViewBag.Teacher.TeacherFirstName + " " + ViewBag.Teacher.TeacherLastName)</h3>
+    <div class="card">
+        <div class="card-body">
+            @Html.DisplayFor(m => m.Decription)
+        </div>
+    </div>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="@Url.Action("CourseDetails","TcCourse",new { couid = Model.Course_Id} )">Details</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("EditCourseDetails","TcCourse")">Edit Course</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("StudentOnCourse","TcCourse")" aria-selected="false">Student</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Index","TcAssignment")">Assignment</a>
+        </li>
+    </ul>
+
+    @foreach (var item in ViewBag.contentList)
+    {
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-11">
+                        <h3>
+                            @item.Title
+                        </h3>
+                    </div>
+                    <div class="col-sm-1">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-cog" width="16" height="16"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <button class="dropdown-item" type="button" data-toggle="ajax-modal"
+                                        data-target="#editContent" data-url="@Url.Action("EditContent","TcCourse",new { conid = item.Content_Id})">
+                                    Edit
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <button class="dropdown-item" type="button" data-toggle="ajax-modal"
-                                            data-target="#editContent" data-url="@Url.Action("EditContent","TcCourse",new { conid = item.Content_Id})">
-                                        Edit
-                                    </button>
-                                    @Html.ActionLink("Delete", "DeleteContent", "TcCourse", new { conid = item.Content_Id }, new { onclick = "return confirm('Are you sure to remove this content?');", @class = "dropdown-item" })
-                                </div>
+                                @Html.ActionLink("Delete", "DeleteContent", "TcCourse", new { conid = item.Content_Id }, new { onclick = "return confirm('Are you sure to remove this content?');", @class = "dropdown-item" })
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <h4>@item.Description</h4>
-                        <!--file show để download-->
-                        @if (item.File != null)
-                        {
-                            <a href="~/@item.File" download>@item.File.Substring(11)</a>
-                        }
-                        else
-                        {
-                            <p>null</p>
-                        }
-                </div>
             </div>
-        }
-    </div>
+            <div class="card-body">
+                <h4>@item.Description</h4>
+                <!--file show để download-->
+                @if (item.File != null)
+                {
+                    <a href="~/@item.File" download>@item.File.Substring(11)</a>
+                }
+                else
+                {
+                    <p>null</p>
+                }
+            </div>
+        </div>
+    }
     <button type="button" class="btn btn-primary" data-toggle="content"
             data-target="#addContent" data-url="@Url.Action("AddContent","TcCourse")">
         Add Content

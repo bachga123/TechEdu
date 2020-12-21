@@ -30,6 +30,8 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
         }
         public ActionResult EditCourseDetails()
         {
+            tb_Teacher tc = (tb_Teacher)Session["teacher"];
+            ViewBag.Teacher = tc;
             int couid = Convert.ToInt32(Session["couid"]);
             tb_Course cou = db.tb_Course.Find(couid);
             return View("EditCourseDetails",cou);
@@ -53,8 +55,10 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
         }
         public ActionResult StudentOnCourse(int page = 1,int pageSize =2)
         {
+            tb_Teacher tc = (tb_Teacher)Session["teacher"];
+            ViewBag.Teacher = tc;
             int couid = Convert.ToInt32(Session["couid"]);
-            ViewBag.couid = couid;
+            ViewBag.cou = db.tb_Course.Find(couid);
             var stuInCourse = db.tb_StudentCourse.Where(m => m.CourseId == couid);
             List<tb_Student> stuList = new List<tb_Student>();
             foreach(var item in stuInCourse)

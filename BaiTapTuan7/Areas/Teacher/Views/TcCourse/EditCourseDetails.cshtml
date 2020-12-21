@@ -4,8 +4,30 @@
     Layout = "~/Areas/Teacher/Views/Shared/_TeacherLayout.cshtml";
 }
 
-
+<div class="page-breadcrumb">
+    <div class="row align-items-center">
+        <div class="col-5">
+            <h3 class="page-title">My Course</h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","TcInfor")">Home</a></li>
+                        <li class="breadcrumb-item active" aria-page="current"><a href="@Url.Action("Index","TcCourse")">Course</a></li>
+                        <li class="breadcrumb-item active" aria-page="current"><a href="@Url.Action("CourseDetails","TcCourse",new { couid= Model.Course_Id})">@Model.Course_Name</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container-fluid">
+    <h2>@Model.Course_Name</h2>
+    <h3>Teacher: @(ViewBag.Teacher.TeacherFirstName + " " + ViewBag.Teacher.TeacherLastName)</h3>
+    <div class="card">
+        <div class="card-body">
+            @Html.DisplayFor(m => m.Decription)
+        </div>
+    </div>
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link" href="@Url.Action("CourseDetails","TcCourse",new { couid = Model.Course_Id} )">Details</a>
@@ -20,42 +42,46 @@
             <a class="nav-link" href="@Url.Action("Index","TcAssignment")">Assignment</a>
         </li>
     </ul>
-
-    @using (Html.BeginForm("EditCourseDetails", "TcCourse", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="card-body">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.Course_Id)
-
-            <div class="form-group">
-                <h4>Course Name</h4>
-                <div class="col-md-10">
-                    @Html.DisplayFor(model => model.Course_Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Course_Name, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                <h4>Description</h4>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Decription, new { htmlAttributes = new { @class = "form-control", @row = '5' } })
-                    @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                <h4>Details</h4>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-header">
+            <h3>Edit Course</h3>
         </div>
-    }
+        @using (Html.BeginForm("EditCourseDetails", "TcCourse", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Course_Id)
+
+                <div class="form-group">
+                    <h4>Course Name</h4>
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.Course_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Course_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h4>Description</h4>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Decription, new { htmlAttributes = new { @class = "form-control", @row = '5' } })
+                        @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h4>Details</h4>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>

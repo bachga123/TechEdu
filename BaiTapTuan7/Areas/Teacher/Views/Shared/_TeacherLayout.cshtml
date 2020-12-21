@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using BaiTapTuan7.Models
+<!DOCTYPE html>
 <html dir="ltr" lang="en">
 
 <head>
@@ -53,16 +54,14 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="index.html">
-
+                    <a class="navbar-brand" href="@Url.Action("Index","TcInfor")">
+                        Tech Edu
                     </a>
                     <!-- ============================================================== -->
                     <!-- End Logo -->
                     <!-- ============================================================== -->
                     <!-- This is for the sidebar toggle which is visible on mobile only -->
-                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
-                        <i class="ti-menu ti-close"></i>
-                    </a>
+                    
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -75,13 +74,7 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item search-box">
-                            <a class="nav-link waves-effect waves-dark"
-                               href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search position-absolute">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="ti-close"></i></a>
-                            </form>
-                        </li>
+                        
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
@@ -91,26 +84,37 @@
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
+                            <span class="mr-2 d-none d-lg-inline text-white">
+                                @(((tb_Teacher)Session["teacher"]).TeacherFirstName + " " + ((tb_Teacher)Session["teacher"]).TeacherLastName)
+                            </span>
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="Assets/xtreme/assets/images/users/1.jpg" alt="user" class="rounded-circle"
-                                     width="31">
+                                @if (((tb_Teacher)Session["teacher"]).Images != null)
+                                {
+                                    var base64 = Convert.ToBase64String(((tb_Teacher)Session["teacher"]).Images);
+                                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                    <img src="@imgSrc" alt="user" class="rounded-circle"
+                                         width="31">
+
+                                }
+                                else
+                                {
+                                    <img src="Assets/xtreme/assets/images/users/1.jpg" alt="user" class="rounded-circle"
+                                         width="31">
+                                }
                             </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
                                 <a class="dropdown-item" href="@Url.Action("TeacherProfile","TcInfor")">
                                     <i class="ti-user m-r-5 m-l-5"></i>
                                     My Profile
                                 </a>
-                                <a class="dropdown-item" href="javascript:void(0)">
+                                <a class="dropdown-item" href="@Url.Action("AccountSetting","TcInfor")">
                                     <i class="ti-wallet m-r-5 m-l-5"></i>
-                                    My Balance
+                                    Account Setting
                                 </a>
-                                <a class="dropdown-item" href="javascript:void(0)">
-                                    <i class="ti-email m-r-5 m-l-5"></i>
-                                    Inbox
-                                </a>
+
                                 <a class="dropdown-item" href="@Url.Action("Logout","TcInfor")">
-                                    <i class="ti-wallet m-r-5 m-l-5"></i>
+                                    <i class="ti-power-off m-r-5 m-l-5"></i>
                                     Logout
                                 </a>
                             </div>
@@ -139,26 +143,31 @@
                             <!-- User Profile-->
                             <div class="user-profile d-flex no-block dropdown m-t-20">
                                 <div class="user-pic">
-                                    <img src="Assets/xtreme/assets/images/users/1.jpg" alt="users"
-                                         class="rounded-circle" width="40" />
+                                    @if (((tb_Teacher)Session["teacher"]).Images != null)
+                                    {
+                                        var base64 = Convert.ToBase64String(((tb_Teacher)Session["teacher"]).Images);
+                                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                        <img src="@imgSrc" alt="user" class="rounded-circle"
+                                             width="40">
+
+                                    }
+                                    else
+                                    {
+                                        <img src="Assets/xtreme/assets/images/users/1.jpg" alt="user" class="rounded-circle"
+                                             width="40">
+                                    }
                                 </div>
                                 <div class="user-content hide-menu m-l-10">
                                     <a href="javascript:void(0)" class="" id="Userdd" role="button"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <h5 class="m-b-0 user-name font-medium">
-                                            @Session["userName"] <i class="fa fa-angle-down"></i>
+                                            @(((tb_Teacher)Session["teacher"]).TeacherFirstName + " " + ((tb_Teacher)Session["teacher"]).TeacherLastName) <i class="fa fa-angle-down"></i>
                                         </h5>
-                                        <span class="op-5 user-email">varun@gmail.com</span>
+                                        <span class="op-5 user-email">@(((tb_Teacher)Session["teacher"]).Gmail)</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Userdd">
                                         <a class="dropdown-item" href="@Url.Action("TeacherProfile","TcInfor")">
                                             <i class="ti-user m-r-5 m-l-5"></i> My Profile
-                                        </a>
-                                        <a class="dropdown-item" href="javascript:void(0)">
-                                            <i class="ti-wallet m-r-5 m-l-5"></i> My Balance
-                                        </a>
-                                        <a class="dropdown-item" href="javascript:void(0)">
-                                            <i class="ti-email m-r-5 m-l-5"></i> Inbox
                                         </a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="@Url.Action("AccountSetting","TcInfor")">
@@ -206,41 +215,14 @@
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
         <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <div class="page-breadcrumb">
-                <div class="row align-items-center">
-                    <div class="col-5">
-                        <h4 class="page-title">Dashboard</h4>
-                        <div class="d-flex align-items-center">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
+           
                 @RenderBody()
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
+
+           
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by Xtreme Admin. Designed and Developed by <a href="https://www.wrappixel.com">WrapPixel</a>.
+                All Rights Reserved by Tech Edu.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

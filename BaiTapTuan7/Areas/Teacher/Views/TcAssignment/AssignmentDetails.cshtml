@@ -20,54 +20,67 @@
             <a class="nav-link active" href="@Url.Action("Index","TcAssignment")">Assignment</a>
         </li>
     </ul>
-    <h4>tb_Assignment</h4>
-    <hr />
-    @Html.ActionLink("Edit", "EditAssignment", new { assid = Model.Assignment_Id }, new { @class = "btn btn-primary" })
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-10">
+                    <h3 class="m-0 font-weight-bold text-capitalize">Assignment Details</h3>
+                </div>
+                <div class="col-md-2">
+                    @Html.ActionLink("Edit", "EditAssignment", new { assid = Model.Assignment_Id }, new { @class = "btn btn-primary" })
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Deadline)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.CreatedDate, new { @class = "control-label col-md-2" })
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Deadline)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Deadline)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.File)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Deadline, new { @class = "control-label col-md-2" })
+                </dd>
 
-        <dd>
-            @if (Model.File != null)
-            {
-                @Model.File.Substring(11)
-            }
-            else
-            {
-                <p>null</p>
-            }
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.File)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Details)
-        </dt>
+                <dd>
+                    @if (Model.File != null)
+                    {
+                        <div class="control-label col-md-2">
+                            @Model.File.Substring(11)
+                        </div>
+                    }
+                    else
+                    {
+                        <p>null</p>
+                    }
+                </dd>
 
-        <dd>
-            @Html.DisplayTextFor(model => model.Details)
-        </dd>
-    </dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Details)
+                </dt>
 
+                <dd>
+                    @Html.DisplayTextFor(model => model.Details)
+                </dd>
+            </dl>
+        </div>
+    </div>
     <div class="table table-hover">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Student Answer</h6>
+                <h3 class="m-0 font-weight-bold text-primary">Student Answer</h3>
             </div>
             <div class="card-body">
                 <div id="PlaceHolderHere"></div>
@@ -87,37 +100,37 @@
                                 <tbody>
                                     @foreach (var item in ViewBag.studentAnswerList)
                                     {
-                                    <tr>
-                                        <td>@item.StudentId</td>
-                                        <td>@item.StudentName</td>
-                                        <td>
-                                            <!--file show để download-->
-                                            @if (Model.File != null)
+                                        <tr>
+                                            <td>@item.StudentId</td>
+                                            <td>@item.StudentName</td>
+                                            <td>
+                                                <!--file show để download-->
+                                                @if (Model.File != null)
+                                                {
+                                                    <a href="~/@Model.File" download>@Model.File.Substring(11)</a>
+                                                }
+                                                else
+                                                {
+                                                    <p>null</p>
+                                                }
+                                            </td>
+                                            <td>@item.Answer</td>
+                                            @if (item.Score == -1)
                                             {
-                                                <a href="~/@Model.File" download>@Model.File.Substring(11)</a>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary" data-toggle="ajax-modal"
+                                                            data-target="#addScoreToStudent" data-url="@Url.Action("AddScoreToStudent","TcAssignment",new { stuid = item.StudentId,assid= Model.Assignment_Id})">
+                                                        Add Score
+                                                    </button>
+                                                </td>
                                             }
                                             else
                                             {
-                                                <p>null</p>
+                                                <td>
+                                                    @item.Score
+                                                </td>
                                             }
-                                        </td>
-                                        <td>@item.Answer</td>
-                                        @if (item.Score == -1)
-                                        {
-                                            <td>
-                                                <button type="button" class="btn btn-primary" data-toggle="ajax-modal"
-                                                        data-target="#addScoreToStudent" data-url="@Url.Action("AddScoreToStudent","TcAssignment",new { stuid = item.StudentId,assid= Model.Assignment_Id})">
-                                                    Add Score
-                                                </button>
-                                            </td>
-                                        }
-                                        else
-                                        {
-                                            <td>
-                                                @item.Score
-                                            </td>
-                                        }
-                                    </tr>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>

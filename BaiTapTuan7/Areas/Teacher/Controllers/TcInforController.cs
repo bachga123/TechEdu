@@ -8,6 +8,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using BaiTapTuan7.Models;
+using BaiTapTuan7.Areas.Teacher.Model;
 namespace BaiTapTuan7.Areas.Teacher.Controllers
 {
     [AuthorizeController]
@@ -18,6 +19,8 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
         public ActionResult Index()
         {
             ViewBag.newsList = MyNews();
+            ViewBag.courseAssignmentList = CourseAssignmentActiveList();
+            ViewBag.myCourseList = MyCourseList();
             return View();
         }
         public ActionResult TeacherProfile()
@@ -97,9 +100,45 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
         }
         public ActionResult NewsDetails(int newsid)
         {
+            ViewBag.newsList = MyNews();
             var news = db.tb_News.Find(newsid);
             return View("NewsDetails", news);
         }
+
+        public List<CourseAssignment> CourseAssignmentActiveList()
+        {
+            List<CourseAssignment> caList = new List<CourseAssignment>();
+            var couList = MyCourseList();
+            foreach(var item in couList)
+            {
+                CourseAssignment ca = new CourseAssignment();
+                ca.CourseId = item.Course_Id;
+                ca.CourseName = item.Course_Name;
+                ca.AssignmentList = AssignmentList(item.Course_Id);
+                caList.Add(ca);
+            }
+            return caList;
+        }
+        public List<tb_Assignment> AssignmentList(int couid)
+        {
+            var assList = db.tb_Assignment.Where(m => m.Course_Id == couid && m.Status == 1).ToList();
+            return assList;
+        }
+
+        public List<tb_Course> MyCourseList()
+        {
+            tb_Teacher tc = (tb_Teacher)Session["teacher"];
+            var data = db.tb_Course.Where(m => m.TeacherId == tc.TeacherId);
+            List<tb_Course> myCourseList = new List<tb_Course>();
+            foreach (var item in data)
+            {
+                var cou = db.tb_Course.FirstOrDefault(m => m.Course_Id == item.Course_Id && m.TeacherId == tc.TeacherId);
+                if (myCourseList.Contains(cou) == false)
+                    myCourseList.Add(cou);
+            }
+            return myCourseList;
+        }
+
         public List<tb_News> MyNews()
         {
             var newsLists = db.tb_News.Where(m => m.To != "2").ToList();

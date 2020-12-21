@@ -1,26 +1,74 @@
-﻿
+﻿@model BaiTapTuan7.Models.tb_News
 @{
     ViewBag.Title = "NewsDetails";
     Layout = "~/Areas/Teacher/Views/Shared/_TeacherLayout.cshtml";
 }
 
-<div id="content-wrapper" class="d-flex flex-column">
+<div class="page-breadcrumb">
+    <div class="row align-items-center">
+        <div class="col-5">
+            <h3 class="page-title">News</h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","TcInfor")">Home</a></li>
+                        <li class="breadcrumb-item active" aria-page="current"><a href="@Url.Action("NewsDetails","TcInfor",new { newsid = Model.News_Id})">@Model.Title</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="content-wrapper" class="container-fluid">
     <div id="content">
-        <div class="col-xl-8 col-lg-7">
-            <div class="card shadow mb-4">
-                <div class="inputdate">
-                    [Date: @Model.CreatedDate]
+        <div class="row">
+            <div class="col-xl-8 col-lg-7">
+                <div class="card shadow mb-4">
+
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h5 class="m-0 font-weight-bold text-primary">@Model.Title</h5>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="inputdate">
+                            <div class="small text">
+                                [Date: @Model.CreatedDate]
+                            </div>
+                        </div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td height="22" align="left">
+                                        <span class="content"> @Html.Raw(Model.Details)</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td height="22" align="left">
-                                    <span class="content"> @Html.Raw(Model.Details)</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+            </div>
+            <div class="col-xl-4 col-lg-5">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h5 class="m-0 font-weight-bold text-primary">News</h5>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <table class="table">
+                            @foreach (var item in ViewBag.newsList)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="@Url.Action("NewsDetails","TcInfor",new { newsid = item.News_Id})" class="fa-hacker-news">
+                                            @item.Title
+                                        </a>
+                                        <br />
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -17,8 +17,9 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
         // GET: Teacher/TcAssignment
         public ActionResult Index()
         {
+            ViewBag.Teacher = (tb_Teacher)Session["teacher"];
             int couid = Convert.ToInt32(Session["couid"]);
-            ViewBag.couid = couid;
+            ViewBag.cou = db.tb_Course.Find(couid);
             List<tb_Assignment> assList = db.tb_Assignment.Where(m => m.Course_Id == couid).ToList();
             foreach (var item in assList)
             {
@@ -31,9 +32,10 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
         }
         public ActionResult CreateAssignment(int couid)
         {
+            ViewBag.Teacher = (tb_Teacher)Session["teacher"];
+            ViewBag.cou = db.tb_Course.Find(couid);
             tb_Assignment ass = new tb_Assignment();
             ass.Course_Id = couid;
-            ViewBag.couid = couid;
             ass.CreatedDate = DateTime.Now;
             return View("CreateAssignment", ass);
         }

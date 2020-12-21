@@ -5,44 +5,79 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div id="content-wrapper" class="d-flex flex-column">
+<div class="container-fluid">
     <div id="content">
-
-        <div class="col-xl-8 col-lg-7">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">@Model.Title</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                             aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="@Url.Action("EditNews","Admin",new { newsid = Model.News_Id})">Edit</a>
-                            <a class="dropdown-item" href="@Url.Action("DeleteNews","Admin",new { newsid = Model.News_Id})" onclick = "return confirm('Are you sure to delete this user?');" >Delete</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+        <div class="row">
+            <div class="col-xl-8 col-lg-7">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">@Model.Title</h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                 aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-header">Dropdown Header:</div>
+                                <a class="dropdown-item" href="@Url.Action("EditNews","Admin",new { newsid = Model.News_Id})">Edit</a>
+                                <a class="dropdown-item" href="@Url.Action("DeleteNews","Admin",new { newsid = Model.News_Id})" onclick="return confirm('Are you sure to delete this user?');">Delete</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
                         </div>
                     </div>
+                    <div class="card-body">
+                        <div class="inputdate">
+                            <div class="small text">
+                                [Date: @Model.CreatedDate]
+                            </div>
+                        </div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td height="22" align="left">
+                                        <span class="content"> @Html.Raw(Model.Details)</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="inputdate">
-                    [Date: @Model.CreatedDate]
-                </div>
-                <div class="card-body">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td height="22" align="left">
-                                    <span class="content"> @Html.Raw(Model.Details)</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+            </div>
+            <div class="col-xl-4 col-lg-5">
+                <div class="card shadow mb-4">
+
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h5 class="m-0 font-weight-bold text-primary">News</h5>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                 aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-header">Dropdown Header:</div>
+                                <a class="dropdown-item" href="@Url.Action("AddNews","Admin")">Add News</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            @foreach (var item in ViewBag.newsList)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="@Url.Action("NewsDetails","Admin",new { newsid = item.News_Id})">
+                                            @item.Title
+                                        </a>
+                                        <br />
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
-</div>
