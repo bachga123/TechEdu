@@ -22,7 +22,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
 
         public ActionResult CreateCourse()
         {
-            var list = new SelectList(db.tb_Teacher, "TeacherId", "TeacherLastName");
+            var list = new SelectList (TeacherSelectList(),"value","text");
             ViewBag.teacherList = list;
             return View();
         }
@@ -34,7 +34,12 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 var check = db.tb_Course.FirstOrDefault(m => m.Course_Name == cou.Course_Name);
                 if (check == null)
                 {
-                    db.Entry(cou).State = EntityState.Added;
+                    var newCou = new tb_Course();
+                    newCou.TeacherId = cou.TeacherId;
+                    newCou.Course_Name = cou.Course_Name;
+                    newCou.Decription = cou.Decription;
+                    newCou.Details = cou.Details;
+                    db.Entry(newCou).State = EntityState.Added;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -193,6 +198,33 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Details", new { id = couid });
             }
+        }
+        public List<SelectListItem> TeacherSelectList()
+        {
+            List<SelectListItem> tsl = new List<SelectListItem>();
+            var tcList = ListOfTeacher();
+            foreach(var item in tcList)
+            {
+                SelectListItem tc = new SelectListItem();
+                tc.Value = item.TeacherId.ToString();
+                tc.Text = item.TeacherFirstName + " " + item.TeacherLastName;
+                tsl.Add(tc);
+            }
+            return tsl;
+        }
+        public List<tb_Teacher> ListOfTeacher()
+        {
+            List<tb_Teacher> tcList = db.tb_Teacher.ToList();
+            var adminList = db.tb_Users.Where(m => m.Usertype == "admin").ToList();
+            foreach (var item in adminList)
+            {
+                tb_Teacher tc = db.tb_Teacher.FirstOrDefault(m => m.UserId == item.Id);
+                if (tcList.Contains(tc))
+                {
+                    tcList.Remove(tc);
+                }
+            }
+            return tcList;
         }
     }
 }

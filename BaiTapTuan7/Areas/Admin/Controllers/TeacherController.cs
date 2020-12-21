@@ -19,12 +19,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         public ActionResult Index(int page = 1, int pageSize = 10)
         {
             var admin = (tb_Teacher)Session["admin"];
-            var list = db.tb_Teacher.ToList();
-            if(list.Contains(admin))
-            {
-                //Remove mình khỏi list
-                list.Remove(admin);
-            }
+            var list = ListOfAdminTeacher();
             var listTeacher = list.OrderByDescending(m => m.TeacherFirstName).ToPagedList(page, pageSize);
             return View(listTeacher);
         }
@@ -93,6 +88,21 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+        }
+
+        public List<tb_Teacher> ListOfAdminTeacher()
+        {
+            List<tb_Teacher> tcList = db.tb_Teacher.ToList();
+            var adminList = db.tb_Users.Where(m => m.Usertype == "admin").ToList();
+            foreach(var item in adminList)
+            {
+                tb_Teacher tc = db.tb_Teacher.FirstOrDefault(m => m.UserId == item.Id);
+                if(tcList.Contains(tc))
+                {
+                    tcList.Remove(tc);
+                }
+            }
+            return tcList;
         }
     }
 }
