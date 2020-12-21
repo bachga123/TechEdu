@@ -2053,6 +2053,7 @@
     <Content Include="Assets\images\g7.jpg" />
     <Content Include="Assets\images\g8.jpg" />
     <Content Include="Assets\images\g9.jpg" />
+    <Content Include="Assets\images\usericon.png" />
     <Content Include="Assets\images\t1.jpg" />
     <Content Include="Assets\images\t2.jpg" />
     <Content Include="Assets\images\t3.jpg" />

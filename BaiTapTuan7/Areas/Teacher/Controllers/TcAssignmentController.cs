@@ -88,18 +88,10 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
 
         public ActionResult AssignmentDetails(int assid)
         {
-            //List<tb_Student> StudentInAssignment = new List<tb_Student>();
-            //var stuAssignList = db.tb_Student_Assignment.Where(m => m.Assignment_Id == assid).ToPagedList(1,10);
-            //foreach(var item in stuAssignList)
-            //{
-            //    var stu = db.tb_Student.Find(item.Student_Id);
-            //    if (StudentInAssignment.Contains(stu) == false)
-            //        StudentInAssignment.Add(stu);
-            //}
-            //ViewBag.StudentInAssignment = StudentInAssignment;
             ViewBag.studentAnswerList = CreateAssignmentScore(assid);
             tb_Assignment ass = db.tb_Assignment.Find(assid);
-            ViewBag.couid = ass.Course_Id;
+            ViewBag.Teacher = (tb_Teacher)Session["teacher"];
+            ViewBag.cou = db.tb_Course.Find(ass.Course_Id);
             return View("AssignmentDetails", ass);
         }
         public ActionResult EditAssignment(int assid)

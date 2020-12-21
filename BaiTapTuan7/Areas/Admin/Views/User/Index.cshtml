@@ -59,13 +59,13 @@
                                                                 {
                                                                     @Html.ActionLink("Unactive", "UnactiveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to unactive this user?');", @class = "btn btn-danger" })
                                                                 }
+                                                                <a>
+                                                                    @Html.ActionLink("Remove", "RemoveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to delete this user?');", @class = "btn btn-danger" })
+                                                                </a>
                                                             }
                                                         </a>
 
-                                                        <a href="@Url.Action("EditUser","User",new { Id = item.Id })" class="btn btn-success"> Edit User</a>
-                                                        <a>
-                                                            @Html.ActionLink("Remove", "RemoveUser", new { Id = item.Id }, new { onclick = "return confirm('Are you sure to delete this user?');", @class = "btn btn-danger" })
-                                                        </a>
+                                                        @*<a href="@Url.Action("EditUser","User",new { Id = item.Id })" class="btn btn-success"> Edit User</a>*@
                                                     </td>
                                                 </tr>
                                             }
