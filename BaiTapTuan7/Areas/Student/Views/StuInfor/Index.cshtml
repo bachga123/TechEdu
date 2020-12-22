@@ -1,4 +1,5 @@
 ﻿@using System.Globalization
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Student/Views/Shared/_StudentLayout.cshtml";
@@ -17,17 +18,33 @@
                     <!-- Card Body -->
                     <div class="card-body">
                         <table class="table">
-                            @foreach (var item in ViewBag.newsList)
+                            @if (ViewBag.newsList.Count < 5)
                             {
-                                <tr>
-                                    <td>
-                                        <a href="@Url.Action("NewsDetails","StuInfor",new { newsid = item.News_Id})" class="fa-hacker-news">
-                                            @item.Title
-                                        </a>
-                                        <br />
-                                    </td>
-                                </tr>
-
+                                for (int i = 0; i < ViewBag.newsList.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.Action("NewsDetails", "StuInfor", new { newsid = ViewBag.newsList[i].News_Id })" >
+                                                @ViewBag.newsList[i].Title
+                                            </a>
+                                            <br />
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                for (int i = 0; i < 5; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.Action("NewsDetails", "StuInfor", new { newsid = ViewBag.newsList[i].News_Id })" class="fa-hacker-news">
+                                                @ViewBag.newsList[i].Title
+                                            </a>
+                                            <br />
+                                        </td>
+                                    </tr>
+                                }
                             }
                         </table>
                     </div>

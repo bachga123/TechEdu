@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="TechEduModel.tb_Users" Width="1.5" PointX="0.625" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="TechEduModel.tb_UserType" Width="1.5" PointX="4.5" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TechEduModel.tb_Course" Width="1.5" PointX="4.5" PointY="6.75" />
-        <EntityTypeShape EntityType="TechEduModel.tb_Files" Width="1.5" PointX="2.875" PointY="0.75" />
         <EntityTypeShape EntityType="TechEduModel.tb_Assignment" Width="1.5" PointX="6.375" PointY="0.75" />
         <EntityTypeShape EntityType="TechEduModel.tb_Student_Assignment" Width="1.5" PointX="6.375" PointY="3.625" />
         <EntityTypeShape EntityType="TechEduModel.tb_Roles" Width="1.5" PointX="2.625" PointY="6.75" />

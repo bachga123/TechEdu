@@ -66,7 +66,6 @@
     <EntitySet Name="tb_Users" EntityType="Self.tb_Users" />
     <EntitySet Name="tb_UserType" EntityType="Self.tb_UserType" />
     <EntitySet Name="tb_Course" EntityType="TechEduModel.tb_Course" />
-    <EntitySet Name="tb_Files" EntityType="TechEduModel.tb_Files" />
     <EntitySet Name="tb_Assignment" EntityType="TechEduModel.tb_Assignment" />
     <EntitySet Name="tb_Student_Assignment" EntityType="TechEduModel.tb_Student_Assignment" />
     <EntitySet Name="tb_Roles" EntityType="TechEduModel.tb_Roles" />
@@ -86,16 +85,6 @@
     <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="TeacherId" Type="Int32" />
-  </EntityType>
-  <EntityType Name="tb_Files">
-    <Key>
-      <PropertyRef Name="File_id" />
-    </Key>
-    <Property Name="File_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="FileType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="DataFiles" Type="Binary" MaxLength="50" FixedLength="false" />
-    <Property Name="CreateOn" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="tb_Assignment">
     <Key>

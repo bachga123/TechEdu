@@ -55,16 +55,6 @@
           <Property Name="Content_Id" Type="int" Nullable="false" />
           <Property Name="Details" Type="nchar" MaxLength="10" />
         </EntityType>
-        <EntityType Name="tb_Files">
-          <Key>
-            <PropertyRef Name="File_id" />
-          </Key>
-          <Property Name="File_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="FileType" Type="varchar" MaxLength="50" />
-          <Property Name="DataFiles" Type="varbinary" MaxLength="50" />
-          <Property Name="CreateOn" Type="datetime" />
-        </EntityType>
         <EntityType Name="tb_News">
           <Key>
             <PropertyRef Name="News_Id" />
@@ -176,7 +166,6 @@
           <EntitySet Name="tb_Content" EntityType="Self.tb_Content" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Course" EntityType="Self.tb_Course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Course_Content" EntityType="Self.tb_Course_Content" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tb_Files" EntityType="Self.tb_Files" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_News" EntityType="Self.tb_News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Roles" EntityType="Self.tb_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Score" EntityType="Self.tb_Score" Schema="dbo" store:Type="Tables" />
@@ -258,7 +247,6 @@
           <EntitySet Name="tb_Users" EntityType="Self.tb_Users" />
           <EntitySet Name="tb_UserType" EntityType="Self.tb_UserType" />
           <EntitySet Name="tb_Course" EntityType="TechEduModel.tb_Course" />
-          <EntitySet Name="tb_Files" EntityType="TechEduModel.tb_Files" />
           <EntitySet Name="tb_Assignment" EntityType="TechEduModel.tb_Assignment" />
           <EntitySet Name="tb_Student_Assignment" EntityType="TechEduModel.tb_Student_Assignment" />
           <EntitySet Name="tb_Roles" EntityType="TechEduModel.tb_Roles" />
@@ -278,16 +266,6 @@
           <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="TeacherId" Type="Int32" />
-        </EntityType>
-        <EntityType Name="tb_Files">
-          <Key>
-            <PropertyRef Name="File_id" />
-          </Key>
-          <Property Name="File_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FileType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DataFiles" Type="Binary" MaxLength="50" FixedLength="false" />
-          <Property Name="CreateOn" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="tb_Assignment">
           <Key>
@@ -453,17 +431,6 @@
                 <ScalarProperty Name="Decription" ColumnName="Decription" />
                 <ScalarProperty Name="Course_Name" ColumnName="Course_Name" />
                 <ScalarProperty Name="Course_Id" ColumnName="Course_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_Files">
-            <EntityTypeMapping TypeName="TechEduModel.tb_Files">
-              <MappingFragment StoreEntitySet="tb_Files">
-                <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
-                <ScalarProperty Name="DataFiles" ColumnName="DataFiles" />
-                <ScalarProperty Name="FileType" ColumnName="FileType" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="File_id" ColumnName="File_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

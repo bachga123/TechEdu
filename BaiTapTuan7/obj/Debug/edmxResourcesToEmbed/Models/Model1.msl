@@ -76,17 +76,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tb_Files">
-      <EntityTypeMapping TypeName="TechEduModel.tb_Files">
-        <MappingFragment StoreEntitySet="tb_Files">
-          <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
-          <ScalarProperty Name="DataFiles" ColumnName="DataFiles" />
-          <ScalarProperty Name="FileType" ColumnName="FileType" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="File_id" ColumnName="File_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tb_Assignment">
       <EntityTypeMapping TypeName="TechEduModel.tb_Assignment">
         <MappingFragment StoreEntitySet="tb_Assignment">

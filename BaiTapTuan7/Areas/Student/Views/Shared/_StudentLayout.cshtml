@@ -12,6 +12,7 @@
     <meta name="description"
           content="Xtreme Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
+    <link href="~/Assets/Admin/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
     <title>TechEdu</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/xtreme-admin-lite/" />
     <!-- Favicon icon -->
@@ -76,12 +77,12 @@
                     <ul class="navbar-nav float-left mr-auto">
                         <!-- ============================================================== -->
                         <!-- Search -->
-                        <!-- ============================================================== -->                    
+                        <!-- ============================================================== -->
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
                     <!-- ============================================================== -->
-                    <ul class="navbar-nav float-right">                      
+                    <ul class="navbar-nav float-right">
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
@@ -224,21 +225,21 @@
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
             @*<div class="page-breadcrumb">
-                <div class="row align-items-center">
-                    <div class="col-5">
-                        <h4 class="page-title">Dashboard</h4>
-                        <div class="d-flex align-items-center">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
-                                </ol>
-                            </nav>
+                    <div class="row align-items-center">
+                        <div class="col-5">
+                            <h4 class="page-title">Dashboard</h4>
+                            <div class="d-flex align-items-center">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                    </ol>
+                                </nav>
+                            </div>
                         </div>
-                    </div>
 
-                </div>
-            </div>*@
+                    </div>
+                </div>*@
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -281,9 +282,9 @@
     <!--Custom JavaScript -->
     <script src="/Assets/xtreme/dist/js/custom.js"></script>
     <!--This page JavaScript -->
+    <script src="~/Assets/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <!--chartis chart-->
-    <script src="/Assets/xtreme/assets/libs/chartist/dist/chartist.min.js"></script>
-    <script src="/Assets/xtreme/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
     <script src="/Assets/xtreme/dist/js/pages/dashboards/dashboard1.js"></script>
     <script>
         $(document).ready(function () {
@@ -320,6 +321,12 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+
 </body>
 
 </html>

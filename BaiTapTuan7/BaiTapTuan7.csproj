@@ -4834,9 +4834,6 @@
     <Compile Include="Models\tb_Course_Content.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tb_Files.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tb_News.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
