@@ -23,6 +23,7 @@
     <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
     <Property Name="PlaceOfBirth" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Images" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="tb_Teacher">
     <Key>
@@ -38,6 +39,7 @@
     <Property Name="PlaceOfBirth" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Images" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="Rank" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="tb_Users">
     <Key>
@@ -50,7 +52,8 @@
     <Property Name="Usertype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Block" Type="Boolean" />
     <Property Name="RegisterDate" Type="DateTime" Precision="3" />
-    <Property Name="ResetPasswordCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="ResetPasswordCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ActivateCode" Type="Guid" />
   </EntityType>
   <EntityType Name="tb_UserType">
     <Key>

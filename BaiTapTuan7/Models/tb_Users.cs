@@ -22,5 +22,6 @@ namespace BaiTapTuan7.Models
         public Nullable<bool> Block { get; set; }
         public Nullable<System.DateTime> RegisterDate { get; set; }
         public string ResetPasswordCode { get; set; }
+        public Nullable<System.Guid> ActivateCode { get; set; }
     }
 }

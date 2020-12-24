@@ -5,6 +5,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using BaiTapTuan7.Areas.Admin.Model;
+using System;
+using System.Threading.Tasks;
 
 namespace BaiTapTuan7.Areas.Admin.Controllers
 {
@@ -12,6 +15,9 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
     public class CourseController : Controller
     {
         TechEduEntities db = new TechEduEntities();
+        SendEmail email = new SendEmail();
+
+        GetInfor inf = new GetInfor();
         // GET: Admin/Course
         public ActionResult Index(int page = 1, int pageSize = 10)
         {
@@ -22,7 +28,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
 
         public ActionResult CreateCourse()
         {
-            var list = new SelectList (TeacherSelectList(),"value","text");
+            var list = new SelectList(TeacherSelectList(), "value", "text");
             ViewBag.teacherList = list;
             return View();
         }
@@ -60,12 +66,12 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var cou = db.tb_Course.Find(couid);
                 var cts = db.tb_StudentCourse.Where(m => m.CourseId == couid).ToList();
                 db.Entry(cou).State = EntityState.Deleted;
-                foreach(var item in cts)
+                foreach (var item in cts)
                 {
                     var ctss = db.tb_StudentCourse.Find(item.Id);
                     db.Entry(ctss).State = EntityState.Deleted;
@@ -121,7 +127,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             ViewBag.teacher = db.tb_Teacher.FirstOrDefault(m => m.TeacherId == result.TeacherId);
             var data = db.tb_StudentCourse.Where(m => m.CourseId == id && m.Status == 1).ToList();
             List<tb_Student> studentInCourseList = new List<tb_Student>();
-            foreach(var item in data)
+            foreach (var item in data)
             {
                 var stu = db.tb_Student.FirstOrDefault(m => m.StudentId == item.StudentId);
                 studentInCourseList.Add(stu);
@@ -149,7 +155,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             ViewBag.studentList = studentNotInCourseList;
             return View(result);
         }
-        public ActionResult EnrollStudentWantToEnroll(int stuid,int couid)
+        public ActionResult EnrollStudentWantToEnroll(int stuid, int couid)
         {
             var cts = db.tb_StudentCourse.FirstOrDefault(m => m.CourseId == couid && m.StudentId == stuid);
             cts.Status = 1;
@@ -157,7 +163,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Details", new { id = couid });
         }
-        public ActionResult DeleteStudentWantToEnroll(int stuid,int couid)
+        public ActionResult DeleteStudentWantToEnroll(int stuid, int couid)
         {
             var cts = db.tb_StudentCourse.FirstOrDefault(m => m.CourseId == couid && m.StudentId == stuid);
             db.Entry(cts).State = EntityState.Deleted;
@@ -170,11 +176,11 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             int? couid = int.Parse(Request.Form["Course_Id"]);
             var cou = db.tb_Course.FirstOrDefault(m => m.Course_Id == couid);
             string[] StudentIdList = f["StudentId"].Split(new char[] { ',' });
-            if(couid == null)
+            if (couid == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            foreach(string id in StudentIdList)
+            foreach (string id in StudentIdList)
             {
                 tb_StudentCourse cts = new tb_StudentCourse();
                 cts.StudentId = int.Parse(id);
@@ -182,10 +188,18 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 cts.Status = 1;
                 db.Entry(cts).State = EntityState.Added;
                 db.SaveChanges();
+                try
+                {
+                    email.EnrollStudentSuccessMail(inf.GetStudent(int.Parse(id)).Gmail, inf.GetCourse((int)couid).Course_Name);
+                }
+                catch
+                {
+
+                }
             }
             return RedirectToAction("Details", new { id = couid });
         }
-        public ActionResult RemoveStudent(int? stuid,int? couid)
+        public ActionResult RemoveStudent(int? stuid, int? couid)
         {
             if (stuid == null || couid == null)
             {
@@ -203,7 +217,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         {
             List<SelectListItem> tsl = new List<SelectListItem>();
             var tcList = ListOfTeacher();
-            foreach(var item in tcList)
+            foreach (var item in tcList)
             {
                 SelectListItem tc = new SelectListItem();
                 tc.Value = item.TeacherId.ToString();

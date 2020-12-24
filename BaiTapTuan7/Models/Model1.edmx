@@ -97,6 +97,7 @@
           <Property Name="DateOfBirth" Type="datetime" />
           <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="150" />
           <Property Name="Images" Type="varbinary(max)" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="tb_Student_Assignment">
           <Key>
@@ -131,6 +132,7 @@
           <Property Name="PlaceOfBirth" Type="nchar" MaxLength="10" />
           <Property Name="Images" Type="varbinary(max)" />
           <Property Name="Rank" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="tb_Users">
           <Key>
@@ -143,7 +145,8 @@
           <Property Name="Usertype" Type="varchar" MaxLength="50" />
           <Property Name="Block" Type="bit" />
           <Property Name="RegisterDate" Type="datetime" />
-          <Property Name="ResetPasswordCode" Type="nchar" MaxLength="10" />
+          <Property Name="ResetPasswordCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="ActivateCode" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="tb_UserType">
           <Key>
@@ -204,6 +207,7 @@
           <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
           <Property Name="PlaceOfBirth" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Images" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tb_Teacher">
           <Key>
@@ -219,6 +223,7 @@
           <Property Name="PlaceOfBirth" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Images" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Rank" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tb_Users">
           <Key>
@@ -231,7 +236,8 @@
           <Property Name="Usertype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Block" Type="Boolean" />
           <Property Name="RegisterDate" Type="DateTime" Precision="3" />
-          <Property Name="ResetPasswordCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ResetPasswordCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ActivateCode" Type="Guid" />
         </EntityType>
         <EntityType Name="tb_UserType">
           <Key>
@@ -373,6 +379,7 @@
           <EntitySetMapping Name="tb_Student">
             <EntityTypeMapping TypeName="TechEduModel.tb_Student">
               <MappingFragment StoreEntitySet="tb_Student">
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -388,6 +395,7 @@
           <EntitySetMapping Name="tb_Teacher">
             <EntityTypeMapping TypeName="TechEduModel.tb_Teacher">
               <MappingFragment StoreEntitySet="tb_Teacher">
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Rank" ColumnName="Rank" />
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -404,6 +412,7 @@
           <EntitySetMapping Name="tb_Users">
             <EntityTypeMapping TypeName="TechEduModel.tb_Users">
               <MappingFragment StoreEntitySet="tb_Users">
+                <ScalarProperty Name="ActivateCode" ColumnName="ActivateCode" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

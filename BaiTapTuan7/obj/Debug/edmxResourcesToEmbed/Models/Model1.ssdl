@@ -92,6 +92,7 @@
     <Property Name="DateOfBirth" Type="datetime" />
     <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="150" />
     <Property Name="Images" Type="varbinary(max)" />
+    <Property Name="Gender" Type="varchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="tb_Student_Assignment">
     <Key>
@@ -126,6 +127,7 @@
     <Property Name="PlaceOfBirth" Type="nchar" MaxLength="10" />
     <Property Name="Images" Type="varbinary(max)" />
     <Property Name="Rank" Type="nvarchar" MaxLength="50" />
+    <Property Name="Gender" Type="varchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="tb_Users">
     <Key>
@@ -138,7 +140,8 @@
     <Property Name="Usertype" Type="varchar" MaxLength="50" />
     <Property Name="Block" Type="bit" />
     <Property Name="RegisterDate" Type="datetime" />
-    <Property Name="ResetPasswordCode" Type="nchar" MaxLength="10" />
+    <Property Name="ResetPasswordCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="ActivateCode" Type="uniqueidentifier" />
   </EntityType>
   <EntityType Name="tb_UserType">
     <Key>

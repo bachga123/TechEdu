@@ -15,6 +15,7 @@
     <EntitySetMapping Name="tb_Student">
       <EntityTypeMapping TypeName="TechEduModel.tb_Student">
         <MappingFragment StoreEntitySet="tb_Student">
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="StudentId" ColumnName="StudentId" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -30,6 +31,7 @@
     <EntitySetMapping Name="tb_Teacher">
       <EntityTypeMapping TypeName="TechEduModel.tb_Teacher">
         <MappingFragment StoreEntitySet="tb_Teacher">
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="Rank" ColumnName="Rank" />
           <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -46,6 +48,7 @@
     <EntitySetMapping Name="tb_Users">
       <EntityTypeMapping TypeName="TechEduModel.tb_Users">
         <MappingFragment StoreEntitySet="tb_Users">
+          <ScalarProperty Name="ActivateCode" ColumnName="ActivateCode" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />

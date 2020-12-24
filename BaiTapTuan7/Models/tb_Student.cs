@@ -23,5 +23,6 @@ namespace BaiTapTuan7.Models
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public string PlaceOfBirth { get; set; }
         public byte[] Images { get; set; }
+        public string Gender { get; set; }
     }
 }

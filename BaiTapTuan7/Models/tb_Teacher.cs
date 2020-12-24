@@ -24,5 +24,6 @@ namespace BaiTapTuan7.Models
         public string PlaceOfBirth { get; set; }
         public byte[] Images { get; set; }
         public string Rank { get; set; }
+        public string Gender { get; set; }
     }
 }
