@@ -40,6 +40,7 @@
     <Property Name="Decription" Type="nvarchar" MaxLength="150" />
     <Property Name="Details" Type="nvarchar" MaxLength="150" />
     <Property Name="TeacherId" Type="int" />
+    <Property Name="Course_Price" Type="float" />
   </EntityType>
   <EntityType Name="tb_Course_Content">
     <Key>
@@ -112,6 +113,8 @@
     <Property Name="CourseId" Type="int" />
     <Property Name="StudentId" Type="int" />
     <Property Name="Status" Type="int" />
+    <Property Name="EnrollDate" Type="datetime" />
+    <Property Name="Payment" Type="bit" />
   </EntityType>
   <EntityType Name="tb_Teacher">
     <Key>

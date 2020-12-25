@@ -45,6 +45,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                     newCou.Course_Name = cou.Course_Name;
                     newCou.Decription = cou.Decription;
                     newCou.Details = cou.Details;
+                    newCou.Course_Price = cou.Course_Price;
                     db.Entry(newCou).State = EntityState.Added;
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -104,6 +105,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                     result.Course_Name = cou.Course_Name;
                     result.Decription = cou.Decription;
                     result.Details = cou.Details;
+                    result.Course_Price = cou.Course_Price;
                     db.Entry(result).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");

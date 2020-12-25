@@ -71,6 +71,7 @@
     <EntitySetMapping Name="tb_Course">
       <EntityTypeMapping TypeName="TechEduModel.tb_Course">
         <MappingFragment StoreEntitySet="tb_Course">
+          <ScalarProperty Name="Course_Price" ColumnName="Course_Price" />
           <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
           <ScalarProperty Name="Details" ColumnName="Details" />
           <ScalarProperty Name="Decription" ColumnName="Decription" />
@@ -133,6 +134,8 @@
     <EntitySetMapping Name="tb_StudentCourse">
       <EntityTypeMapping TypeName="TechEduModel.tb_StudentCourse">
         <MappingFragment StoreEntitySet="tb_StudentCourse">
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+          <ScalarProperty Name="EnrollDate" ColumnName="EnrollDate" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="StudentId" ColumnName="StudentId" />
           <ScalarProperty Name="CourseId" ColumnName="CourseId" />

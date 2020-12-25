@@ -45,6 +45,7 @@
           <Property Name="Decription" Type="nvarchar" MaxLength="150" />
           <Property Name="Details" Type="nvarchar" MaxLength="150" />
           <Property Name="TeacherId" Type="int" />
+          <Property Name="Course_Price" Type="float" />
         </EntityType>
         <EntityType Name="tb_Course_Content">
           <Key>
@@ -117,6 +118,8 @@
           <Property Name="CourseId" Type="int" />
           <Property Name="StudentId" Type="int" />
           <Property Name="Status" Type="int" />
+          <Property Name="EnrollDate" Type="datetime" />
+          <Property Name="Payment" Type="bit" />
         </EntityType>
         <EntityType Name="tb_Teacher">
           <Key>
@@ -272,6 +275,7 @@
           <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="TeacherId" Type="Int32" />
+          <Property Name="Course_Price" Type="Double" />
         </EntityType>
         <EntityType Name="tb_Assignment">
           <Key>
@@ -329,6 +333,8 @@
           <Property Name="CourseId" Type="Int32" />
           <Property Name="StudentId" Type="Int32" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="EnrollDate" Type="DateTime" Precision="3" />
+          <Property Name="Payment" Type="Boolean" />
         </EntityType>
         <EntityType Name="tb_Course_Content">
           <Key>
@@ -435,6 +441,7 @@
           <EntitySetMapping Name="tb_Course">
             <EntityTypeMapping TypeName="TechEduModel.tb_Course">
               <MappingFragment StoreEntitySet="tb_Course">
+                <ScalarProperty Name="Course_Price" ColumnName="Course_Price" />
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="Decription" ColumnName="Decription" />
@@ -497,6 +504,8 @@
           <EntitySetMapping Name="tb_StudentCourse">
             <EntityTypeMapping TypeName="TechEduModel.tb_StudentCourse">
               <MappingFragment StoreEntitySet="tb_StudentCourse">
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="EnrollDate" ColumnName="EnrollDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />

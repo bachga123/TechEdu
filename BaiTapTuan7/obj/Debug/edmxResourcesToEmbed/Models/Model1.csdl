@@ -88,6 +88,7 @@
     <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="TeacherId" Type="Int32" />
+    <Property Name="Course_Price" Type="Double" />
   </EntityType>
   <EntityType Name="tb_Assignment">
     <Key>
@@ -145,6 +146,8 @@
     <Property Name="CourseId" Type="Int32" />
     <Property Name="StudentId" Type="Int32" />
     <Property Name="Status" Type="Int32" />
+    <Property Name="EnrollDate" Type="DateTime" Precision="3" />
+    <Property Name="Payment" Type="Boolean" />
   </EntityType>
   <EntityType Name="tb_Course_Content">
     <Key>

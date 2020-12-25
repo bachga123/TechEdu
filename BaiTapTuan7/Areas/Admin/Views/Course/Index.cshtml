@@ -23,7 +23,6 @@
                                 <a class="btn btn-primary" href="@Url.Action("CreateCourse","Course")"> Create Course</a>
                             </div>
                         </div>
-                        
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -34,21 +33,35 @@
                                             <tr>
                                                 <th>Course name</th>
                                                 <th>Teacher</th>
+                                                <th>Price</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach (var item in Model)
                                             {
-                                                <tr onclick="location.href='@(Url.Action("Details","Course",new {Id = item.Course_Id }))'">
+                                                <tr onclick="location.href='@(Url.Action("Details", "Course", new { Id = item.Course_Id }))'">
                                                     <td>@item.Course_Name</td>
                                                     <td>
                                                         @foreach (var i in ViewBag.teacherList)
                                                         {
                                                             if (item.TeacherId == i.TeacherId)
                                                             {
-                                                                @(i.TeacherFirstName +' '+ i.TeacherLastName);
+                                                                @(i.TeacherFirstName + ' ' + i.TeacherLastName);
                                                             }
                                                         }
+                                                    </td>
+
+                                                    @if (item.Course_Price != null)
+                                                    {
+                                                        <td>@item.Course_Price</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>Free</td>
+                                                    }
+                                                    <td>
+                                                        <a href="@(Url.Action("Details", "Course", new { Id = item.Course_Id }))" class="btn btn-primary">Details</a>
                                                     </td>
                                                 </tr>
                                             }

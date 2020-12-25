@@ -18,5 +18,7 @@ namespace BaiTapTuan7.Models
         public Nullable<int> CourseId { get; set; }
         public Nullable<int> StudentId { get; set; }
         public Nullable<int> Status { get; set; }
+        public Nullable<System.DateTime> EnrollDate { get; set; }
+        public Nullable<bool> Payment { get; set; }
     }
 }

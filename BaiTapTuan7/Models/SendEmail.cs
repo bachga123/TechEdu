@@ -17,7 +17,7 @@ namespace BaiTapTuan7.Models
             string emailSubject = EmailInfor.EMAIL_SUBJECT_DEFAUALT + " Test";
             string body = "Hello " + username + ", ";
             body += "<br /><br />Please click the following link to reset your password account";
-            body += "<br /><a href = '" + string.Format("{0}://{1}/Home/ActiveAccount/{2}", Request.Url.Scheme, Request.Url.Authority, ForgotPasswordCode) + "'>Click here to reset your password account.</a>";
+            body += "<br /><a href = '" + string.Format("{0}://{1}/Home/ResetPassword/{2}", Request.Url.Scheme, Request.Url.Authority, ForgotPasswordCode) + "'>Click here to reset your password account.</a>";
             body += "<br /><br />Thanks";
             try
             {

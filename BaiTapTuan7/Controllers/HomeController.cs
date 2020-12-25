@@ -170,6 +170,47 @@ namespace BaiTapTuan7.Controllers
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
         }
+        [HttpGet]
+        [Route("ResetPassword/{id ?}")]
+        public ActionResult ResetPassword(string id)
+        {
+            var value = db.tb_Users.Where(m => m.ResetPasswordCode == new Guid(id).ToString()).FirstOrDefault();
+            if (value != null)
+            {
+                ForgotPasswordModel m = new ForgotPasswordModel();
+                m.UserId = value.Id;
+                return View("ResetPassword",m);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+        }
+        [HttpPost]
+        public ActionResult ResetPassword(ForgotPasswordModel us)
+        {
+            if(ModelState.IsValid)
+            {
+                if (us.NewPassword != us.RepeatNewPassword)
+                {
+                    ModelState.AddModelError("", "Repeat password false");
+                    return View("ResetPassword", us);
+                }
+                else
+                {
+                    var newpa = db.tb_Users.Find(us.UserId);
+                    newpa.Password = MD5(us.NewPassword);
+                    db.Entry(newpa).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index","Home");
+                }
+            }
+            else
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+
+        }
         private static string MD5(string Metin)
         {
             MD5CryptoServiceProvider MD5Code = new MD5CryptoServiceProvider();

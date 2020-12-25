@@ -47,11 +47,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li><a href="#gallery" class="page-scroll">Gallery</a></li>
                         <li><a href="#testimonials" class="page-scroll">Testimonials</a></li>
                         <li><a href="#contact" class="page-scroll">Contact</a></li>
-                   </ul>    
-                    <form class="navbar-form navbar-left">
-                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#dang_nhap">Signin
-                        </button>
-                    </form>
+                        <li><a href="@Url.Action("Register","Home")" class="btn btn-primary btn-lg">Register</a></li>
+                        <li>
+                            <a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#dang_nhap">
+                                Signin
+                            </a>
+                        </li>
+                    </ul>
                     <div class="modal fade" id="dang_nhap">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -64,7 +66,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <div id="err_login"></div>
                                         <div id="login_here">
                                             <label style="color:White">Username : </label>
-                                            <input type="text" class="form-control" name="username" id="username"/>
+                                            <input type="text" class="form-control" name="username" id="username" />
                                             <label style="color:White">Password : </label>
                                             <input type="password" class="form-control" name="password" id="password" />
                                             <br />
@@ -85,7 +87,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
-
+                    
                 </div><!-- /.navbar-collapse -->
 
             </nav>
