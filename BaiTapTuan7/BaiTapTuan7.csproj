@@ -4697,6 +4697,7 @@
     <Content Include="Areas\Teacher\Views\TcInfor\NewsDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\AccountSettings.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\ChartRender.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKe\ThongKeUserType.cshtml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -4789,6 +4790,8 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\CourseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongKeController.cs" />
+    <Compile Include="Areas\Admin\Model\ThongKeViewModel.cs" />
     <Compile Include="Areas\Admin\Model\AddUserModel.cs" />
     <Compile Include="Areas\Admin\Model\GetInfor.cs" />
     <Compile Include="Areas\Admin\Model\Chart.cs" />
