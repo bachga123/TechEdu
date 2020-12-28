@@ -129,31 +129,43 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             ViewBag.teacher = db.tb_Teacher.FirstOrDefault(m => m.TeacherId == result.TeacherId);
             var data = db.tb_StudentCourse.Where(m => m.CourseId == id && m.Status == 1).ToList();
             List<tb_Student> studentInCourseList = new List<tb_Student>();
-            foreach (var item in data)
+            if (data != null)
             {
-                var stu = db.tb_Student.FirstOrDefault(m => m.StudentId == item.StudentId);
-                studentInCourseList.Add(stu);
+                foreach (var item in data)
+                {
+                    var stu = db.tb_Student.FirstOrDefault(m => m.StudentId == item.StudentId);
+                    studentInCourseList.Add(stu);
+                }
+                ViewBag.studentInCourseList = studentInCourseList;
             }
-            ViewBag.studentInCourseList = studentInCourseList;
             List<tb_Student> studentWantToEnroll = new List<tb_Student>();
             var data2 = db.tb_StudentCourse.Where(m => m.CourseId == id && m.Status == 2).ToList();
-            foreach (var item in data2)
+            if (data2 != null)
             {
-                var stu = db.tb_Student.FirstOrDefault(m => m.StudentId == item.StudentId);
-                studentWantToEnroll.Add(stu);
+                foreach (var item in data2)
+                {
+                    var stu = db.tb_Student.FirstOrDefault(m => m.StudentId == item.StudentId);
+                    studentWantToEnroll.Add(stu);
+                }
+                ViewBag.studentWantToEnroll = studentWantToEnroll;
             }
             var studentNotInCourseList = db.tb_Student.ToList();
-            foreach (var item in studentInCourseList)
+            if (studentInCourseList != null)
             {
-                var itemRemove = studentNotInCourseList.Find(m => m.StudentId == item.StudentId);
-                studentNotInCourseList.Remove(itemRemove);
+                foreach (var item in studentInCourseList)
+                {
+                    var itemRemove = studentNotInCourseList.Find(m => m.StudentId == item.StudentId);
+                    studentNotInCourseList.Remove(itemRemove);
+                }
             }
-            foreach (var item in studentWantToEnroll)
+            if (studentWantToEnroll != null)
             {
-                var itemRemove = studentNotInCourseList.Find(m => m.StudentId == item.StudentId);
-                studentNotInCourseList.Remove(itemRemove);
-            }
-            ViewBag.studentWantToEnroll = studentWantToEnroll;
+                foreach (var item in studentWantToEnroll)
+                {
+                    var itemRemove = studentNotInCourseList.Find(m => m.StudentId == item.StudentId);
+                    studentNotInCourseList.Remove(itemRemove);
+                }
+            }   
             ViewBag.studentList = studentNotInCourseList;
             return View(result);
         }

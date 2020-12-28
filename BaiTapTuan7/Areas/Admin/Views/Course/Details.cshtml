@@ -178,63 +178,7 @@
     </div>
 </div>
 
-<!--<div class="modal fade" id="ModalPopUp1" role="dialog">
-    <div class="modal-dialog modal-body" style="margin-left: 200px; width: 600px; margin-right: 200px;">
-        <div class="modal-content" style="width: 1202px">
-            <div class="modal-header">
-                <button id="DivClose" type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body" style="text-align:center;">
-                @if (ViewBag.studentWantToEnroll.Count == 0)
-                {
-                    <h4> No data </h4>
-                }
-                else
-                {
-                    <div class="table table-hover">
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Student</h6>
-                            </div>
-                            <div class="table-responsive">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
-                                            @Html.HiddenFor(m => m.Course_Id)
-                                            <thead>
-                                                <tr>
-                                                    <th>FirstName</th>
-                                                    <th>LastName</th>
-                                                    <th>Gmail</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var item in ViewBag.studentWantToEnroll)
-                                                {-->
-                                                    @*<tr onclick="location.href='@(Url.Action("EnrollStudentToCourse", "Course", new { couid = Model.Course_Id, stuid = item.StudentId }))'">*@
-                                                <!--<tr>
-                                                    <td>@item.FirstName</td>
-                                                    <td>@item.LastName</td>
-                                                    <td>@item.Gmail</td>
-                                                    <td>
-                                                        @Html.ActionLink("Enroll","EnrollStudentWantToEnroll", new { stuid = item.StudentId, couid = Model.Course_Id },new {@class = "btn btn-primary" })
-                                                         @Html.ActionLink("Delete","DeleteStudentWantToEnroll", "Course", new { stuid = item.StudentId, couid = Model.Course_Id }, new { @class = "btn btn-primary" })
-                                                    </td>
-                                                </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
-</div>-->
+
 
 
 

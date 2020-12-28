@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "ChartOfIncomeUSD";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+            @{
+                Html.RenderAction("ChartRender", "ThongKe");
+            }
+    </div>
+</div>
+

@@ -4696,8 +4696,9 @@
     <Content Include="Areas\Student\Views\StuInfor\NewsDetails.cshtml" />
     <Content Include="Areas\Teacher\Views\TcInfor\NewsDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\AccountSettings.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\ChartRender.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKe\ChartRender.cshtml" />
     <Content Include="Areas\Admin\Views\ThongKe\ThongKeUserType.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKe\ChartOfIncomeUSD.cshtml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
