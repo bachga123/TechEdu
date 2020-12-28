@@ -40,7 +40,7 @@
     <Property Name="Decription" Type="nvarchar" MaxLength="150" />
     <Property Name="Details" Type="nvarchar" MaxLength="150" />
     <Property Name="TeacherId" Type="int" />
-    <Property Name="Course_Price" Type="float" />
+    <Property Name="Course_Price" Type="decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="tb_Course_Content">
     <Key>

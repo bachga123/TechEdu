@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="TechEduModel.tb_Teacher" Width="1.5" PointX="4.625" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TechEduModel.tb_Users" Width="1.5" PointX="0.625" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="TechEduModel.tb_UserType" Width="1.5" PointX="2.625" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechEduModel.tb_Course" Width="1.5" PointX="4.5" PointY="6.75" />
         <EntityTypeShape EntityType="TechEduModel.tb_Assignment" Width="1.5" PointX="6.375" PointY="0.75" />
         <EntityTypeShape EntityType="TechEduModel.tb_Student_Assignment" Width="1.5" PointX="4.625" PointY="4.125" />
         <EntityTypeShape EntityType="TechEduModel.tb_Roles" Width="1.5" PointX="2.625" PointY="6.75" />
@@ -20,6 +19,7 @@
         <EntityTypeShape EntityType="TechEduModel.tb_Course_Content" Width="1.5" PointX="2.75" PointY="9.75" />
         <EntityTypeShape EntityType="TechEduModel.tb_Content" Width="1.5" PointX="4.5" PointY="9.625" />
         <EntityTypeShape EntityType="TechEduModel.tb_News" Width="1.5" PointX="8.375" PointY="3" />
+        <EntityTypeShape EntityType="TechEduModel.tb_Course" Width="1.5" PointX="9.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -14,9 +14,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using BaiTapTuan7.Models;
+using BaiTapTuan7.Areas.Admin.Model;
 namespace BaiTapTuan7.Areas.Admin.Controllers
 {
-    [AuthorizeController]
+    //[AuthorizeController]
     public class AdminController : Controller
     {
         TechEduEntities db = new TechEduEntities();
@@ -25,32 +26,69 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         {
             var tc = (tb_Teacher)Session["admin"];
             ViewBag.newsList = MyNews();
+            ViewBag.inCome = CreateListIncomeUsdOfYear(2020);
+            string a = "";
+            a = a + ViewBag.inCome[0];
+            for(int i =1; i< 12; i++)
+            {
+                a = a + "," +ViewBag.inCome[i];
+            }
+            ViewBag.inn = a;
             return View(tc);
+        }
+        public JsonResult AreaChartData()
+        {
+            Chart _chart = new Chart();
+            _chart.labels = new string[] { "Jan", "Feb", "Mar" };
+            _chart.datasets = new List<Datasets>();
+            List<Datasets> _dataSet = new List<Datasets>();
+            _dataSet.Add(new Datasets()
+            {
+                label = "This Year",
+                data = CreateListIncomeUsdOfYear(2020),
+                backgroundColor = new string[] { "800000", "#E9967C", "#FF0000" },
+                borderColor = new string[] { "800000", "#E9967C", "#FF0000" },
+                borderWidth = "1"
+            });
+            _chart.datasets = _dataSet;
+            return Json(_chart, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ChartRender()
+        {
+            ViewBag.inCome = CreateListIncomeUsdOfYear(2020);
+            string a = "";
+            a = a + ViewBag.inCome[0];
+            for (int i = 1; i < 12; i++)
+            {
+                a = a + "," + ViewBag.inCome[i];
+            }
+            ViewBag.inn = a;
+            return View();
         }
         // Phần thông báo của admin
         public ActionResult NewsDetails(int newsid)
         {
             ViewBag.newsList = MyNews();
             var news = db.tb_News.Find(newsid);
-            return View("NewsDetails",news);
+            return View("NewsDetails", news);
         }
         public ActionResult AddNews()
         {
             ViewBag.RoleList = GetRoleNews();
             tb_News news = new tb_News();
-            return View("AddNews",news);
+            return View("AddNews", news);
         }
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult AddNews(tb_News news)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 tb_News ne = new tb_News();
                 ne.Title = news.Title;
                 ne.Details = news.Details;
                 ne.CreatedDate = DateTime.Now;
-                ne.From = ((tb_Teacher)Session["admin"]).TeacherFirstName + " "+ ((tb_Teacher)Session["admin"]).TeacherLastName;
+                ne.From = ((tb_Teacher)Session["admin"]).TeacherFirstName + " " + ((tb_Teacher)Session["admin"]).TeacherLastName;
                 ne.To = news.To;
                 db.Entry(ne).State = EntityState.Added;
                 db.SaveChanges();
@@ -65,7 +103,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         {
             ViewBag.RoleList = GetRoleNews();
             tb_News ne = db.tb_News.Find(newsid);
-            return View("EditNews",ne);
+            return View("EditNews", ne);
         }
         [HttpPost]
         [ValidateInput(false)]
@@ -96,7 +134,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AccountSettings(tb_Users us)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var uss = db.tb_Users.Find(us.Id);
                 uss.Password = MD5(us.Password);
@@ -127,7 +165,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         public ActionResult Logout()
         {
             ClearCache();
-            return RedirectToAction("Index", "Home",new { @area = ""});
+            return RedirectToAction("Index", "Home", new { @area = "" });
         }
         public ActionResult AdminProfile()
         {
@@ -157,7 +195,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                     }
                     db.Entry(oldtc).State = EntityState.Modified;
                     db.SaveChanges();
-                    return View("AdminProfile",oldtc);
+                    return View("AdminProfile", oldtc);
                 }
                 else
                 {
@@ -204,6 +242,20 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             }
 
         }
+
+        //Charts
+        public ActionResult StatisticalOfYear()
+        {
+            return View();
+        }
+        public ActionResult StatisticalOfMonth()
+        {
+            return View();
+        }
+        public ActionResult StatisticalOfWeek()
+        {
+            return View();
+        }
         public void ClearCache()
         {
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
@@ -211,6 +263,50 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             Response.Cache.SetNoStore();
         }
 
+        public int[] CreateListIncomeUsdOfYear(int year, int month = 0)
+        {
+            int[] incomeMonthList = new int[12];
+            if (month == 0)
+            {
+                for (int i = 1; i < 13; i++)
+                {
+                    decimal income = IncomeUsdForAllCourseIn1Month(year, i);
+                    incomeMonthList[i - 1] = (int)income;
+                }
+            }
+            else
+            {
+                incomeMonthList = new int[1];
+                incomeMonthList[0] = (int)IncomeUsdForAllCourseIn1Month(year, month);
+            }
+            return incomeMonthList;
+        }
+        public decimal IncomeUsdForAllCourseIn1Month(int year,int month =0)
+        {
+            decimal sum = 0;
+            var allOfCourse = db.tb_Course.Where(m => m.Course_Price != null || m.Course_Price != 0).ToList();
+            foreach (var item in allOfCourse)
+            {
+                int count = IncomeStudentFor1CourseIn1Month(item.Course_Id, year, month);
+                sum = sum + (decimal)(count * item.Course_Price);
+            }
+            return sum;
+        }
+        public int IncomeStudentFor1CourseIn1Month(int couid, int year, int month = 0)
+        {
+            var listOfIncomeStudent = listOfIncomeStudentIn1Month(couid, year, month);
+            return listOfIncomeStudent.Count;
+        }
+        public List<tb_StudentCourse> listOfIncomeStudentIn1Month(int couid, int year, int month = 0)
+        {
+            if (month != 0)
+            {
+                return db.tb_StudentCourse.Where(m => m.CourseId == couid && ((DateTime)m.EnrollDate).Month == month && ((DateTime)m.EnrollDate).Year == year).ToList();
+            }
+            else
+                return db.tb_StudentCourse.Where(m => m.CourseId == couid && ((DateTime)m.EnrollDate).Year == year).ToList();
+
+        }
         public List<SelectListItem> GetRoleNews()
         {
             var list = new List<SelectListItem>();

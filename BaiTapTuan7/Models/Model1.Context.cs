@@ -30,7 +30,6 @@ namespace BaiTapTuan7.Models
         public virtual DbSet<tb_Teacher> tb_Teacher { get; set; }
         public virtual DbSet<tb_Users> tb_Users { get; set; }
         public virtual DbSet<tb_UserType> tb_UserType { get; set; }
-        public virtual DbSet<tb_Course> tb_Course { get; set; }
         public virtual DbSet<tb_Assignment> tb_Assignment { get; set; }
         public virtual DbSet<tb_Student_Assignment> tb_Student_Assignment { get; set; }
         public virtual DbSet<tb_Roles> tb_Roles { get; set; }
@@ -40,5 +39,6 @@ namespace BaiTapTuan7.Models
         public virtual DbSet<tb_Course_Content> tb_Course_Content { get; set; }
         public virtual DbSet<tb_Content> tb_Content { get; set; }
         public virtual DbSet<tb_News> tb_News { get; set; }
+        public virtual DbSet<tb_Course> tb_Course { get; set; }
     }
 }

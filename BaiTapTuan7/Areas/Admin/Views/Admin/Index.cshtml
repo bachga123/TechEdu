@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <h5 class="card-title">User</h5>
                             <p class="card-text">User Manager</p>
-                            <a href="@Url.Action("Index","User")" class="stretched-link"></a>
+                            <a href="@Url.Action("Index", "User")" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Teacher</h5>
                             <p class="card-text">Teacher Manager</p>
-                            <a href="@Url.Action("Index","Teacher")" class="stretched-link"></a>
+                            <a href="@Url.Action("Index", "Teacher")" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Student</h5>
                             <p class="card-text">Student Manager</p>
-                            <a href="@Url.Action("Index","Student")" class="stretched-link"></a>
+                            <a href="@Url.Action("Index", "Student")" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Course</h5>
                             <p class="card-text">Course Manager</p>
-                            <a href="@Url.Action("Index","Course")" class="stretched-link"></a>
+                            <a href="@Url.Action("Index", "Course")" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                      aria-labelledby="dropdownMenuLink">
                                     <div class="dropdown-header">Dropdown Header:</div>
-                                    <a class="dropdown-item" href="@Url.Action("AddNews","Admin")">Add News</a>
+                                    <a class="dropdown-item" href="@Url.Action("AddNews", "Admin")">Add News</a>
                                 </div>
                             </div>
                         </div>
@@ -115,19 +115,75 @@
                                 {
                                     <tr>
                                         <td>
-                                            <a href="@Url.Action("NewsDetails","Admin",new { newsid = item.News_Id})">
+                                            <a href="@Url.Action("NewsDetails", "Admin", new { newsid = item.News_Id })">
                                                 @item.Title
                                             </a>
                                             <br />
                                         </td>
                                     </tr>
-
                                 }
                             </table>
+                            @foreach (var item in ViewBag.Income)
+                            {
+                                <a>@item</a>
+                            }
                         </div>
                     </div>
                 </div>
 
+            </div>
+            <div class="row">
+                <div class="col-xl-8 col-lg-7">
+
+                    <!-- Area Chart -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area">
+                                <canvas id="myAreaChart"></canvas>
+                                <input type="hidden" id="myInput" data-myValue="0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000" />
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+
+                    <!-- Bar Chart -->
+                    <!--<div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-bar">
+                        <canvas id="myBarChart"></canvas>
+                    </div>
+                    <hr>
+                    Styling for the bar chart can be found in the
+                    <code>/js/demo/chart-bar-demo.js</code> file.
+                </div>
+            </div>
+
+        </div>-->
+                    <!-- Donut Chart -->
+                    <!--<div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">-->
+                    <!-- Card Header - Dropdown -->
+                    <!--<div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
+        </div>-->
+                    <!-- Card Body -->
+                    <!--<div class="card-body">
+                    <div class="chart-pie pt-4">
+                        <canvas id="myPieChart"></canvas>
+                    </div>
+                    <hr>
+                    Styling for the donut chart can be found in the
+                    <code>/js/demo/chart-pie-demo.js</code> file.
+                </div>
+            </div>
+        </div>-->
+                </div>
             </div>
         </div>
     </div>

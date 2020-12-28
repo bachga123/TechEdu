@@ -68,7 +68,6 @@
     <EntitySet Name="tb_Teacher" EntityType="Self.tb_Teacher" />
     <EntitySet Name="tb_Users" EntityType="Self.tb_Users" />
     <EntitySet Name="tb_UserType" EntityType="Self.tb_UserType" />
-    <EntitySet Name="tb_Course" EntityType="TechEduModel.tb_Course" />
     <EntitySet Name="tb_Assignment" EntityType="TechEduModel.tb_Assignment" />
     <EntitySet Name="tb_Student_Assignment" EntityType="TechEduModel.tb_Student_Assignment" />
     <EntitySet Name="tb_Roles" EntityType="TechEduModel.tb_Roles" />
@@ -78,18 +77,8 @@
     <EntitySet Name="tb_Course_Content" EntityType="TechEduModel.tb_Course_Content" />
     <EntitySet Name="tb_Content" EntityType="TechEduModel.tb_Content" />
     <EntitySet Name="tb_News" EntityType="TechEduModel.tb_News" />
+    <EntitySet Name="tb_Course" EntityType="TechEduModel.tb_Course" />
   </EntityContainer>
-  <EntityType Name="tb_Course">
-    <Key>
-      <PropertyRef Name="Course_Id" />
-    </Key>
-    <Property Name="Course_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Course_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="TeacherId" Type="Int32" />
-    <Property Name="Course_Price" Type="Double" />
-  </EntityType>
   <EntityType Name="tb_Assignment">
     <Key>
       <PropertyRef Name="Assignment_Id" />
@@ -177,5 +166,16 @@
     <Property Name="From" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="To" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tb_Course">
+    <Key>
+      <PropertyRef Name="Course_Id" />
+    </Key>
+    <Property Name="Course_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Course_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="TeacherId" Type="Int32" />
+    <Property Name="Course_Price" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
 </Schema>

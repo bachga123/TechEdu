@@ -1,5 +1,4 @@
-﻿
-@model BaiTapTuan7.Models.tb_Course
+﻿@model BaiTapTuan7.Models.tb_Course
 @{
     ViewBag.Title = "CourseDetails";
     Layout = "~/Areas/Student/Views/Shared/_StudentLayout.cshtml";
@@ -19,7 +18,16 @@
         </li>
     </ul>
     <div class="card-body">
-        <h2>@Model.Course_Name</h2>
+        <div>
+
+            @if (ViewBag.messageOutDate != null)
+            {
+                //<a href="@Url.Action("PaymentForCourse", "StuCourse", new { couid = Model.Course_Id})" class="text text-danger"> You Have @ViewBag.messageOutDate Days to payment for this course</a>
+                <a class="text text-danger"> You Have @ViewBag.messageOutDate Days to payment for this course</a>
+            }
+            <h2>@Model.Course_Name</h2>
+        </div>
+
         <div class="col-12">
             <h3>Teacher: @(ViewBag.Teacher.TeacherFirstName + " " + ViewBag.Teacher.TeacherLastName)</h3>
             <div class="card">

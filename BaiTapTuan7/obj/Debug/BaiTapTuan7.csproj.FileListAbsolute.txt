@@ -650,3 +650,5 @@ C:\Users\BIU RAIN\Desktop\New folder\BaiTapTuan7\bin\roslyn\VBCSCompiler.exe
 C:\Users\BIU RAIN\Desktop\New folder\BaiTapTuan7\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\BIU RAIN\Desktop\New folder\BaiTapTuan7\obj\Debug\BaiTapTuan7.csproj.GenerateResource.cache
 C:\Users\BIU RAIN\Desktop\New folder\BaiTapTuan7\obj\Debug\BaiTapTuan7.Resources.Constants.EmailInfor.resources
+C:\Users\BIU RAIN\Desktop\New folder\BaiTapTuan7\bin\PayPal.dll
+C:\Users\BIU RAIN\Desktop\New folder\BaiTapTuan7\bin\PayPal.xml

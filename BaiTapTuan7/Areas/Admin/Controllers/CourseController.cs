@@ -157,21 +157,22 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             ViewBag.studentList = studentNotInCourseList;
             return View(result);
         }
-        public ActionResult EnrollStudentWantToEnroll(int stuid, int couid)
-        {
-            var cts = db.tb_StudentCourse.FirstOrDefault(m => m.CourseId == couid && m.StudentId == stuid);
-            cts.Status = 1;
-            db.Entry(cts).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Details", new { id = couid });
-        }
-        public ActionResult DeleteStudentWantToEnroll(int stuid, int couid)
-        {
-            var cts = db.tb_StudentCourse.FirstOrDefault(m => m.CourseId == couid && m.StudentId == stuid);
-            db.Entry(cts).State = EntityState.Deleted;
-            db.SaveChanges();
-            return RedirectToAction("Details", new { id = couid });
-        }
+        //public ActionResult EnrollStudentWantToEnroll(int stuid, int couid)
+        //{
+        //    var cts = db.tb_StudentCourse.FirstOrDefault(m => m.CourseId == couid && m.StudentId == stuid);
+        //    cts.Status = 1;
+        //    cts.
+        //    db.Entry(cts).State = EntityState.Modified;
+        //    db.SaveChanges();
+        //    return RedirectToAction("Details", new { id = couid });
+        //}
+        //public ActionResult DeleteStudentWantToEnroll(int stuid, int couid)
+        //{
+        //    var cts = db.tb_StudentCourse.FirstOrDefault(m => m.CourseId == couid && m.StudentId == stuid);
+        //    db.Entry(cts).State = EntityState.Deleted;
+        //    db.SaveChanges();
+        //    return RedirectToAction("Details", new { id = couid });
+        //}
         [HttpPost]
         public ActionResult EnrollStudentToCourse(FormCollection f)
         {
@@ -188,16 +189,10 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 cts.StudentId = int.Parse(id);
                 cts.CourseId = cou.Course_Id;
                 cts.Status = 1;
+                cts.Payment = true;
                 db.Entry(cts).State = EntityState.Added;
+                email.EnrollStudentSuccessMail(inf.GetStudent(int.Parse(id)).Gmail, inf.GetCourse((int)couid).Course_Name);
                 db.SaveChanges();
-                try
-                {
-                    email.EnrollStudentSuccessMail(inf.GetStudent(int.Parse(id)).Gmail, inf.GetCourse((int)couid).Course_Name);
-                }
-                catch
-                {
-
-                }
             }
             return RedirectToAction("Details", new { id = couid });
         }

@@ -24,6 +24,7 @@
                                         <th>Name Of Course</th>
                                         <th>Description</th>
                                         <th>Details</th>
+                                        <th>Course Price</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -35,6 +36,16 @@
                                             <td>@item.Course_Name</td>
                                             <td>@item.Decription</td>
                                             <td>@item.Details</td>
+                                            <td>
+                                                @if (item.Course_Price == null)
+                                                {
+                                                    <a> Free</a>
+                                                }
+                                                else
+                                                {
+                                                    <a>@item.Course_Price $</a>
+                                                }
+                                            </td>
                                             <td>
                                                 @Html.ActionLink("Enroll", "EnrollToCourse", "StuCourse", new { couid = item.Course_Id }, new { onclick = "return confirm('Are you sure to enroll to this course?');", @class = "btn btn-danger" })
                                                 @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-l" value="@item.StudentId">Details</button>*@

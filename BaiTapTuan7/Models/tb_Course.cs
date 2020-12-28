@@ -19,6 +19,6 @@ namespace BaiTapTuan7.Models
         public string Decription { get; set; }
         public string Details { get; set; }
         public Nullable<int> TeacherId { get; set; }
-        public Nullable<double> Course_Price { get; set; }
+        public Nullable<decimal> Course_Price { get; set; }
     }
 }

@@ -68,18 +68,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tb_Course">
-      <EntityTypeMapping TypeName="TechEduModel.tb_Course">
-        <MappingFragment StoreEntitySet="tb_Course">
-          <ScalarProperty Name="Course_Price" ColumnName="Course_Price" />
-          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
-          <ScalarProperty Name="Details" ColumnName="Details" />
-          <ScalarProperty Name="Decription" ColumnName="Decription" />
-          <ScalarProperty Name="Course_Name" ColumnName="Course_Name" />
-          <ScalarProperty Name="Course_Id" ColumnName="Course_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tb_Assignment">
       <EntityTypeMapping TypeName="TechEduModel.tb_Assignment">
         <MappingFragment StoreEntitySet="tb_Assignment">
@@ -171,6 +159,18 @@
           <ScalarProperty Name="Details" ColumnName="Details" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="News_Id" ColumnName="News_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_Course">
+      <EntityTypeMapping TypeName="TechEduModel.tb_Course">
+        <MappingFragment StoreEntitySet="tb_Course">
+          <ScalarProperty Name="Course_Price" ColumnName="Course_Price" />
+          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="Decription" ColumnName="Decription" />
+          <ScalarProperty Name="Course_Name" ColumnName="Course_Name" />
+          <ScalarProperty Name="Course_Id" ColumnName="Course_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
