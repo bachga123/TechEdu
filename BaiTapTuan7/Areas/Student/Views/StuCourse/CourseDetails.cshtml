@@ -21,9 +21,9 @@
         <div>
 
             @if (ViewBag.messageOutDate != null)
-            {
-                //<a href="@Url.Action("PaymentForCourse", "StuCourse", new { couid = Model.Course_Id})" class="text text-danger"> You Have @ViewBag.messageOutDate Days to payment for this course</a>
-                <a class="text text-danger"> You Have @ViewBag.messageOutDate Days to payment for this course</a>
+                {
+                <a href = "@Url.Action("PaymentForCourse", "StuCourse", new { couid = Model.Course_Id})" class="text text-danger"> You Have @ViewBag.messageOutDate Days to payment for this course</a>
+                @*<a class="text text-danger"> You Have @ViewBag.messageOutDate Days to payment for this course</a>*@
             }
             <h2>@Model.Course_Name</h2>
         </div>

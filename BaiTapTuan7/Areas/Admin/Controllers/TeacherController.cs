@@ -82,14 +82,55 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 db.Entry(tc).State = EntityState.Deleted;
                 foreach(var item in cou)
                 {
-                    var coua = db.tb_Course.Find(item.Course_Id);
-                    db.Entry(coua).State = EntityState.Deleted;
+                    DeleteCourse(item.Course_Id);
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
         }
-
+        public void DeleteCourse(int couid)
+        {
+            var cou = db.tb_Course.Find(couid);
+            var cts = db.tb_StudentCourse.Where(m => m.CourseId == couid).ToList();
+            var assignment = db.tb_Assignment.Where(m => m.Course_Id == couid).ToList();
+            var content = CourseContentList(couid);
+            foreach (var item in content)
+            {
+                db.Entry(item).State = EntityState.Deleted;
+            }
+            foreach (var item in assignment)
+            {
+                var StuAssignment = db.tb_Student_Assignment.Where(m => m.Assignment_Id == item.Assignment_Id).ToList();
+                foreach (var item1 in StuAssignment)
+                {
+                    db.Entry(item1).State = EntityState.Deleted;
+                }
+                var score = db.tb_Score.Where(m => m.Assignment_id == item.Assignment_Id).ToList();
+                foreach (var item2 in score)
+                {
+                    db.Entry(item2).State = EntityState.Deleted;
+                }
+                db.Entry(item).State = EntityState.Deleted;
+            }
+            db.Entry(cou).State = EntityState.Deleted;
+            foreach (var item in cts)
+            {
+                var ctss = db.tb_StudentCourse.Find(item.Id);
+                db.Entry(ctss).State = EntityState.Deleted;
+            }
+            db.SaveChanges();
+        }
+        public List<tb_Content> CourseContentList(int? couid)
+        {
+            List<tb_Content> contentList = new List<tb_Content>();
+            var listContentId = db.tb_Course_Content.Where(m => m.Course_Id == couid).ToList();
+            foreach (var item in contentList)
+            {
+                var content = db.tb_Content.Find(item.Content_Id);
+                contentList.Add(content);
+            }
+            return contentList;
+        }
         public List<tb_Teacher> ListOfAdminTeacher()
         {
             List<tb_Teacher> tcList = db.tb_Teacher.ToList();

@@ -77,24 +77,31 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
         {
             if (ModelState.IsValid)
             {
-                var uss = db.tb_Users.Find(us.Id);
-                if (uss != null)
+                if (us.Password != null)
                 {
-                    uss.Password = MD5(us.Password);
-                    db.Entry(uss).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("AccountSetting");
+                    var uss = db.tb_Users.Find(us.Id);
+                    if (uss != null)
+                    {
+                        uss.Password = MD5(us.Password);
+                        db.Entry(uss).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("AccountSetting");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Edit User failed");
+                        return RedirectToAction("AccountSetting", us);
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Edit User failed");
-                    return RedirectToAction("AccountSetting", us);
+                    return View("AccountSetting", us);
                 }
             }
             else
             {
                 ModelState.AddModelError("", "Edit User failed");
-                return RedirectToAction("AccountSetting", us);
+                return View("AccountSetting", us);
             }
 
         }

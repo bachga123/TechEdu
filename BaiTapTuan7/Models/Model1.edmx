@@ -32,8 +32,8 @@
             <PropertyRef Name="Content_Id" />
           </Key>
           <Property Name="Content_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" />
-          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="File" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="tb_Course">
@@ -41,9 +41,9 @@
             <PropertyRef Name="Course_Id" />
           </Key>
           <Property Name="Course_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Course_Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Decription" Type="nvarchar" MaxLength="150" />
-          <Property Name="Details" Type="nvarchar" MaxLength="150" />
+          <Property Name="Course_Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Decription" Type="nvarchar" MaxLength="300" />
+          <Property Name="Details" Type="nvarchar" MaxLength="500" />
           <Property Name="TeacherId" Type="int" />
           <Property Name="Course_Price" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
@@ -339,8 +339,8 @@
             <PropertyRef Name="Content_Id" />
           </Key>
           <Property Name="Content_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="File" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tb_News">
@@ -359,9 +359,9 @@
             <PropertyRef Name="Course_Id" />
           </Key>
           <Property Name="Course_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Course_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Course_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Decription" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="TeacherId" Type="Int32" />
           <Property Name="Course_Price" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>

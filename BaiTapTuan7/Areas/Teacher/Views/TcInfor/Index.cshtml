@@ -53,20 +53,30 @@
                         <h4> Course Assignment</h4>
                     </div>
                     <div class="card-body">
-                        @for (int i = 0; i < 2; i++)
+                        @if (ViewBag.courseAssignmentList != null)
                         {
-                            <a class="h4" href="@Url.Action("CourseDetails", "TcCourse", new { couid = ViewBag.courseAssignmentList[i].CourseId })">@ViewBag.courseAssignmentList[i].CourseName</a>
-                            <hr />
-                            foreach (var item in ViewBag.courseAssignmentList[i].AssignmentList)
+                            for (int i = 0; i < ViewBag.courseAssignmentList.Count; i++)
                             {
-                                <a class="h-75" href="@Url.Action("AssignmentDetails", "TcAssignment", new { assid = item.Assignment_Id })">
-                                    + @item.Details is due
-                                </a>
-                                <br />
-                                <span class="small text">@item.Deadline</span>
-                                <br />
+                                if (ViewBag.courseAssignmentList[i].AssignmentList.Count != 0)
+                                {
+                                    <a class="h4" href="@Url.Action("CourseDetails", "TcCourse", new { couid = ViewBag.courseAssignmentList[i].CourseId })">@ViewBag.courseAssignmentList[i].CourseName</a>
+                                    <hr />
+                                    foreach (var item in ViewBag.courseAssignmentList[i].AssignmentList)
+                                    {
+                                        <a class="h-75" href="@Url.Action("AssignmentDetails", "TcAssignment", new { assid = item.Assignment_Id })">
+                                            + @item.Details is due
+                                        </a>
+                                        <br />
+                                        <span class="small text">@item.Deadline</span>
+                                        <br />
+                                    }
+                                    <hr />
+                                }
                             }
-                            <hr />
+                        }
+                        else
+                        {
+                            <span class="text">No Data</span>
                         }
                     </div>
                 </div>
@@ -94,7 +104,7 @@
                                                         <img class="card-img-top" alt="100%x200" src="~/Assets/Admin/img/undraw_environmental_study_skau.svg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
                                                     </a>
                                                     <div class="card-body">
-                                                        <a class="card-title stretched-link" href="@Url.Action("CourseDetails","StuCourse",new { couid = item.Course_Id})">@item.Course_Name</a>
+                                                        <a class="card-title stretched-link" href="@Url.Action("CourseDetails","TcCourse",new { couid = item.Course_Id})">@item.Course_Name</a>
                                                         <p class="card-text">@item.Decription</p>
                                                         <p class="card-text"><small class="text-muted">@item.Details</small></p>
                                                     </div>

@@ -23,6 +23,7 @@ namespace BaiTapTuan7.Areas.Admin.Model
         public string Password { get; set; }
         [Required(ErrorMessage = "This box is empty")]
         [Display(Name = "Email")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
         public string Usertype { get; set; }
 

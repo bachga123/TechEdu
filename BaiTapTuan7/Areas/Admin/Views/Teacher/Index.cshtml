@@ -37,7 +37,7 @@
                                                     <td>@item.TeacherLastName</td>
                                                     <td>@item.Gmail</td>
                                                     <td>
-                                                        @Html.ActionLink("Remove", "Delete", "Teacher", new { id = item.TeacherId }, new { onclick = "return confirm('Are you sure to remove this teacher?');", @class = "btn btn-danger" })
+                                                        @Html.ActionLink("Remove", "Delete", "Teacher", new { tcid = item.TeacherId }, new { onclick = "return confirm('Are you sure to remove this teacher?');", @class = "btn btn-danger" })
                                                         @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-l" value="@item.StudentId">Details</button>*@
                                                     </td>
                                                 </tr>

@@ -126,7 +126,7 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
             if (ModelState.IsValid)
             {
                 var aas = db.tb_Assignment.Find(assid);
-                aas.File= null;
+                aas.File = null;
                 //cần delte file trong Files_Here
                 db.Entry(aas).State = EntityState.Modified;
                 db.SaveChanges();
@@ -160,7 +160,7 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
         }
         // Score
 
-        public ActionResult AddScoreToStudent(int stuid,int assid)
+        public ActionResult AddScoreToStudent(int stuid, int assid)
         {
             tb_Score sco = new tb_Score();
             sco.Student_id = stuid;

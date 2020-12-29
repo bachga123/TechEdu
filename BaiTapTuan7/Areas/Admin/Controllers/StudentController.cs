@@ -84,14 +84,29 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 var cts = db.tb_StudentCourse.Where(m => m.StudentId == stuid).ToList();
                 db.Entry(us).State = EntityState.Deleted;
                 db.Entry(stu).State = EntityState.Deleted;
-                foreach(var item in cts)
-                {
-                    var ctss = db.tb_StudentCourse.Find(item.Id);
-                    db.Entry(ctss).State = EntityState.Deleted;
-                }
+                DeleteStudentRe(stuid);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+        }
+        public void DeleteStudentRe(int? stuid)
+        {
+            var studentCourse = db.tb_StudentCourse.Where(m => m.StudentId == stuid).ToList();
+            var studentAssignment = db.tb_Student_Assignment.Where(m => m.Student_Id == stuid).ToList();
+            var studentScore = db.tb_Score.Where(m => m.Student_id == stuid);
+            foreach(var item in studentCourse)
+            {
+                db.Entry(item).State = EntityState.Deleted;
+            }
+            foreach (var item in studentAssignment)
+            {
+                db.Entry(item).State = EntityState.Deleted;
+            }
+            foreach (var item in studentScore)
+            {
+                db.Entry(item).State = EntityState.Deleted;
+            }
+
         }
     }
 }

@@ -4699,6 +4699,7 @@
     <Content Include="Areas\Admin\Views\ThongKe\ChartRender.cshtml" />
     <Content Include="Areas\Admin\Views\ThongKe\ThongKeUserType.cshtml" />
     <Content Include="Areas\Admin\Views\ThongKe\ChartOfIncomeUSD.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Message.cshtml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />

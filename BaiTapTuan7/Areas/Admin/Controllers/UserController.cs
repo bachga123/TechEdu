@@ -17,12 +17,12 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
     {
         TechEduEntities db = new TechEduEntities();
         // GET: User
-        public ActionResult Index(int page = 1,int pageSize = 10)
+        public ActionResult Index(int page = 1, int pageSize = 10)
         {
             var admin = (tb_Users)Session["user"];
             var list = db.tb_Users.ToList();
             var item = list.FirstOrDefault(m => m.Id == admin.Id);
-            if(item != null)
+            if (item != null)
             {
                 list.Remove(item);
             }
@@ -60,7 +60,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                     db.tb_Users.Add(us);
                     db.SaveChanges();
                     tb_Users uz = db.tb_Users.FirstOrDefault(m => m.Username == us.Username);
-                    if (uz.Usertype == "teacher"  || uz.Usertype == "admin")
+                    if (uz.Usertype == "teacher" || uz.Usertype == "admin")
 
                     {
                         tb_Teacher tc = new tb_Teacher();
@@ -91,12 +91,13 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewBag.ListOfType = TypeList.GetTypeList();
+                return View("AddUser",us1);
             }
         }
         public ActionResult EditUser(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return RedirectToAction("Index");
             }
@@ -109,7 +110,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult EditUser(tb_Users tb)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var result = db.tb_Users.Find(tb.Id);
                 if (result != null)
@@ -188,13 +189,15 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 }
                 else
                 {
-                    if (us.Usertype == "teacher")
+
+                    if (us.Usertype == "student")
                     {
-                        return RedirectToAction("RemoveTeacherByUserId", us);
+                        return RedirectToAction("RemoveStudentByUserId", us);
+
                     }
                     else
                     {
-                        return RedirectToAction("RemoveStudentByUserId", us);
+                        return RedirectToAction("RemoveTeacherByUserId", new { usid = Id});
                     }
                 }
             }
@@ -204,20 +207,20 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             }
 
         }
-        public ActionResult RemoveTeacherByUserId(tb_Users us)
+
+        public ActionResult RemoveTeacherByUserId(int usid)
         {
-            int userid = us.Id;
 
             if (ModelState.IsValid)
             {
-                tb_Teacher tc = db.tb_Teacher.FirstOrDefault(m => m.UserId == userid);
+                var us = db.tb_Users.Find(usid);
+                tb_Teacher tc = db.tb_Teacher.AsNoTracking().Where(m => m.UserId == usid).FirstOrDefault();
                 db.Entry(tc).State = EntityState.Deleted;
                 db.Entry(us).State = EntityState.Deleted;
                 var cou = db.tb_Course.Where(m => m.TeacherId == tc.TeacherId).ToList();
                 foreach (var item in cou)
                 {
-                    var coua = db.tb_Course.Find(item.Course_Id);
-                    db.Entry(coua).State = EntityState.Deleted;
+                    DeleteCourse(item.Course_Id);
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index", "User");
@@ -233,8 +236,9 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                tb_Student tc = db.tb_Student.FirstOrDefault(m => m.UserId == userid);
-                db.Entry(tc).State = EntityState.Deleted;
+                tb_Student stu = db.tb_Student.FirstOrDefault(m => m.UserId == userid);
+                DeleteStudentRe(stu.StudentId);
+                db.Entry(stu).State = EntityState.Deleted;
                 db.Entry(us).State = EntityState.Deleted;
                 db.SaveChanges();
                 return RedirectToAction("Index", "User");
@@ -245,6 +249,69 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             }
         }
 
+        public void DeleteStudentRe(int? stuid)
+        {
+            var studentCourse = db.tb_StudentCourse.Where(m => m.StudentId == stuid).ToList();
+            var studentAssignment = db.tb_Student_Assignment.Where(m => m.Student_Id == stuid).ToList();
+            var studentScore = db.tb_Score.Where(m => m.Student_id == stuid);
+            foreach (var item in studentCourse)
+            {
+                db.Entry(item).State = EntityState.Deleted;
+            }
+            foreach (var item in studentAssignment)
+            {
+                db.Entry(item).State = EntityState.Deleted;
+            }
+            foreach (var item in studentScore)
+            {
+                db.Entry(item).State = EntityState.Deleted;
+            }
+
+        }
+
+        public void DeleteCourse(int couid)
+        {
+            var cou = db.tb_Course.Find(couid);
+            var cts = db.tb_StudentCourse.Where(m => m.CourseId == couid).ToList();
+            var assignment = db.tb_Assignment.Where(m => m.Course_Id == couid).ToList();
+            var content = CourseContentList(couid);
+            foreach (var item in content)
+            {
+                db.Entry(item).State = EntityState.Deleted;
+            }
+            foreach (var item in assignment)
+            {
+                var StuAssignment = db.tb_Student_Assignment.Where(m => m.Assignment_Id == item.Assignment_Id).ToList();
+                foreach (var item1 in StuAssignment)
+                {
+                    db.Entry(item1).State = EntityState.Deleted;
+                }
+                var score = db.tb_Score.Where(m => m.Assignment_id == item.Assignment_Id).ToList();
+                foreach (var item2 in score)
+                {
+                    db.Entry(item2).State = EntityState.Deleted;
+                }
+                db.Entry(item).State = EntityState.Deleted;
+            }
+            db.Entry(cou).State = EntityState.Deleted;
+            foreach (var item in cts)
+            {
+                var ctss = db.tb_StudentCourse.Find(item.Id);
+                db.Entry(ctss).State = EntityState.Deleted;
+            }
+            db.SaveChanges();
+        }
+        public List<tb_Content> CourseContentList(int? couid)
+        {
+            List<tb_Content> contentList = new List<tb_Content>();
+            var listContentId = db.tb_Course_Content.Where(m => m.Course_Id == couid).ToList();
+            foreach (var item in contentList)
+            {
+                var content = db.tb_Content.Find(item.Content_Id);
+                contentList.Add(content);
+            }
+            return contentList;
+        }
         //Encrypt
         private static string MD5(string Metin)
         {
@@ -258,5 +325,6 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             }
             return sb.ToString();
         }
+
     }
 }

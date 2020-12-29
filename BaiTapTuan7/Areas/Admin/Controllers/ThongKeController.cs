@@ -12,7 +12,7 @@ using System.Text;
 
 namespace BaiTapTuan7.Areas.Admin.Controllers
 {
-    //[AuthorizeController]
+    [AuthorizeController]
     public class ThongKeController : Controller
     {
         TechEduEntities db = new TechEduEntities();
