@@ -24,8 +24,8 @@
                             Action
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="@Url.Action("EditCourse","Course",new { couid= Model.Course_Id})">Edit</a>
-                            <a class="dropdown-item" href="@Url.Action("DeleteCourse","Course",new { couid= Model.Course_Id})" onclick = "return confirm('Are you sure to remove this course?');">Delete</a>
+                            <a class="dropdown-item" href="@Url.Action("EditCourse", "Course", new { couid = Model.Course_Id })">Edit</a>
+                            <a class="dropdown-item" href="@Url.Action("DeleteCourse", "Course", new { couid = Model.Course_Id })" onclick = "return confirm('Are you sure to remove this course?');">Delete</a>
                         </div>
                         @*@Html.ActionLink("Remove Course", "DeleteCourse", "Course", new { couid = Model.Course_Id }, new { onclick = "return confirm('Are you sure to remove this course?');", @class = "btn btn-danger" })*@
                     </div>
@@ -73,7 +73,7 @@
                             </div>
                             <div class="col-6 col-md-4">
                                 <button type="button" name="btnLink" id="btnLink" class="btn btn-primary">Enroll Student</button>
-                                <button type="button" name="btnLink1" id="btnLink1" class="btn btn-primary">Request Enroll</button>
+                                <a href="@Url.Action("ExportStudentListInCourse", "Course", new { couid = Model.Course_Id})" name="btnLink1" id="btnLink1" class="btn btn-primary">Export Student to Excel</a>
 
                             </div>
                         </div>

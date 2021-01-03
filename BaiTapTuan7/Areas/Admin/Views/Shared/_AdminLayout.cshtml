@@ -92,7 +92,7 @@
                         <a class="collapse-item" href="@Url.Action("Index","Teacher")">Teacher List</a>
                         <a class="collapse-item" href="@Url.Action("Index","Student")">Student List</a>
                         @*<a class="collapse-item" href="utilities-animation.html">Animations</a>
-                    <a class="collapse-item" href="utilities-other.html">Other</a>*@
+                            <a class="collapse-item" href="utilities-other.html">Other</a>*@
                     </div>
                 </div>
             </li>
@@ -118,11 +118,11 @@
                         <a class="collapse-item" href="@Url.Action("Index","Course")">Course</a>
                         <a class="collapse-item" href="@Url.Action("CreateCourse","Course")">Add Course</a>
                         @*<a class="collapse-item" href="register.html">Register</a>
-                    <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                    <div class="collapse-divider"></div>
-                    <h6 class="collapse-header">Other Pages:</h6>
-                    <a class="collapse-item" href="404.html">404 Page</a>
-                    <a class="collapse-item" href="blank.html">Blank Page</a>*@
+                            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">Other Pages:</h6>
+                            <a class="collapse-item" href="404.html">404 Page</a>
+                            <a class="collapse-item" href="blank.html">Blank Page</a>*@
                     </div>
                 </div>
             </li>
@@ -140,23 +140,23 @@
                         <a class="collapse-item" href="@Url.Action("ChartOfIncomeUSD","ThongKe")">Statistical of Income USD</a>
                     </div>
                 </div>
-                
+
             </li>
 
             <!-- Nav Item - Charts -->
             <!--<li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span>
-        </a>
-    </li>-->
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Charts</span>
+                </a>
+            </li>-->
             <!-- Nav Item - Tables -->
             <!--<li class="nav-item">
-        <a class="nav-link" href="@Html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span>
-        </a>
-    </li>-->
+                <a class="nav-link" href="@Html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span>
+                </a>
+            </li>-->
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -167,10 +167,10 @@
 
             <!-- Sidebar Message -->
             @*<div class="sidebar-card">
-            <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="">
-            <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-            <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-        </div>*@
+                    <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="">
+                    <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+                    <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+                </div>*@
 
         </ul>
         <!-- End of Sidebar -->
@@ -522,6 +522,19 @@
             });
         })
     </script>
+    <script type="text/javascript">
+        $(function () {
+            var PlaceHolderElement = $('#PlaceHolderHere');
+            $('button[data-toggle="add-user"]').click(function (event) {
+                var url = $(this).data('url');
+                $.get(url).done(function (data) {
+                    PlaceHolderElement.html(data);
+                    PlaceHolderElement.find('.modal').modal('show');
+                });
+            });
+        })
+    </script>
+
 
 </body>
 

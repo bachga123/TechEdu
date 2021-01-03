@@ -8,6 +8,9 @@ using System.Web.Mvc;
 using BaiTapTuan7.Areas.Admin.Model;
 using System;
 using System.Threading.Tasks;
+using ClosedXML.Excel;
+using System.Data;
+using System.IO;
 
 namespace BaiTapTuan7.Areas.Admin.Controllers
 {
@@ -282,6 +285,52 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 contentList.Add(content);
             }
             return contentList;
+        }
+
+        public List<tb_Student> GetStudentListInCourse(int couid)
+        {
+            List<tb_Student> stuList = new List<tb_Student>();
+            var stuInCourseList = db.tb_StudentCourse.Where(m => m.CourseId == couid && m.Status == 1);
+            foreach(var item in stuInCourseList)
+            {
+                tb_Student stu = db.tb_Student.Find(item.StudentId);
+                stuList.Add(stu);
+            }
+            return stuList;
+        }
+
+        public FileResult ExportStudentListInCourse(int couid)
+        {
+            DataTable dt = new DataTable("StudentList");
+            dt.Columns.AddRange(new DataColumn[7] { new DataColumn("StudentID"),
+                                                    new DataColumn("First Name"),
+                                                    new DataColumn("Last Name"),
+                                                    new DataColumn("Gmail"),
+                                                    new DataColumn("Phone"),
+                                                    new DataColumn("BirthDate"),
+                                                    new DataColumn("Address"),});
+            var stuList = GetStudentListInCourse(couid);
+            foreach(var item in stuList)
+            {
+                if (item.PhoneNumber != null && item.DateOfBirth != null && item.PlaceOfBirth != null)
+                {
+                    dt.Rows.Add(item.StudentId, item.FirstName, item.LastName, item.Gmail, item.PhoneNumber, ((DateTime)item.DateOfBirth).ToShortDateString(), item.PlaceOfBirth);
+                }
+                else
+                {
+                    dt.Rows.Add(item.StudentId, item.FirstName, item.LastName, item.Gmail,"","","");
+                }
+            }
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "StudentList.xlsx");
+                }
+            }
+
         }
     }
 }

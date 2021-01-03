@@ -1,0 +1,76 @@
+﻿@using System.Data;
+@model DataTable
+
+@{
+    ViewBag.Title = "AddUsers";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        @using (Html.BeginForm("AddUserWithExcel", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            <div class="card shadow ">
+                <div class="card-header py-3">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h5 class="m-0 font-weight-bold text-primary">User List</h5>
+                        </div>
+                        <div class="col-sm-4">
+                                <a href="@Url.Action("DownloadExampleAddUserExcel","User")" class="btn btn-primary">Example</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <input type="file" id="file" name="file" />
+                    <input type="submit" value="Upload File" />
+                    <div style="color:red;">@ViewBag.Message</div>
+                    @if (ViewBag.messageList != null)
+                    {
+                        foreach (var item in ViewBag.messageList)
+                        {
+                            <div style="color:red;">@item</div>
+                        }
+                    }
+                    <!--Show the Data Table on the View after reading the Excel File-->
+                    @if (Model != null)
+                    {
+                        <div class="table table-hover">
+                            <div class="card-body">
+                                <div class="table-responsive">
+
+
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                @for (int i = 0; i < Model.Columns.Count; i++)
+                                                {
+                                                    <th>@Model.Columns[i].ColumnName</th>
+
+                                                }
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for (int i = 0; i < Model.Rows.Count; i++)
+                                            {
+                                                <tr>
+                                                    @for (int j = 0; j < Model.Columns.Count; j++)
+                                                    {
+                                                        <td>@Model.Rows[i][j]</td>
+
+                                                    }
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        }
+    </div>
+</div>

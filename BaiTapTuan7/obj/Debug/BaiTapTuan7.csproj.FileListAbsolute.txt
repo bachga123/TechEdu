@@ -844,3 +844,11 @@ C:\Users\dovt5\Desktop\New folder\TechEdu\BaiTapTuan7\obj\Debug\BaiTapTuan7.cspr
 C:\Users\dovt5\Desktop\New folder\TechEdu\BaiTapTuan7\obj\Debug\BaiTapTuan7.csproj.CopyComplete
 C:\Users\dovt5\Desktop\New folder\TechEdu\BaiTapTuan7\obj\Debug\BaiTapTuan7.dll
 C:\Users\dovt5\Desktop\New folder\TechEdu\BaiTapTuan7\obj\Debug\BaiTapTuan7.pdb
+C:\Users\BIU RAIN\Desktop\New folder\BaiTapTuan7\bin\ClosedXML.dll
+C:\Users\BIU RAIN\Desktop\New folder\BaiTapTuan7\bin\DocumentFormat.OpenXml.dll
+C:\Users\BIU RAIN\Desktop\New folder\BaiTapTuan7\bin\ExcelNumberFormat.dll
+C:\Users\BIU RAIN\Desktop\New folder\BaiTapTuan7\bin\System.IO.Packaging.dll
+C:\Users\BIU RAIN\Desktop\New folder\BaiTapTuan7\bin\ClosedXML.pdb
+C:\Users\BIU RAIN\Desktop\New folder\BaiTapTuan7\bin\ClosedXML.xml
+C:\Users\BIU RAIN\Desktop\New folder\BaiTapTuan7\bin\DocumentFormat.OpenXml.xml
+C:\Users\BIU RAIN\Desktop\New folder\BaiTapTuan7\bin\ExcelNumberFormat.xml

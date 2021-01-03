@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BaiTapTuan7.Models;
+using ClosedXML.Excel;
 using PagedList;
 
 namespace BaiTapTuan7.Areas.Admin.Controllers
@@ -105,6 +107,46 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
             foreach (var item in studentScore)
             {
                 db.Entry(item).State = EntityState.Deleted;
+            }
+
+        }
+
+        public List<tb_Student> GetStudentList()
+        {
+            List<tb_Student> stuList = db.tb_Student.ToList();
+            return stuList;
+        }
+
+        public FileResult ExportStudentListInCourse()
+        {
+            DataTable dt = new DataTable("StudentList");
+            dt.Columns.AddRange(new DataColumn[7] { new DataColumn("StudentID"),
+                                                    new DataColumn("First Name"),
+                                                    new DataColumn("Last Name"),
+                                                    new DataColumn("Gmail"),
+                                                    new DataColumn("Phone"),
+                                                    new DataColumn("BirthDate"),
+                                                    new DataColumn("Address"),});
+            var stuList = GetStudentList();
+            foreach (var item in stuList)
+            {
+                if (item.PhoneNumber != null && item.DateOfBirth != null && item.PlaceOfBirth != null)
+                {
+                    dt.Rows.Add(item.StudentId, item.FirstName, item.LastName, item.Gmail, item.PhoneNumber, ((DateTime)item.DateOfBirth).ToShortDateString(), item.PlaceOfBirth);
+                }
+                else
+                {
+                    dt.Rows.Add(item.StudentId, item.FirstName, item.LastName, item.Gmail, "", "", "");
+                }
+            }
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "StudentList.xlsx");
+                }
             }
 
         }
