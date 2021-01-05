@@ -226,6 +226,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 cts.StudentId = int.Parse(id);
                 cts.CourseId = cou.Course_Id;
                 cts.Status = 1;
+                cts.EnrollDate = DateTime.Now;
                 cts.Payment = true;
                 db.Entry(cts).State = EntityState.Added;
                 email.EnrollStudentSuccessMail(inf.GetStudent(int.Parse(id)).Gmail, inf.GetCourse((int)couid).Course_Name);

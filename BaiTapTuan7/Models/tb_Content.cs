@@ -11,16 +11,11 @@ namespace BaiTapTuan7.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class tb_Content
     {
         public int Content_Id { get; set; }
-        [Display(Name ="Content name")]
-        [Required(ErrorMessage = "Content must have name")]
         public string Title { get; set; }
-        [Display(Name = "Content description")]
-        [Required(ErrorMessage = "Content must have description")]
         public string Description { get; set; }
         public string File { get; set; }
     }

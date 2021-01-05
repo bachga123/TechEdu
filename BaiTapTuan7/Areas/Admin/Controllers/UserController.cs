@@ -295,23 +295,22 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                                 dt.Rows[dt.Rows.Count - 1][cellIndex] = cell.Value.ToString();
                                 cellIndex++;
                             }
-                            //us.FirstName = dt.Rows[dt.Rows.Count - 1][0].ToString();
-                            //us.LastName = dt.Rows[dt.Rows.Count - 1][1].ToString();
-                            //us.Username = dt.Rows[dt.Rows.Count - 1][2].ToString();
-                            //us.Password = dt.Rows[dt.Rows.Count - 1][3].ToString();
-                            //us.Email = dt.Rows[dt.Rows.Count - 1][4].ToString();
-                            //us.Usertype = dt.Rows[dt.Rows.Count - 1][5].ToString();
-                            //if (AddUserWithExcelData(us))
-                            //{
-                            //    string message = "Success Add " + us.Username + " to database";
-                            //    messageList.Add(message);
-                            //}
-                            //else
-                            //{
-                            //    string message = "Failure to add" + us.Username + ". Please check data again.";
-                            //    messageList.Add(message);
-                            //}
-                            messageList.Add("Success Add " + dt.Rows[dt.Rows.Count - 1][2] + " to database");
+                            us.FirstName = dt.Rows[dt.Rows.Count - 1][0].ToString();
+                            us.LastName = dt.Rows[dt.Rows.Count - 1][1].ToString();
+                            us.Username = dt.Rows[dt.Rows.Count - 1][2].ToString();
+                            us.Password = dt.Rows[dt.Rows.Count - 1][3].ToString();
+                            us.Email = dt.Rows[dt.Rows.Count - 1][4].ToString();
+                            us.Usertype = dt.Rows[dt.Rows.Count - 1][5].ToString();
+                            if (AddUserWithExcelData(us))
+                            {
+                                string message = "success add " + us.Username + " to database";
+                                messageList.Add(message);
+                            }
+                            else
+                            {
+                                string message = "failure to add" + us.Username + ". Please check data again.";
+                                messageList.Add(message);
+                            }
                         }
                     }          
                     if(firstRow)

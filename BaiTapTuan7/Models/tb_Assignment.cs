@@ -11,21 +11,15 @@ namespace BaiTapTuan7.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class tb_Assignment
     {
         public int Assignment_Id { get; set; }
         public Nullable<int> Course_Id { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
-        [Required(ErrorMessage = "Please Choice deadline")]
-        [Display(Name = "Deadline")]
         public Nullable<System.DateTime> Deadline { get; set; }
-        [Required(ErrorMessage = "Fill the details")]
-        [Display(Name = "Details")]
         public string Details { get; set; }
         public Nullable<int> Status { get; set; }
-        [Display(Name = "Tutorial file")]
         public string File { get; set; }
     }
 }

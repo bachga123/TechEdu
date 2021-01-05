@@ -11,6 +11,7 @@ using System.IO;
 
 namespace BaiTapTuan7.Areas.Teacher.Controllers
 {
+    [AuthorizeController]
     public class TcAssignmentController : Controller
     {
         TechEduEntities db = new TechEduEntities();

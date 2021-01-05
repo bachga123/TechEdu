@@ -28,7 +28,7 @@
     </Key>
     <Property Name="Content_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Title" Type="nvarchar" MaxLength="200" />
-    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="File" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="tb_Course">
