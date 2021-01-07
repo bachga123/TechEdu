@@ -78,8 +78,9 @@ namespace BaiTapTuan7.Areas.Student.Controllers
                 cts1.EnrollDate = DateTime.Now;
                 if (cou.Course_Price != null)
                 {
+
                     cts1.Payment = false;
-                    //return RedirectToAction("PaymentForCourse", new { couid });
+                    return RedirectToAction("PaymentForCourse", new { couid });
                 }
                 else
                 {
@@ -147,7 +148,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
             }
             //on successful payment, show success page to user.
             InCourse(((tb_Course)Session["course"]).Course_Id);
-            return RedirectToAction("CourseDetails", "StuCourse",new { couid = ((tb_Course)Session["course"]).Course_Id});
+            return RedirectToAction("CourseDetails", "StuCourse",new { couid = ((tb_Course)Session["course"]).Course_Id, area = "Student"});
         }
         private PayPal.Api.Payment payment;
         private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
@@ -245,11 +246,11 @@ namespace BaiTapTuan7.Areas.Student.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
-        public ActionResult InCourse(int? couid)
+        public bool InCourse(int? couid)
         {
             if (couid == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return false;
             }
             if (ModelState.IsValid)
             {
@@ -260,18 +261,20 @@ namespace BaiTapTuan7.Areas.Student.Controllers
                 cts.Payment = true;
                 db.Entry(cts).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return true;
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return false ;
             }
 
         }
         public ActionResult CourseDetails(int? couid)
         {
-            tb_Course cou = db.tb_Course.Find(couid);
+            
             var stu = (tb_Student)Session["student"];
+            tb_Course cou = db.tb_Course.Find(couid);
+            Session["course"] = cou;
             ViewBag.Teacher = db.tb_Teacher.Find(cou.TeacherId);
             ViewBag.contentList = MyContentList(cou.Course_Id);
             ViewBag.couid = cou.Course_Id;

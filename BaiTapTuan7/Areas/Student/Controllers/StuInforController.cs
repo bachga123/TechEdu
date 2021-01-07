@@ -43,6 +43,8 @@ namespace BaiTapTuan7.Areas.Student.Controllers
                     oldstu.FirstName = stu.FirstName;
                     oldstu.LastName = stu.LastName;
                     oldstu.Gmail = stu.Gmail;
+                    var us = db.tb_Users.Find(oldstu.UserId);
+                    us.Email = stu.Gmail;
                     oldstu.PhoneNumber = stu.PhoneNumber;
                     oldstu.DateOfBirth = stu.DateOfBirth;
                     oldstu.PlaceOfBirth = stu.PlaceOfBirth;
@@ -52,6 +54,7 @@ namespace BaiTapTuan7.Areas.Student.Controllers
                         using (var binaryReader = new BinaryReader(upload.InputStream))
                             oldstu.Images = binaryReader.ReadBytes(upload.ContentLength);
                     }
+                    db.Entry(us).State = EntityState.Modified;
                     db.Entry(oldstu).State = EntityState.Modified;
                     db.SaveChanges();
                     Session["student"] = oldstu;

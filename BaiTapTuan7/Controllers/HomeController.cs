@@ -111,7 +111,6 @@ namespace BaiTapTuan7.Controllers
                 }
                 else
                 {
-                    ViewBag.ListOfType = TypeList.GetTypeList();
                     ModelState.AddModelError("", "Username Or Email has exists");
                     return View("Register", us1);
                 }

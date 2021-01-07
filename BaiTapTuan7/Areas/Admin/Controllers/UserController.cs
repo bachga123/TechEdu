@@ -432,7 +432,7 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
 
         public bool AddUserWithExcelData(AddUserModel us1)
         {
-            var check = db.tb_Users.FirstOrDefault(m => m.Username == us1.Username);
+            var check = db.tb_Users.FirstOrDefault(m => m.Username == us1.Username || m.Email == us1.Email);
             if (check == null)
             {
                 if(us1.FirstName == null || us1.LastName == null || us1.Email == null || us1.Password == null || us1.Usertype == null)
@@ -487,52 +487,52 @@ namespace BaiTapTuan7.Areas.Admin.Controllers
                 return false;
             }
         }
-        public bool AddUserWithExcelData(string firstname,string lastname,string username,string password,string gmail,string usertype)
-        {
-            try
-            {
-                tb_Users us = new tb_Users();
-                us.Username = username;
-                us.Usertype = usertype.ToLower();
-                us.Email = gmail;
-                us.Password = MD5(password);
-                if (usertype.ToLower() != "admin")
-                {
-                    us.Block = true;
-                }
-                else
-                {
-                    us.Block = false;
-                }
-                us.RegisterDate = DateTime.Now;
-                db.tb_Users.Add(us);
-                tb_Users uz = db.tb_Users.FirstOrDefault(m => m.Username == us.Username);
-                if (uz.Usertype == "teacher" || uz.Usertype == "admin")
+        //public bool AddUserWithExcelData(string firstname,string lastname,string username,string password,string gmail,string usertype)
+        //{
+        //    try
+        //    {
+        //        tb_Users us = new tb_Users();
+        //        us.Username = username;
+        //        us.Usertype = usertype.ToLower();
+        //        us.Email = gmail;
+        //        us.Password = MD5(password);
+        //        if (usertype.ToLower() != "admin")
+        //        {
+        //            us.Block = true;
+        //        }
+        //        else
+        //        {
+        //            us.Block = false;
+        //        }
+        //        us.RegisterDate = DateTime.Now;
+        //        db.tb_Users.Add(us);
+        //        tb_Users uz = db.tb_Users.FirstOrDefault(m => m.Username == us.Username);
+        //        if (uz.Usertype == "teacher" || uz.Usertype == "admin")
 
-                {
-                    tb_Teacher tc = new tb_Teacher();
-                    tc.TeacherFirstName = firstname;
-                    tc.TeacherLastName = lastname;
-                    tc.Gmail = gmail;
-                    tc.UserId = uz.Id;
-                    db.tb_Teacher.Add(tc);
-                }
-                else if (uz.Usertype == "student")
-                {
-                    tb_Student stu = new tb_Student();
-                    stu.FirstName = firstname;
-                    stu.LastName = lastname;
-                    stu.Gmail = gmail;
-                    stu.UserId = uz.Id;
-                    db.tb_Student.Add(stu);
-                }
-                return true;
-            }
-            catch(Exception  ex)
-            {
-                return false;
-            }
-        }
+        //        {
+        //            tb_Teacher tc = new tb_Teacher();
+        //            tc.TeacherFirstName = firstname;
+        //            tc.TeacherLastName = lastname;
+        //            tc.Gmail = gmail;
+        //            tc.UserId = uz.Id;
+        //            db.tb_Teacher.Add(tc);
+        //        }
+        //        else if (uz.Usertype == "student")
+        //        {
+        //            tb_Student stu = new tb_Student();
+        //            stu.FirstName = firstname;
+        //            stu.LastName = lastname;
+        //            stu.Gmail = gmail;
+        //            stu.UserId = uz.Id;
+        //            db.tb_Student.Add(stu);
+        //        }
+        //        return true;
+        //    }
+        //    catch(Exception  ex)
+        //    {
+        //        return false;
+        //    }
+        //}
 
     }
 }

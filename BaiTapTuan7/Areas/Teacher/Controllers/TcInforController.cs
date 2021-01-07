@@ -41,6 +41,8 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
                     oldtc.TeacherLastName = tc.TeacherLastName;
                     oldtc.DateOfBirth = tc.DateOfBirth;
                     oldtc.Gmail = tc.Gmail;
+                    var us = db.tb_Users.Find(oldtc.UserId);
+                    us.Email = tc.Gmail;
                     oldtc.PhoneNumber = tc.PhoneNumber;
                     oldtc.PlaceOfBirth = tc.PlaceOfBirth;
                     HttpPostedFileBase upload = Request.Files["image"];
@@ -49,6 +51,7 @@ namespace BaiTapTuan7.Areas.Teacher.Controllers
                         using (var binaryReader = new BinaryReader(upload.InputStream))
                             oldtc.Images = binaryReader.ReadBytes(upload.ContentLength);
                     }
+                    db.Entry(us).State = EntityState.Modified;
                     db.Entry(oldtc).State = EntityState.Modified;
                     db.SaveChanges();
                     return View("TeacherProfile", oldtc);
